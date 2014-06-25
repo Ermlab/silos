@@ -6,7 +6,6 @@ waitOn: function() { return Meteor.subscribe('logi'); }
 });
 Router.map(function() {
 this.route('startPage', {path: '/'});
-<<<<<<< HEAD
 this.route('createLogBook', {path: '/CreateLogBook'});
     this.route('methodExample', {
         path: '/api/call',
