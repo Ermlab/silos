@@ -1,0 +1,4 @@
+<template name="startPage">
+Witaj na stronie glownej
+{{> loginButtons}}
+</template>
