@@ -1,3 +1,4 @@
 <template name="startPage">
-Witaj na stronie glownej
+Witaj na stronie glownej<br>
+<a href="{{pathFor 'createLogBook'}}" class="discuss btn">Stwórz LogBook</a><br/>
 </template>

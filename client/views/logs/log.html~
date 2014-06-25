@@ -1,0 +1,10 @@
+<template name="log">
+
+
+<tr>
+<td> {{Nazwa}} </td>
+
+</tr>
+
+
+</template>

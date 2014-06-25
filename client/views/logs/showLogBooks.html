@@ -1,0 +1,20 @@
+<template name="showLogBooks">
+<div id="przeslane dane">
+logi
+
+<table class="table">
+<thead>
+<tr>
+<th>Nazwa</th>
+<th>ID</th>
+</tr>
+</thead>
+<tbody>
+{{#each logBooks}}
+{{> log}}
+{{/each}}
+</tbody>
+</table>
+
+</div>
+</template>
