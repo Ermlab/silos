@@ -1,4 +1,4 @@
 <template name="header">
-{{> loginButtons align="right"}}
+{{> loginButtons}}
 <br>
 </template>
