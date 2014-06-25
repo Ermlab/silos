@@ -6,7 +6,21 @@ waitOn: function() { return Meteor.subscribe('logi'); }
 });
 Router.map(function() {
 this.route('startPage', {path: '/'});
-    
+<<<<<<< HEAD
+this.route('createLogBook', {path: '/CreateLogBook'});
+    this.route('methodExample', {
+        path: '/api/call',
+        where: 'server',
+        action: function() {
+            // GET, POST, PUT, DELETE
+            var requestMethod = this.request.method;
+            // Data from a POST request
+            var requestData = this.request.body;
+            // Could be, e.g. application/xml, etc.
+            this.response.writeHead(200, {'Content-Type': 'text/html'});
+            this.response.end('<html><body>Your request was a ' + requestMethod + requestData.user+ '</body></html>');
+        }
+    });
 });
 
 var requireLogin = function(pause){
