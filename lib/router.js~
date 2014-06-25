@@ -5,8 +5,17 @@ waitOn: function() { return Meteor.subscribe('logi'); }
 */
 });
 Router.map(function() {
-this.route('mainPage', {path: '/'});
+this.route('startPage', {path: '/'});
     
 });
+
+var requireLogin = function(pause){
+ if (! Meteor.user()) {
+	this.render('accessDenied');
+	pause();
+	}
+ }
+
+Router.onBeforeAction(requireLogin, {only: 'createLogBooks'});
 
 
