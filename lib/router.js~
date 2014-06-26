@@ -14,16 +14,18 @@ this.route('createLogBook', {path: '/CreateLogBook'});
             // GET, POST, PUT, DELETE
             var requestMethod = this.request.method;
             // Data from a POST request
-           if (LogBooks.find(this.params._key).count()>0)
+           var doc=LogBooks.findOne({Key=this.params._key});
+	if (doc)
            {
+	
                var LogName = this.request.body.logName;
                var LogBody= this.request.body.logBody;
 	       var LogSeverity= this.request.body.logSeverity; 
-	       var LogThread= this.requres.body.logThread;
+	       var LogThread= this.request.body.logThread;
                var LogDate= (new Date).getTime();
                Logs.insert({
                    LogName: LogName,
-                   LogBookID: this.params._key,
+                   LogBookID: doc._id,
                    LogBody: LogBody,
                    LogDate: LogDate,
 		   LogSeverity: LogSeverity,
