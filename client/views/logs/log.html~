@@ -4,6 +4,7 @@
 <tr>
 <td> {{Nazwa}} </td>
 <td> {{_id}} </td>
+<td> {{Key}} </td>
 </tr>
 
 
