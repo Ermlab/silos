@@ -18,5 +18,9 @@ var requireLogin = function(pause){
  }
 
 Router.onBeforeAction(requireLogin, {only: 'createLogBooks'});
+Router.onBeforeAction(requireLogin, {only: 'showLogBooks'});
 
-
+Hooks.onLoggedOut = function (userId) {
+console.log("cos robi");
+Router.go('/');
+}
