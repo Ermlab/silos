@@ -1,5 +1,5 @@
 Template.showLogBooks.helpers({
   logBooks: function() {
-    return LogBooks.find();
+    return LogBooks.find({AuthorID: Meteor.userId().toString()});
   }
 });
