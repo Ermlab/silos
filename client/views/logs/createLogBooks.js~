@@ -3,8 +3,8 @@ Template.createLogBook.events({
 e.preventDefault();
 
 var LogBook = {
-Nazwa: $(e.target).find('[name=Nazwa]').val()
-Key: Random.id(64);
+Nazwa: $(e.target).find('[name=Nazwa]').val(),
+Key: Random.id(64)
 }
 LogBook._id = LogBooks.insert(LogBook);
 
