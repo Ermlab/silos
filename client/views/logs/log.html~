@@ -3,7 +3,7 @@
 
 <tr>
 <td> {{Nazwa}} </td>
-
+<td> {{_id}} </td>
 </tr>
 
 
