@@ -34,7 +34,7 @@
     
 
     <div class="container">
-	<br><br>
+	<br><br><br>
       {{> showLogBooks}}
 
     </div><!-- /.container -->
