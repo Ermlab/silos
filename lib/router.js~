@@ -7,7 +7,7 @@ this.route('startPage', {path: '/'});
 this.route('showLogBooks', {path: '/showLogBooks'});
 this.route('createLogBook', {path: '/CreateLogBook'});
     this.route('methodExample', {
-        path: '/api/call:_key',
+        path: '/api/call/:_key',
         where: 'server',
 	 //data: function() { return LogBooks.find().toArray; },
         action: function() {
@@ -18,12 +18,16 @@ this.route('createLogBook', {path: '/CreateLogBook'});
            {
                var LogName = this.request.body.logName;
                var LogBody= this.request.body.logBody;
+	       var LogSeverity= this.request.body.logSeverity; 
+	       var LogThread= this.requres.body.logThread;
                var LogDate= (new Date).getTime();
                Logs.insert({
                    LogName: LogName,
                    LogBookID: this.params._key,
                    LogBody: LogBody,
-                   LogDate: LogDate
+                   LogDate: LogDate,
+		   LogSeverity: LogSeverity,
+		   LogThread: LogThread
                });
                console.log("przyslano loga");
            }else{
