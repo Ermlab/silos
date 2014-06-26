@@ -1,0 +1,38 @@
+Router.map(function() { 
+this.route('methodExample', {
+        path: '/api/call/:_key',
+        where: 'server',
+	 //data: function() { return LogBooks.find().toArray; },
+        action: function() {
+            // GET, POST, PUT, DELETE
+            var requestMethod = this.request.method;
+            // Data from a POST request
+           var doc=LogBooks.findOne({Key:this.params._key});
+	if (doc)
+           {
+	
+               var LogName = this.request.body.logName;
+               var LogBody= this.request.body.logBody;
+	       var LogSeverity= this.request.body.logSeverity; 
+	       var LogThread= this.request.body.logThread;
+               var LogDate= (new Date).getTime();
+               Logs.insert({
+                   LogName: LogName,
+                   LogBookID: doc._id,
+                   LogBody: LogBody,
+                   LogDate: LogDate,
+		   LogSeverity: LogSeverity,
+		   LogThread: LogThread
+		
+               });
+this.response.writeHead(200, {'Content-Type': 'text/html'});
+            this.response.end('Succes');
+
+           }else{
+this.response.writeHead(200, {'Content-Type': 'text/html'});
+            this.response.end('Failed');
+           }
+            
+        }
+    });
+});
