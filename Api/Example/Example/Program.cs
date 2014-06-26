@@ -16,6 +16,8 @@ namespace Example
 			 * api.Error
 			 * api.Fatal
 			 * 
+			 * add reference to file Library.dll from Library/Library/bin/Debug  
+			 * 
 			 */
 			Console.WriteLine (respond);
 			Console.ReadLine ();
