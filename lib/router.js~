@@ -2,9 +2,9 @@ Router.configure({
 layoutTemplate: 'layout',
 waitOn: function() { return Meteor.subscribe('logBooks'); }
 });
-Router.map(function() {this.route('startPage', {path: '/'}); });
-Router.map(function() {
 
+Router.map(function() {
+this.route('startPage', {path: '/'});
 this.route('showLogBooks', {path: '/showLogBooks'});
 this.route('createLogBook', {path: '/CreateLogBook'});
     
