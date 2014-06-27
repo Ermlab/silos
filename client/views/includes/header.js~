@@ -1,0 +1,4 @@
+Template.header.rendered = function(){
+	console.log(d3.select('#con').style('height'));
+};
+
