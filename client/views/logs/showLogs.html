@@ -17,6 +17,20 @@
 {{/each}}
 </tbody>
 </table>
-
+<form>
+<fieldset><legend>Filter by severity</legend>
+        
+        <div class="control-group">
+	<label class="control-label" for="level">Level</label>
+        <select class="controls" name="level" id="level" >
+	<option value="1">1 - Debug</option>
+	<option value="2">2 - Info</option>
+	<option value="3">3 - Warning</option> 
+	<option value="4">4 - Error</option>
+	<option value="5">5 - Fatal</option>
+	</select></div>
+	<input type="submit" value="Filter"/>	
+	</fieldset>
+</form>
 </div>
 </template>
