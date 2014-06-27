@@ -1,10 +1,12 @@
 Router.configure({
 layoutTemplate: 'layout',
-waitOn: function() { return Meteor.subscribe('logBooks'); }
+waitOn: function() { return Meteor.subscribe('logBooks',{AuthorID : Meteor.userId()}) }
 });
 
 Router.map(function() {
-this.route('startPage', {path: '/'});
+this.route('startPage', {
+path: '/'
+});
 this.route('showLogBooks', {path: '/showLogBooks'});
 this.route('createLogBook', {path: '/CreateLogBook'});
     
@@ -20,7 +22,4 @@ var requireLogin = function(pause){
 Router.onBeforeAction(requireLogin, {only: 'createLogBooks'});
 Router.onBeforeAction(requireLogin, {only: 'showLogBooks'});
 
-Hooks.onLoggedOut = function (userId) {
-console.log("cos robi");
-Router.go('/');
-}
+

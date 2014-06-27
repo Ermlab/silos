@@ -1,5 +1,0 @@
-Template.przeslaneLogi.helpers({
-  LogBooks: function() {
-    return LogBooks.find();
-  }
-});

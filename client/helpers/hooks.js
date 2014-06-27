@@ -4,10 +4,10 @@ if(Meteor.isClient){
     });
 }
 
-Hooks.onLoggedOut = function (userId) {
-console.log("Wylogowalo " + userId);
-//Router.go("/");
+Hooks.onLoggedOut = function () {
+console.log("Wylogowalo ");
+Router.go("/");
 }
-Hooks.onLoggedIn = function (userId) {
-console.log("Zalogowalo " + userId);
+Hooks.onLoggedIn = function () {
+console.log("Zalogowalo ");
 }
