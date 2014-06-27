@@ -5,3 +5,4 @@ LogBooks.allow({
 	}
 });
 Logs = new Meteor.Collection('logs');
+Limits =new Meteor.Collection('limits');

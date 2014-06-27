@@ -6,7 +6,7 @@ var LogBook = {
 Nazwa: $(e.target).find('[name=Nazwa]').val(),
 Key: Random.id(64),
 AuthorID: Meteor.userId(),
-Created: new Date()
+Created: ((new Date).getTime())
 }
 LogBook._id = LogBooks.insert(LogBook);
 

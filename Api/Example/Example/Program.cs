@@ -6,8 +6,8 @@ namespace Example
 	{
 		public static void Main (string[] args)
 		{
-			Silos api = new Silos ("http://localhost", "3000", "WvBfGMQoBkJiD4PiooZMg5EnuwHw7P8AfiEc6CGajBHRfZddkBe5gp6ErvuwJQPG","LogThread");
-			String respond=api.Debug ("LogName"," LogBody");
+			Silos api = new Silos ("http://localhost", "3000", "s2xfyn6xjhMYeSB3CHDzaRGYSMM5rTjseo3ZaB2xjStRDBMiFkfxRTHYaiXDyKcX","LogThread");
+			String respond=api.Error ("LogName"," LogBody");
 			/*
 			 * Rest of api logging function 
 			 * each function has the same parameters
