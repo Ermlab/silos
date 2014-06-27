@@ -6,8 +6,8 @@ if(Meteor.isClient){
 
 Hooks.onLoggedOut = function () {
 console.log("Wylogowalo ");
-Router.go("/");
 }
 Hooks.onLoggedIn = function () {
 console.log("Zalogowalo ");
 }
+

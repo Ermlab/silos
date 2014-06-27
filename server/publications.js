@@ -1,3 +1,3 @@
-Meteor.publish('logBooks', function() {
-  return LogBooks.find();
+Meteor.publish('logBooks', function(authorId) {
+  return LogBooks.find({AuthorID: authorId});
 });
