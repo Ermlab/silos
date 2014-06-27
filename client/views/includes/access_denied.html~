@@ -1,0 +1,3 @@
+<template name="accessDenied">
+Musisz się zalogować aby korzystać z tej części serwisu!
+</template>
