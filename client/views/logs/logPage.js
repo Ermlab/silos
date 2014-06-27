@@ -10,14 +10,22 @@ Template.logItem.rendered=function (){
         default: break;
     }
     });
-    $(".date").each(function() {
+var i=0;
         $(".date").each(function() {
+            i++;
             var numberDate=$( this ).html();
-            //  console.log();
-            var myDate=new Date(parseFloat(numberDate));
-         //   console.log(myDate.toDateString());
-            $( this ).text(myDate.toLocaleDateString());
+            var timestamp=(numberDate);
+
+            if (isNaN(timestamp)==false)
+            {
+                console.log(timestamp*1);
+                var d=new Date(timestamp*1);
+                $( this ).html(d);
+
+            }
+
         });
-    });
+    console.log(i)
+
 };
 
