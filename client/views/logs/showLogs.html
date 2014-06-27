@@ -1,0 +1,22 @@
+<template name="showLogs">
+<div id="przeslane dane">
+<table class="table">
+<thead>
+<tr>
+<th>Nazwa</th>
+<th>Tresc</th>
+<th>Data</th>
+<th>Poziom</th>
+<th>Proces</th>
+
+</tr>
+</thead>
+<tbody>
+{{#each logs}}
+{{> logItem}}
+{{/each}}
+</tbody>
+</table>
+
+</div>
+</template>
