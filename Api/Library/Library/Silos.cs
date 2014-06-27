@@ -10,34 +10,43 @@ namespace SilosApi
 		private string host;
 		private string port;
 		private string key;
-		public Silos(string Host,string Port,string Key)
+		private string thread=null;
+		public Silos(string Host,string Port,string Key,string Thread=null)
 		{
 			this.host = Host;
 			this.port = Port;
 			this.key = Key;
+			if(Thread!=null)
+			{
+				this.thread = Thread;
+			}
 		}
-		public string Debug(string LogName,string LogBody,string LogThread)
+		public string Debug(string LogName,string LogBody,string LogThread=null)
 		{
-			return this.Send(LogName,LogBody,LogThread,1);
+			return this.Send(LogName,LogBody,1,LogThread);
 		}
-		public string Information(string LogName,string LogBody,string LogThread)
+		public string Information(string LogName,string LogBody,string LogThread=null)
 		{
-			return this.Send(LogName,LogBody,LogThread,2);
+			return this.Send(LogName,LogBody,2,LogThread);
 		}
-		public string Warnings(string LogName,string LogBody,string LogThread)
+		public string Warnings(string LogName,string LogBody,string LogThread=null)
 		{
-			return this.Send(LogName,LogBody,LogThread,3);
+			return this.Send(LogName,LogBody,3,LogThread);
 		}
-		public string Error(string LogName,string LogBody,string LogThread)
+		public string Error(string LogName,string LogBody,string LogThread=null)
 		{
-			return this.Send(LogName,LogBody,LogThread,4);
+			return this.Send(LogName,LogBody,4,LogThread);
 		}
-		public string Fatal(string LogName,string LogBody,string LogThread)
+		public string Fatal(string LogName,string LogBody,string LogThread=null)
 		{
-			return this.Send(LogName,LogBody,LogThread,5);
+			return this.Send(LogName,LogBody,5,LogThread);
 		}
-		private string Send(string LogName,string LogBody,string LogThread,int LogSeverity)
+		private string Send(string LogName,string LogBody,int LogSeverity,string LogThread=null)
 		{
+			if (LogThread!=null) 
+			{
+				LogThread = this.thread;
+			}
 			Uri uri=new Uri(string.Format ("{0}:{1}/api/call/{2}",this.host ,this.port, this.key));
 
 
