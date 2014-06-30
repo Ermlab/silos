@@ -1,3 +1,7 @@
+Template.logBook.helpers({
+ownPost: function() {
+	return this.AuthorID == Meteor.userId(); }
+});
 Template.logBook.rendered=function (){
     $(".date").each(function() {
         var numberDate=$( this ).html();

@@ -9,7 +9,10 @@
 <input type="submit" value="Wyslij" class="btn btn-primary submit"/>
 </div>
 <div>
-<a class="btn btn-danger delete" href="#">Usun LogBook</a>
+<a class="btn btn-danger delete" href="#">Usun LogBook</a><br>
+    <a href="{{pathFor 'addUser'}}" class="btn btn-warning">Dodaj uzytkownika</a>
+<br>
+    <a href="{{pathFor 'showUsers'}}" class="btn btn-success">Pokaz uzytkownikow</a>
 </div>
 </form>
 </template>
