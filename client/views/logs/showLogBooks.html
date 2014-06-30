@@ -1,5 +1,6 @@
 <template name="showLogBooks">
 <div id="przeslane dane">
+    Moje
 <table class="table">
 <thead>
 <tr>
@@ -10,11 +11,32 @@
 </tr>
 </thead>
 <tbody>
-{{#each logBooks}}
+
+{{#each myLogBooks}}
 {{>logBook}}
 {{/each}}
+
 </tbody>
 </table>
+    Uzyskany dostęp
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>ID</th>
+            <th>Key</th>
+            <th>Data</th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+        {{#each friendsLogBooks}}
+        {{> logBook}}
+        {{/each}}
+
+        </tbody>
+        </table>
 
 </div>
 </template>

@@ -1,0 +1,16 @@
+<template name="showUsers">
+    strona
+    {{#each logBookUsers}}
+    {{> bookUsers}}
+    {{/each}}
+</template>
+<template name="bookUsers">
+    {{#each users}}
+    {{> bookUser}}
+    {{/each}}
+</template>
+<template name="bookUser">
+    {{#if isEmail}}
+        {{this}}
+    {{/if}}
+</template>
