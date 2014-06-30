@@ -1,25 +1,41 @@
 Router.configure({
-layoutTemplate: 'layout',
-waitOn: function() { return Meteor.subscribe('logBooks',{AuthorID : Meteor.userId()}) }
+layoutTemplate: 'layout'
+
 });
 
 Router.map(function() {
-this.route('startPage', {
-path: '/'
+this.route('showLogBooks', {
+    path: '/',
+    waitOn: function() { return Meteor.subscribe('logBooks', Meteor.userId()); },
+    data: function() { return {logBooks: LogBooks.find().fetch()} }
 });
-this.route('showLogBooks', {path: '/showLogBooks'});
-this.route('createLogBook', {path: '/CreateLogBook'});
-    
+this.route('createLogBook', {
+    path: '/CreateLogBook',
+    waitOn: function() { return Meteor.subscribe('limits', Meteor.userId()); },
+    data: function() { return {limits: Limits.find().fetch()} }
 });
 
-var requireLogin = function(pause){
+this.route('showLogs', {
+    path: '/showLogs/:_id',
+      waitOn: function() { return Meteor.subscribe('logs',this.params._id); },
+      data: function() { return {logs: Logs.find().fetch()} }
+    });
+
+});
+
+function requireLoginCreate(pause){
  if (! Meteor.user()) {
 	this.render('accessDenied');
 	pause();
 	}
  }
+function requireLoginShow(pause){
+    if (! Meteor.user()) {
+        this.render('startPage');
+        pause();
+    }
+}
 
-Router.onBeforeAction(requireLogin, {only: 'createLogBooks'});
-Router.onBeforeAction(requireLogin, {only: 'showLogBooks'});
 
-
+Router.onBeforeAction(requireLoginCreate, {only: 'createLogBook'});
+Router.onBeforeAction(requireLoginShow, {only: 'showLogBooks'});
