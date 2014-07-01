@@ -10,13 +10,11 @@ if (Meteor.isServer) {
             function(obj) {
                 console.log(obj._id);
                 if (Logs.find({LogBookID: obj._id}).count()>100) {
-                   Logs.remove({LogDate: { $lt: Logs.find({LogBookID: obj._id}).fetch()[100].LogDate}});
+                   Logs.remove({LogBookID: obj._id,LogDate: { $lt: Logs.find({LogBookID: obj._id}).fetch()[100].LogDate}});
 
                 }
                 //console.log(date);
             }
         );
-
-
     }, 1000 );
 }
