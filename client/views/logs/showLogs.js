@@ -1,10 +1,11 @@
 Template.showLogs.events({
-'submit form': function(e) {
-e.preventDefault();
-$(e.target).find('[level=Level]').val();
-}
-})
-
+    'submit form': function(e) {
+        e.preventDefault();
+        $(e.target).find('[level=Level]').val();
+    },
+    ownPost: function() {
+        return this.AuthorID == Meteor.userId(); }
+});
 Template.showLogs.events({
     'submit form[id=tagForm]': function(e) {
         console.log("witaj");
@@ -15,3 +16,6 @@ Template.showLogs.events({
         Router.go(path)
     }
 })
+
+
+

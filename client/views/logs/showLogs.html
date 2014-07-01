@@ -1,7 +1,7 @@
 <template name="showLogs">
-
+{{#if ownPost}}
     <a href="{{pathFor 'addUser' _id=id}}" >dodaj uzytkownika</a>
-    <a href="{{pathFor 'showUsers' _id=id}}" >pokaz uzytkownikow</a>
+    <a href="{{pathFor 'showUsers' _id=id}}" >pokaz uzytkownikow</a>{{/if}}
     {{id}}
 <div id="przeslane dane">
 

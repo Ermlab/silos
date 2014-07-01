@@ -6,7 +6,7 @@
 <td> {{_id}} </td>
 <td> {{Key}} </td>
 <td class="date">{{Created}}</td>
-<td><a href="{{pathFor 'editLogBook'}}" class="btn">Edit</a></td>
+<td>{{#if ownPost}}<a href="{{pathFor 'editLogBook'}}" class="btn">Edit</a>{{/if}}</td>
 </tr>
 
 
