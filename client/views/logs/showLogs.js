@@ -14,8 +14,14 @@ Template.showLogs.events({
         console.log(tag);
         var path="/showLogs/"+this.id+"/tag/"+tag;
         Router.go(path)
-    }
-})
+    },
+    'click .delete': function(e) {
+	if (confirm("Usunac loga?")) {
+	var currentLogId = this._id;
+	Logs.remove(currentLogId);
+	}
+     }
+});
 Template.showLogs.events({
     'submit form[id=levelForm]': function(e) {
         console.log("witaj");
