@@ -11,3 +11,6 @@ random
 event-hooks
 bootstrap-3
 d3
+accounts-google
+accounts-github
+accounts-base
