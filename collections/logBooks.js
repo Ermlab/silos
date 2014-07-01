@@ -23,3 +23,5 @@ Logs.allow({
 	}
 
 });
+
+//Houston.add_collection(Meteor.users);
