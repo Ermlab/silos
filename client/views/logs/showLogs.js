@@ -6,6 +6,10 @@ Template.showLogs.events({
     ownPost: function() {
         return this.AuthorID == Meteor.userId(); }
 });
+Template.showLogs.rendered=function()
+{
+    console.log(Logs.find().fetch().logd);
+}
 Template.showLogs.events({
     'submit form[id=tagForm]': function(e) {
         console.log("witaj");

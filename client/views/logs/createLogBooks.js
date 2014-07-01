@@ -1,11 +1,15 @@
-Template.createLogBook.rendered=function() {
-    if (LogBooks.find({AuthorID: Meteor.userId().toString()}).count()>2)
-    {
+function checkLimit() {
+
+    //fix here!
+    console.log(Limits.find().count());
+    if (LogBooks.find({AuthorID: Meteor.userId().toString()}).count() > 2) {
         console.log('za duzo');
+        //Meteor.rendered("manyLogBooks");
         Router.go("/manyLogBooks");
 
     }
 }
+Template.createLogBook.rendered=checkLimit;
 
 Template.createLogBook.events({
         'submit form': function(e) {
