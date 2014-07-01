@@ -16,6 +16,15 @@ Template.showLogs.events({
         Router.go(path)
     }
 })
-
+Template.showLogs.events({
+    'submit form[id=levelForm]': function(e) {
+        console.log("witaj");
+        e.preventDefault();
+        var level=$(e.target).find('#level').val();
+        console.log(tag);
+        var path="/showLogs/"+this.id+"/level/"+level;
+        Router.go(path)
+    }
+})
 
 
