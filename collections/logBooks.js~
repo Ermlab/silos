@@ -19,7 +19,8 @@ Logs.allow({
 	return !! userId;},
 	remove: function(userId, doc) {
 
-	return !! userId;
+	return true;
 	}
 
 });
+Houston.add_collection(Meteor.users);

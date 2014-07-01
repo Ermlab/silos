@@ -32,5 +32,14 @@ LogBooks.remove(currentLogBookId);
 console.log(LogBooks.find({_id: currentLogBookId}).count());
 Router.go('showLogBooks');
 }
+},
+'click .clean': function(e) {
+e.preventDefault();
+
+if (confirm("Usunac wszystkie logi?")) {
+var currentLogBookId = this._id;
+Meteor.call('clearLogBook', currentLogBookId);
+Router.go('showLogBooks');
+}
 }
 });
