@@ -43,7 +43,7 @@ namespace SilosApi
 		}
 		private string Send(string LogName,string LogBody,string LogTags,int LogSeverity,string LogThread=null)
 		{
-			if (this.LogThread!=null) 
+			if (this.thread!=null) 
 			{
 				LogThread = this.thread;
 			}
