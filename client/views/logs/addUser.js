@@ -11,3 +11,4 @@ Template.addUser.events({
        Router.go('/');
     }
 });
+

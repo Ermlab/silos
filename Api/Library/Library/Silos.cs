@@ -21,27 +21,27 @@ namespace SilosApi
 				this.thread = Thread;
 			}
 		}
-		public string Debug(string LogName,string LogBody,string LogThread=null)
+		public string Debug(string LogName,string LogBody,string LogTags,string LogThread=null)
 		{
-			return this.Send(LogName,LogBody,1,LogThread);
+			return this.Send(LogName,LogBody,LogTags,1,LogThread);
 		}
-		public string Information(string LogName,string LogBody,string LogThread=null)
+		public string Information(string LogName,string LogBody,string LogTags,string LogThread=null)
 		{
-			return this.Send(LogName,LogBody,2,LogThread);
+			return this.Send(LogName,LogBody,LogTags,2,LogThread);
 		}
-		public string Warnings(string LogName,string LogBody,string LogThread=null)
+		public string Warnings(string LogName,string LogBody,string LogTags,string LogThread=null)
 		{
-			return this.Send(LogName,LogBody,3,LogThread);
+			return this.Send(LogName,LogBody,LogTags,3,LogThread);
 		}
-		public string Error(string LogName,string LogBody,string LogThread=null)
+		public string Error(string LogName,string LogBody,string LogTags,string LogThread=null)
 		{
-			return this.Send(LogName,LogBody,4,LogThread);
+			return this.Send(LogName,LogBody,LogTags,4,LogThread);
 		}
-		public string Fatal(string LogName,string LogBody,string LogThread=null)
+		public string Fatal(string LogName,string LogBody,string LogTags,string LogThread=null)
 		{
-			return this.Send(LogName,LogBody,5,LogThread);
+			return this.Send(LogName,LogBody,LogTags,5,LogThread);
 		}
-		private string Send(string LogName,string LogBody,int LogSeverity,string LogThread=null)
+		private string Send(string LogName,string LogBody,string LogTags,int LogSeverity,string LogThread=null)
 		{
 			if (LogThread!=null) 
 			{
@@ -54,7 +54,7 @@ namespace SilosApi
 			request.Method = "POST";
 
 			// Create POST data and convert it to a byte array.
-			string postData = String.Format ("&logName={0}&logBody={1}&logThread={2}&logSeverity={3}", LogName, LogBody,LogThread,LogSeverity);
+			string postData = String.Format ("&logName={0}&logBody={1}&logThread={2}&logSeverity={3}&logTags={4}", LogName, LogBody,LogThread,LogSeverity,LogTags);
 			byte[] byteArray = Encoding.UTF8.GetBytes (postData);
 			// Set the ContentType property of the WebRequest.
 			request.ContentType = "application/x-www-form-urlencoded";
