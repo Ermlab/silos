@@ -9,8 +9,11 @@ LogBooks.allow({
 
 });
 
+
+Users = new Meteor.Collection("allUsersData");
+
 Logs = new Meteor.Collection('logs');
-Limits =new Meteor.Collection('limits');
+
 //LogBookUsers=new Meteor.Collection('logBookUsers');
 
 Logs.allow({

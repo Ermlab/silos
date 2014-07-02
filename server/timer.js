@@ -8,7 +8,7 @@ if (Meteor.isServer) {
         Logs.remove({ LogDate: { $lt: (new Date).setMonth((new Date).getMonth()-1) } });
         LogBooks.find().fetch().forEach(
             function(obj) {
-                console.log(obj._id);
+                //console.log(obj._id);
                 if (Logs.find({LogBookID: obj._id}).count()>100) {
                    Logs.remove({LogBookID: obj._id,LogDate: { $lt: Logs.find({LogBookID: obj._id}).fetch()[100].LogDate}});
                 }

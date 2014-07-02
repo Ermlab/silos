@@ -1,7 +1,9 @@
 function checkLimit() {
 
     //fix here!
-    console.log(Limits.find().count());
+
+    var userProfile = Meteor.users.findOne()["Limit"];
+    console.log(userProfile);
     if (LogBooks.find({AuthorID: Meteor.userId().toString()}).count() > 2) {
         console.log('za duzo');
         //Meteor.rendered("manyLogBooks");

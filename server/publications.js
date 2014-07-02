@@ -18,9 +18,11 @@ Meteor.publish('logBookUsers',function(flag,ID) {
         Key: false
     });
 });
-
 Meteor.publish('friendsLogBooks',function(arg1,arg2,username) {
     return LogBooks.find({"users" : username});
+});
+Meteor.publish("userData", function () {
+    return Meteor.users.find( {_id: this.userId},{fields: {'Limit': 1, 'LastVisit': 1}});
 });
 
 

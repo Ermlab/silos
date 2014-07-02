@@ -1,4 +1,5 @@
 if(Meteor.isClient){
+    Meteor.subscribe("userData");
     Meteor.startup(function(){
         Hooks.init();
     });
