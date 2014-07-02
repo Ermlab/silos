@@ -23,7 +23,8 @@ Template.createLogBook.events({
                 Nazwa: $(e.target).find('[name=Nazwa]').val(),
                 Key: Random.id(64),
                 AuthorID: Meteor.userId(),
-                Created: ((new Date).getTime())
+                Created: ((new Date).getTime()),
+                LastVisit: []
             }
             LogBook._id = LogBooks.insert(LogBook);
 

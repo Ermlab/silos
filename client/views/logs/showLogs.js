@@ -9,12 +9,7 @@ Template.showLogs.events({
 
 Template.showLogs.rendered=function()
 {
-    //console.log();
-    //var tmp=Logs.find({LogBookID: this.id}).count();
-    //console.log(tmp);
-
-
-
+        Meteor.call('updateTime',this.data.id);
 }
 Template.showLogs.events({
     'submit form[id=tagForm]': function(e) {
@@ -29,7 +24,7 @@ Template.showLogs.events({
     'submit form[id=levelForm]': function(e) {
         e.preventDefault();
         var level=$(e.target).find('#level').val();
-        console.log(this.id);
+       // console.log(this.id);
         var path="/showLogs/"+this.id+"/level/"+level;
         Router.go(path)
     }
