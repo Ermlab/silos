@@ -2,9 +2,9 @@ function checkLimit() {
 
     //fix here!
 
-    var userProfile = Meteor.users.findOne()["Limit"];
-    console.log(userProfile);
-    if (LogBooks.find({AuthorID: Meteor.userId().toString()}).count() > 2) {
+    var limit = Meteor.users.findOne()["Limit"];
+    console.log(limit);
+    if (LogBooks.find({AuthorID: Meteor.userId().toString()}).count() >= limit) {
         console.log('za duzo');
         //Meteor.rendered("manyLogBooks");
         Router.go("/manyLogBooks");

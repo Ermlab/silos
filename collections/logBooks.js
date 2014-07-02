@@ -8,9 +8,14 @@ LogBooks.allow({
 	remove: ownsDocument
 
 });
+Users = new Meteor.Collection("userData");
+Users.allow({
+    update: function()
+    {
+    return true;
+    }
+})
 
-
-Users = new Meteor.Collection("allUsersData");
 
 Logs = new Meteor.Collection('logs');
 
