@@ -10,22 +10,18 @@ Template.logItem.rendered=function (){
         default: break;
     }
     });
-var i=0;
+
         $(".date").each(function() {
-            i++;
             var numberDate=$( this ).html();
             var timestamp=(numberDate);
 
             if (isNaN(timestamp)==false)
             {
-                console.log(timestamp*1);
                 var d=new Date(timestamp*1);
                 $( this ).html(d);
 
             }
 
         });
-    console.log(i)
-
 };
 

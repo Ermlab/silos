@@ -11,8 +11,4 @@ Hooks.onLoggedIn = function () {
 console.log("Zalogowalo ");
 }
 
-Accounts.ui.config({
-    extraSignupFields: [
-        { limit: 3 }
-    ]
-})
+

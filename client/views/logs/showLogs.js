@@ -6,32 +6,30 @@ Template.showLogs.events({
     ownPost: function() {
         return this.AuthorID == Meteor.userId(); }
 });
+
 Template.showLogs.rendered=function()
 {
-    console.log(Logs.find().fetch().logd);
+    //console.log();
+    //var tmp=Logs.find({LogBookID: this.id}).count();
+    //console.log(tmp);
+
+
+
 }
 Template.showLogs.events({
     'submit form[id=tagForm]': function(e) {
-        console.log("witaj");
         e.preventDefault();
         var tag=$(e.target).find('#tag').val();
         console.log(tag);
         var path="/showLogs/"+this.id+"/tag/"+tag;
         Router.go(path)
-    },
-    'click .delete': function(e) {
-	if (confirm("Usunac loga?")) {
-	var currentLogId = this._id;
-	Logs.remove(currentLogId);
-	}
-     }
+    }
 });
 Template.showLogs.events({
     'submit form[id=levelForm]': function(e) {
-        console.log("witaj");
         e.preventDefault();
         var level=$(e.target).find('#level').val();
-        console.log(tag);
+        console.log(this.id);
         var path="/showLogs/"+this.id+"/level/"+level;
         Router.go(path)
     }
