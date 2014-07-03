@@ -40,35 +40,24 @@ function drawChart(){
 
 Template.chart.rendered = function(){
 	drawChart();
-	//Meteor.setInterval(drawChart,21*1000);
+	Meteor.setInterval(drawChart,21*1000);
 }
 
 if(Meteor.isClient){
 	function aggregate(){
-		var one,two,three,four,five;
 		a=0,b=0,c=0,d=0,e=0;
-		one=Logs.find({LogSeverity: 1}).fetch();
-		two=Logs.find({LogSeverity: 2});
-		three=Logs.find({LogSeverity: 3});
-		four=Logs.find({LogSeverity: 4});
-		five=Logs.find({LogSeverity: 5});
-		one.forEach(function() {a+=1;});
-		two.forEach(function() {b+=1;});
-		three.forEach(function() {c+=1;});
-		four.forEach(function() {d+=1;});
-		five.forEach(function() {e+=1;});
-		a+=1;
-		b+=1;
-		c+=1;
-		d+=1;
-		e+=1;		
+		a=Logs.find({LogSeverity: 1}).count();
+		b=Logs.find({LogSeverity: 2}).count();
+		c=Logs.find({LogSeverity: 3}).count();
+		d=Logs.find({LogSeverity: 4}).count();
+		e=Logs.find({LogSeverity: 5}).count();		
 }
 }
 
 
 Template.showLogs.created=function(){
-	//aggregate();
-	//Meteor.setInterval(aggregate,20*1000);
+	aggregate();
+	Meteor.setInterval(aggregate,20*1000);
 
 
 }
