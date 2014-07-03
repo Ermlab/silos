@@ -3,6 +3,8 @@ using System.Net;
 using System.IO;
 using System.Collections.Specialized;
 using System.Text;
+using System.Collections.Generic;
+
 namespace SilosApi
 {
 	public class Silos
@@ -10,51 +12,52 @@ namespace SilosApi
 		private string host;
 		private string port;
 		private string key;
-		private string thread=null;
-		public Silos(string Host,string Port,string Key,string Thread=null)
+		private List<Tuple<String,String>> fileds;
+		public Silos(string Host,string Port,string Key)
 		{
 			this.host = Host;
 			this.port = Port;
 			this.key = Key;
-			if(Thread!=null)
-			{
-				this.thread = Thread;
-			}
+			fileds = new List<Tuple<String,String>> ();
 		}
-		public string Debug(string LogName,string LogBody,string LogTags,string LogThread=null)
+		public string Debug(string LogMsg)
 		{
-			return this.Send(LogName,LogBody,LogTags,1,LogThread);
+			return this.Send(LogMsg,1);
 		}
-		public string Information(string LogName,string LogBody,string LogTags,string LogThread=null)
+		public string Information(string LogMsg)
 		{
-			return this.Send(LogName,LogBody,LogTags,2,LogThread);
+			return this.Send(LogMsg,2);
 		}
-		public string Warnings(string LogName,string LogBody,string LogTags,string LogThread=null)
+		public string Warnings(string LogMsg)
 		{
-			return this.Send(LogName,LogBody,LogTags,3,LogThread);
+			return this.Send (LogMsg,3);
 		}
-		public string Error(string LogName,string LogBody,string LogTags,string LogThread=null)
+		public string Error(string LogMsg)
 		{
-			return this.Send(LogName,LogBody,LogTags,4,LogThread);
+			return this.Send (LogMsg,4);
 		}
-		public string Fatal(string LogName,string LogBody,string LogTags,string LogThread=null)
+		public string Fatal(string LogMsg)
 		{
-			return this.Send(LogName,LogBody,LogTags,5,LogThread);
+			return this.Send (LogMsg,5);
 		}
-		private string Send(string LogName,string LogBody,string LogTags,int LogSeverity,string LogThread=null)
+		public void setFiled(string name,string value)
 		{
-			if (this.thread!=null) 
-			{
-				LogThread = this.thread;
-			}
+			this.fileds.Add (new Tuple<string,string>(name, value));
+		}
+		private string Send(string LogMsg,int LogValue)
+		{
+
 			Uri uri=new Uri(string.Format ("{0}:{1}/api/call/{2}",this.host ,this.port, this.key));
 
 
 			WebRequest request = WebRequest.Create (uri);
 			request.Method = "POST";
-
+			string postData = String.Format ("&LogMsg={0}&LogSeverity={1}", LogMsg,LogValue);
+			foreach (Tuple<string,string> i in this.fileds) {
+				postData += String.Format ("&{0}={1}", i.Item1, i.Item2);
+			}
+			System.Console.WriteLine (postData);
 			// Create POST data and convert it to a byte array.
-			string postData = String.Format ("&logName={0}&logBody={1}&logThread={2}&logSeverity={3}&logTags={4}", LogName, LogBody,LogThread,LogSeverity,LogTags);
 			byte[] byteArray = Encoding.UTF8.GetBytes (postData);
 			// Set the ContentType property of the WebRequest.
 			request.ContentType = "application/x-www-form-urlencoded";

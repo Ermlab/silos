@@ -20,10 +20,11 @@ Template.createLogBook.events({
             console.log("tutua");
 
             var LogBook = {
-                Nazwa: $(e.target).find('[name=Nazwa]').val(),
+                Name: $(e.target).find('[name=Nazwa]').val(),
                 Key: Random.id(64),
                 AuthorID: Meteor.userId(),
                 Created: ((new Date).getTime()),
+                View: [],
                 LastVisit: []
             }
             LogBook._id = LogBooks.insert(LogBook);
