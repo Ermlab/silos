@@ -40,35 +40,24 @@ function drawChart(){
 
 Template.chart.rendered = function(){
 	drawChart();
-	//Meteor.setInterval(drawChart,21*1000);
+	Meteor.setInterval(drawChart,21*1000);
 }
 
 if(Meteor.isClient){
 	function aggregate(){
-		var one,two,three,four,five;
 		a=0,b=0,c=0,d=0,e=0;
-		one=Logs.find({LogSeverity: 1}).fetch();
-		two=Logs.find({LogSeverity: 2});
-		three=Logs.find({LogSeverity: 3});
-		four=Logs.find({LogSeverity: 4});
-		five=Logs.find({LogSeverity: 5});
-		one.forEach(function() {a+=1;});
-		two.forEach(function() {b+=1;});
-		three.forEach(function() {c+=1;});
-		four.forEach(function() {d+=1;});
-		five.forEach(function() {e+=1;});
-		a+=1;
-		b+=1;
-		c+=1;
-		d+=1;
-		e+=1;		
+		a=Logs.find({LogSeverity: 1}).count();
+		b=Logs.find({LogSeverity: 2}).count();
+		c=Logs.find({LogSeverity: 3}).count();
+		d=Logs.find({LogSeverity: 4}).count();
+		e=Logs.find({LogSeverity: 5}).count();		
 }
 }
 
 
 Template.showLogs.created=function(){
-	//aggregate();
-	//Meteor.setInterval(aggregate,20*1000);
+	aggregate();
+	Meteor.setInterval(aggregate,20*1000);
 
 
 }
@@ -79,7 +68,11 @@ Template.showLogs.events({
         $(e.target).find('[level=Level]').val();
     },
     ownPost: function() {
-        return this.AuthorID == Meteor.userId(); }
+        return this.AuthorID == Meteor.userId(); },
+    'click .download': function (e) {
+        csv = json2csv(Logs.find().fetch(), true, true)
+        e.target.href = "data:text/csv;charset=utf-8," + escape(csv)
+        e.target.download = "logs.csv"; }
 });
 
 Template.showLogs.rendered=function()
@@ -104,5 +97,73 @@ Template.showLogs.events({
         Router.go(path)
     }
 })
+function json2csv(objArray, headers, showHeaders) {
+
+    if( typeof headers == "boolean" ){
+        showHeaders = headers;
+        headers = null;
+    }
+
+    var itens = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+
+    //separate fields
+    var fields = {};
+
+    if( !headers ){
+        for(var i = 0; i < itens.length; i++){
+            for(var prop in itens[i]){
+                if( !fields[prop] ){
+                    fields[prop] = [];
+                }
+            }
+        }
+    }else{
+        headers.forEach(function(header){ fields[header] = []; });
+    }
 
 
+    //getting data
+
+    for(var i = 0; i < itens.length; i++){
+        for(var prop in fields){
+            if( typeof itens[i][prop] != "undefined" ){
+                fields[prop].push( itens[i][prop] );
+            }else{
+                fields[prop].push( "" );
+            }
+        }
+    }
+
+    //make the csv
+
+    var csvLines = [];
+
+    if( showHeaders ){
+
+        var lineFields = [];
+
+        for(var prop in fields){
+            lineFields.push( prop );
+        }
+
+        var line = lineFields.join(", ");
+        csvLines.push(line);
+
+    }
+
+    for(var i = 0; i < itens.length; i++){
+
+        var lineFields = [];
+
+        for(var prop in fields){
+            lineFields.push( fields[prop][i] );
+        }
+
+        var line = lineFields.join(", ");
+        csvLines.push(line);
+    }
+
+    var csvStr = "sep=,\n" + csvLines.join("\n");
+
+    return csvStr;
+}

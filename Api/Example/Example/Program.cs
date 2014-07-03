@@ -6,7 +6,7 @@ namespace Example
 	{
 		public static void Main (string[] args)
 		{
-			Silos api = new Silos ("http://localhost", "3000", "jjxvYprZ3bFSoGwsA2chhtCAkmQYnuGdBCveEbdLKGqQ6RGvFTnQFBFfhoGxzSiR");
+			Silos api = new Silos ("http://localhost", "3000", "tEmYM7jBEddHc9ELT4z8yLDEemsvEWrB58J5rYxoPpqgDTc7Tg4ZqkYjvpMz6Wuv");
 			api.setFiled ("pole 23", "wartosc");
 			String respond = api.Debug ("wiadomosc");
 			/*

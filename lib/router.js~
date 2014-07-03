@@ -8,40 +8,75 @@ this.route('showLogBooks', {
     path: '/',
     waitOn: function() {
         Meteor.subscribe('myLogBooks', Meteor.userId());
+        Meteor.subscribe('logs');
         var user = Meteor.user();
-        var email = user && user.emails && user.emails[0].address
+        var email = user && user.emails && user.emails[0].address;
 
         console.log(email);
         Meteor.subscribe('friendsLogBooks',1,2 ,email);
     },
     data: function() {
         var user = Meteor.user();
-        var email = user && user.emails && user.emails[0].address
+        var email = user && user.emails && user.emails[0].address;
+
+        var la = LogBooks.find({AuthorID: Meteor.userId()}).fetch();
+        var lb=LogBooks.find({"users" : email}).fetch();
+
+        _.each(la,function(obj) {
+
+
+        if (typeof obj.LastVisit[0]=== "undefined") {
+
+            obj.isntRead = Logs.find({LogBookID: obj._id}).count();
+            // no variable "v" is defined in the current scop1e
+            // *or* some variable v exists and has been assigned the value undefined
+        } else {
+            obj.isntRead = Logs.find({LogBookID: obj._id, LogDate: {$gt: (new Date(obj.LastVisit[0].date)).getTime()}}).count();
+
+        }
+
+
+
+                   //
+
+
+
+                //var tmp = Logs.find({LogBookID: obj._id}).count();
+
+
+
+        })
+        _.each(lb,function(obj) {
+            try {
+                obj.isntRead = Logs.find({LogBookID: obj._id, LogDate: {$gt: (new Date(obj.LastVisit[0].date).getTime())}}).count();
+            } catch (E) {
+                obj.isntRead = Logs.find({LogBookID: obj._id}).count();
+            }
+        })
+
         return {
-        myLogBooks: LogBooks.find({AuthorID: Meteor.userId()}).fetch(),
-        friendsLogBooks: LogBooks.find({"users" : email}).fetch()
+        myLogBooks: la,
+        friendsLogBooks: lb
     } }
 });
 this.route('createLogBook', {
     path: '/CreateLogBook',
-    waitOn: function() { return Meteor.subscribe('limits', Meteor.userId()); },
-    data: function() { return {limits: Limits.find().fetch()} }
+    waitOn: function() { Meteor.subscribe("userData"); },
+    data: function() {  }
+
 });
 
-this.route('showLogs', {
-    path: '/showLogs/:_id',
-      waitOn: function() { return Meteor.subscribe('logs',this.params._id); },
-      data: function() { return {
-          logs: Logs.find().fetch(),
-          id: this.params._id
-      } }
-    });
+
 this.route('showLogs', {
         path: '/showLogs/:_id/tag/:tag',
         waitOn: function() { return Meteor.subscribe('logs',this.params._id); },
-        data: function() { return {
+        data: function() {
+
+            console.log(LogBooks.findOne({_id:this.params._id}));
+            return {
             logs: Logs.find({LogTags: this.params.tag}).fetch(),
             id: this.params._id
+
         } }
 });
     this.route('showLogs', {
@@ -49,6 +84,17 @@ this.route('showLogs', {
         waitOn: function() { return Meteor.subscribe('logs',this.params._id); },
         data: function() { return {
             logs: Logs.find({LogSeverity: this.params.level}).fetch(),
+            id: this.params._id
+        } }
+    });
+    this.route('showLogs', {
+        path: '/showLogs/:_id',
+        waitOn: function() { Meteor.subscribe('logs',this.params._id); },
+        data: function() {
+
+            return {
+                console.log("witaj");
+            logs: Logs.find({LogBookID:this.params._id}).fetch(),
             id: this.params._id
         } }
     });
