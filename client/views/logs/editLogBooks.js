@@ -34,12 +34,30 @@ Router.go('showLogBooks');
 }
 },
 'click .clean': function(e) {
-e.preventDefault();
+    e.preventDefault();
 
-if (confirm("Usunac wszystkie logi?")) {
-var currentLogBookId = this._id;
-Meteor.call('clearLogBook', currentLogBookId);
-Router.go('showLogBooks');
-}
-}
+    if (confirm("Usunac wszystkie logi?")) {
+        var currentLogBookId = this._id;
+        Meteor.call('clearLogBook', currentLogBookId);
+        Router.go('showLogBooks');
+    }
+},
+    'click .add': function(e) {
+      //pozniej
+        },
+
+
+    'submit #viewForm': function(e) {
+        e.preventDefault();
+        jSon=[];
+        $(".fields").each(function(index,value)
+        {
+            if ($(value).val().length>0) {
+                jSon.push($(value).val());
+            }
+        });
+        LogBooks.update({_id: this._id}, {$set : {View : jSon}});
+        console.log(jSon);
+    }
 });
+
