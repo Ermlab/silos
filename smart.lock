@@ -5,7 +5,8 @@
       "iron-router": {},
       "event-hooks": {},
       "bootstrap-3": {},
-      "houston": {}
+      "houston": {},
+      "chartjs": {}
     },
     "packages": {
       "iron-router": {
@@ -27,6 +28,11 @@
         "git": "https://github.com/gterrono/houston.git",
         "tag": "v1.0.6",
         "commit": "49765acf835385de6de6160b0c86514d5af09395"
+      },
+      "chartjs": {
+        "git": "https://github.com/donskifarrell/meteor-chartjs.git",
+        "tag": "v0.0.4",
+        "commit": "9d2adcd1de3728c8227e8eb7da0dcb2e0df21d0b"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
