@@ -17,7 +17,7 @@ Template.createLogBook.events({
         'submit form': function(e) {
             e.preventDefault();
 
-
+            console.log("tutua");
 
             var LogBook = {
                 Nazwa: $(e.target).find('[name=Nazwa]').val(),
@@ -28,7 +28,7 @@ Template.createLogBook.events({
             }
             LogBook._id = LogBooks.insert(LogBook);
 
-            Router.go('/',LogBook);
+            Router.go('/');
         }
     });
 
