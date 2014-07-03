@@ -1,3 +1,28 @@
+if(Meteor.isClient){
+	function aggregate(){
+		var one,two,three,four,five,a,b,c,d,e;
+		one=Logs.find({LogSeverity:1});
+		two=Logs.find({LogSeverity:2});
+		three=Logs.find({LogSeverity:3});
+		four=Logs.find({LogSeverity:4});
+		five=Logs.find({LogSeverity:5});
+		one.forEach(function() {a+=1;});
+		two.forEach(function() {b+=1;});
+		three.forEach(function() {c+=1;});
+		four.forEach(function() {d+=1;});
+		five.forEach(function() {e+=1;});
+		console.log("Hi mom");
+	
+	}
+}
+
+Template.showLogs.created=function(){
+	aggregate();
+	Meteor.setInterval(aggregate,20*1000);
+
+
+}
+
 Template.showLogs.events({
     'submit form': function(e) {
         e.preventDefault();
