@@ -1,39 +1,33 @@
 var a=0,b=0,c=0,d=0,e=0;
 function drawChart(){
-console.log(a);
-console.log(b);
-console.log(c);
-console.log(d);
-console.log(e);
-
 	
   var data = [
     {
-        value: a,
+        value: 1,
         color:"#7FFF00",
         highlight: "#FF5A5E",
         label: "Green"
     },
     {
-        value: b,
+        value: 1,
         color: "#6495ED",
         highlight: "#5AD3D1",
         label: "Blue"
     },
     {
-        value: c,
+        value: 1,
         color: "#FFFF00",
         highlight: "#FFC870",
         label: "Yellow"
     },
  {
-        value: d,
+        value: 1,
         color: "#FFA500",
         highlight: "#5AD3D1",
         label: "Orange"
     },
  {
-        value: e,
+        value: 1,
         color: "#FF0000",
         highlight: "#5AD3D1",
         label: "Red"
@@ -41,13 +35,12 @@ console.log(e);
 ]
   var ctx = $("#myChart").get(0).getContext("2d");
   var myNewChart = new Chart(ctx);
-
   new Chart(ctx).Pie(data);
 }
 
 Template.chart.rendered = function(){
 	drawChart();
-	Meteor.setInterval(drawChart,21*1000);
+	//Meteor.setInterval(drawChart,21*1000);
 }
 
 if(Meteor.isClient){
@@ -74,8 +67,8 @@ if(Meteor.isClient){
 
 
 Template.showLogs.created=function(){
-	aggregate();
-	Meteor.setInterval(aggregate,20*1000);
+	//aggregate();
+	//Meteor.setInterval(aggregate,20*1000);
 
 
 }
