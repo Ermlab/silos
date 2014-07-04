@@ -1,26 +1,27 @@
 <template name="editLogBook">
+<center>
+    <form>
+        <div>Change LogBook name: <br>
+            <input name="Name" type="text" value="{{Name}}" placeholder="Podaj nazwe LogBooka"/>
+        </div>
+        <div>
 
+
+            <input type="submit" value="Submit" class="btn btn-primary submit"/>
+        </div><br><br><br>
 <div>
-<input name="Nazwa" type="text" value="{{Nazwa}}" placeholder="Podaj nazwe LogBooka"/>
-</div>
-<div>
-
-
-<input type="submit" value="Wyslij" class="btn btn-primary submit"/>
-</div>
-<div>
-<a class="btn btn-danger delete" href="#">Usun LogBook</a><br>
-    <a href="{{pathFor 'addUser'}}" class="btn btn-warning">Dodaj uzytkownika</a>
-<br>
-    <a href="{{pathFor 'showUsers'}}" class="btn btn-success">Pokaz uzytkownikow</a>
-<br>
-<a class="btn btn-info clean" href="{{pathFor 'showLogBooks'}}">Wyczysc Logi</a> 
-</div>
-
+<a class="btn-danger btn-lg delete" href="#">Delete LogBook</a><br><br><br>
+    <a href="{{pathFor 'addUser'}}" class="btn-warning btn-lg">Add user to subscribe</a>
+<br><br><br>
+    <a href="{{pathFor 'showUsers'}}" class="btn-success btn-lg">Show subscribers</a>
+<br><br><br>
+<a class="btn-info btn-lg clean" href="{{pathFor 'showLogBooks'}}">Clean LogBook</a> 
+</div><br><br><br>
     Wpisz jakie pola chcesz wyswietlac: <br/>
-<form name="input" method="get">
-    <a class="btn btn-success new" href="#">Dodaj nowe pole</a>
-    <input type="submit" value="akceptuj"/><br>
-    <input type="text" name="pole">
-</form>
+
+        <a class="btn btn-info new" href="#">Add new field</a>
+        <input type="submit" class="btn btn-success new" value="Submit"/><br><br>
+        <input type="text" name="pole">
+    </form>
+</center>
 </template>

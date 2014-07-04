@@ -1,26 +1,26 @@
 Template.editLogBook.events({
-'submit form': function(e) {
-e.preventDefault();
+    'submit form': function(e) {
+        e.preventDefault();
 
 
-var currentLogBookId = this._id;
+        var currentLogBookId = this._id;
 
-var logBookProperties = {
-Nazwa: $(e.target).find('[name=Nazwa]').val()
-
-
-}
+        var logBookProperties = {
+            Name: $(e.target).find('[name=Name]').val()
 
 
+        }
 
-LogBooks.update(currentLogBookId, {$set: logBookProperties}, function(error) {
-if (error) {
-alert(error.reason);
-} else {
-Router.go('showLogBooks', {_id: currentLogBookId});
-}
-});
-},
+
+
+        LogBooks.update(currentLogBookId, {$set: logBookProperties}, function(error) {
+            if (error) {
+                alert(error.reason);
+            } else {
+                Router.go('showLogBooks', {_id: currentLogBookId});
+            }
+        });
+    },
 
 'click .delete': function(e) {
 e.preventDefault();
