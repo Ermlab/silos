@@ -93,14 +93,13 @@ Template.showLogs.events({
 
 Template.showLogs.rendered=function()
 {
-<<<<<<< HEAD
+
         Meteor.call('updateTime',this.data.id);
 	console.log(this.data.logs);
 
 	
-=======
+
     Meteor.call('updateTime',this.data.id);
->>>>>>> 72f35d4016881338c104c2196923d2bc1b67c75f
 }
 Template.showLogs.events({
     'submit form[id=tagForm]': function(e) {
