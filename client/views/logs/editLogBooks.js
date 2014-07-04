@@ -42,12 +42,12 @@ Router.go('showLogBooks');
         Router.go('showLogBooks');
     }
 },
-    'click .add': function(e) {
+'click .add': function(e) {
       //pozniej
         },
 
 
-    'submit #viewForm': function(e) {
+'submit #viewForm': function(e) {
         e.preventDefault();
         jSon=[];
         $(".fields").each(function(index,value)
@@ -58,6 +58,19 @@ Router.go('showLogBooks');
         });
         LogBooks.update({_id: this._id}, {$set : {View : jSon}});
         console.log(jSon);
-    }
-});
+    },
+    'click .new': function(e) {
+        var form = document.getElementsByTagName('form')[0],
+            input = document.createElement('input'),
+            br = document.createElement("br");
 
+        input.setAttribute('type', 'text');
+        input.setAttribute('name', 'pole');
+        form.appendChild(br);
+        form.appendChild(input);
+
+
+
+    }
+
+});

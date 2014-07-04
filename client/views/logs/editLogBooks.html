@@ -1,5 +1,5 @@
 <template name="editLogBook">
-<form>
+
 <div>
 <input name="Nazwa" type="text" value="{{Nazwa}}" placeholder="Podaj nazwe LogBooka"/>
 </div>
@@ -16,15 +16,11 @@
 <br>
 <a class="btn btn-info clean" href="{{pathFor 'showLogBooks'}}">Wyczysc Logi</a> 
 </div>
-</form>
+
     Wpisz jakie pola chcesz wyswietlac: <br/>
-<form id="viewForm">
-    <input class="fields"/><br/>
-    <input class="fields"/><br/>
-    <input class="fields"/><br/>
-    <input class="fields"/><br/>
-    <input class="fields"/><br/>
-    <input class="fields"/><br/>
-    <input type="submit" value="akceptuj"/>
+<form name="input" method="get">
+    <a class="btn btn-success new" href="#">Dodaj nowe pole</a>
+    <input type="submit" value="akceptuj"/><br>
+    <input type="text" name="pole">
 </form>
 </template>
