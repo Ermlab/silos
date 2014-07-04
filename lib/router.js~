@@ -89,13 +89,17 @@ this.route('showLogs', {
     });
     this.route('showLogs', {
         path: '/showLogs/:_id',
-        waitOn: function() { Meteor.subscribe('logs',this.params._id); },
+        waitOn: function() {
+            Meteor.subscribe('logs',this.params._id);
+            Meteor.subscribe('logBooks');
+        },
         data: function() {
-
+            console.log(this.params._id);
+            console.log(Logs.find({LogBookID:this.params._id}).count());
             return {
-                console.log("witaj");
             logs: Logs.find({LogBookID:this.params._id}).fetch(),
-            id: this.params._id
+            id: this.params._id,
+            view: LogBooks.find({_id: this.params._id}).fetch()
         } }
     });
 this.route('addUser', {
@@ -145,12 +149,5 @@ function requireLoginShow(pause){
     }
 }
 
-/*pozniej
-function requireAuthor(pause){
-    console.log(this.params._id)
-    tutaj jeszcze przerobki
-}
-/
-Router.onBeforeAction(requireAuthor, {only: 'addUser'});*/
 Router.onBeforeAction(requireLoginCreate, {only: 'createLogBook'});
 Router.onBeforeAction(requireLoginShow, {only: 'showLogBooks'});

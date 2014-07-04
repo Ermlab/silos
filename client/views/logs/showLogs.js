@@ -1,34 +1,34 @@
-var a=0,b=0,c=0,d=0,e=0;
+var a,b,c,d,e;
 var interval1, interval2;
 function drawChart(){
 	
   var data = [
     {
-        value: 1,
+        value: a,
         color:"#7FFF00",
         highlight: "#FF5A5E",
         label: "Green"
     },
     {
-        value: 1,
+        value: b,
         color: "#6495ED",
         highlight: "#5AD3D1",
         label: "Blue"
     },
     {
-        value: 1,
+        value: c,
         color: "#FFFF00",
         highlight: "#FFC870",
         label: "Yellow"
     },
  {
-        value: 1,
+        value: d,
         color: "#FFA500",
         highlight: "#5AD3D1",
         label: "Orange"
     },
  {
-        value: 1,
+        value: e,
         color: "#FF0000",
         highlight: "#5AD3D1",
         label: "Red"
@@ -40,18 +40,21 @@ function drawChart(){
 }
 
 Template.chart.rendered = function(){
-	drawChart();
+	console.log("!");
+	setTimeout(function(){drawChart()},3000);
 	interval1 = Meteor.setInterval(drawChart,21*1000);
 }
 
+
+
 if(Meteor.isClient){
 	function aggregate(){
-		a=0,b=0,c=0,d=0,e=0;
-		a=Logs.find({LogSeverity: 1}).count();
-		b=Logs.find({LogSeverity: 2}).count();
-		c=Logs.find({LogSeverity: 3}).count();
-		d=Logs.find({LogSeverity: 4}).count();
-		e=Logs.find({LogSeverity: 5}).count();		
+	a=0,b=0,c=0,d=0,e=0;
+		a=Logs.find({LogSeverity: '1'}).count();
+		b=Logs.find({LogSeverity: '2'}).count();
+		c=Logs.find({LogSeverity: '3'}).count();
+		d=Logs.find({LogSeverity: '4'}).count();
+		e=Logs.find({LogSeverity: '5'}).count();
 }
 }
 
@@ -85,6 +88,9 @@ Template.showLogs.events({
 Template.showLogs.rendered=function()
 {
         Meteor.call('updateTime',this.data.id);
+	console.log(this.data.logs);
+
+	
 }
 Template.showLogs.events({
     'submit form[id=tagForm]': function(e) {
