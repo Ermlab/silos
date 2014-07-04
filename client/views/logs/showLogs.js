@@ -1,4 +1,5 @@
 var a=0,b=0,c=0,d=0,e=0;
+var interval1, interval2;
 function drawChart(){
 	
   var data = [
@@ -40,7 +41,7 @@ function drawChart(){
 
 Template.chart.rendered = function(){
 	drawChart();
-	Meteor.setInterval(drawChart,21*1000);
+	interval1 = Meteor.setInterval(drawChart,21*1000);
 }
 
 if(Meteor.isClient){
@@ -57,10 +58,16 @@ if(Meteor.isClient){
 
 Template.showLogs.created=function(){
 	aggregate();
-	Meteor.setInterval(aggregate,20*1000);
+	interval2 = Meteor.setInterval(aggregate,20*1000);
 
 
 }
+Template.showLogs.destroyed=function(){
+	Meteor.clearInterval(interval1);
+	Meteor.clearInterval(interval2);
+
+}
+
 
 Template.showLogs.events({
     'submit form': function(e) {
