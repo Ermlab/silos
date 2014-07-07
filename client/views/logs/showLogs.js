@@ -55,6 +55,16 @@ if(Meteor.isClient){
 		c=Logs.find({LogSeverity: '3'}).count();
 		d=Logs.find({LogSeverity: '4'}).count();
 		e=Logs.find({LogSeverity: '5'}).count();
+		
+}
+	function aggregatebytag(tag){
+	a=0,b=0,c=0,d=0,e=0;
+		a=Logs.find({LogSeverity: '1'}).count();
+		b=Logs.find({LogSeverity: '2'}).count();
+		c=Logs.find({LogSeverity: '3'}).count();
+		d=Logs.find({LogSeverity: '4'}).count();
+		e=Logs.find({LogSeverity: '5'}).count();
+		
 }
 }
 
@@ -105,6 +115,7 @@ Template.showLogs.events({
     'submit form[id=tagForm]': function(e) {
         e.preventDefault();
         var tag=$(e.target).find('#tag').val();
+	aggregatebytag('#tag');
         console.log(tag);
         var path="/showLogs/"+this.id+"/tag/"+tag;
         Router.go(path)
