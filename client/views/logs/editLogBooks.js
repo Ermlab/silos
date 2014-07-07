@@ -27,9 +27,7 @@ e.preventDefault();
 
 if (confirm("Usunac LogBooka?")) {
 var currentLogBookId = this._id;
-console.log(LogBooks.find({_id: currentLogBookId}).count());
 LogBooks.remove(currentLogBookId);
-console.log(LogBooks.find({_id: currentLogBookId}).count());
 Router.go('showLogBooks');
 }
 },
@@ -44,6 +42,7 @@ Router.go('showLogBooks');
 },
 'click .add': function(e) {
       //pozniej
+        Router.go('addUser');
         },
 
 
@@ -57,7 +56,6 @@ Router.go('showLogBooks');
             }
         });
         LogBooks.update({_id: this._id}, {$set : {View : jSon}});
-        console.log(jSon);
     },
     'click .new': function(e) {
         var form = document.getElementsByTagName('form')[0],

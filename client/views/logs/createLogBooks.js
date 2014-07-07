@@ -3,9 +3,7 @@ function checkLimit() {
     //fix here!
 
     var limit = Meteor.users.findOne()["Limit"];
-    console.log(limit);
     if (LogBooks.find({AuthorID: Meteor.userId().toString()}).count() >= limit) {
-        console.log('za duzo');
         //Meteor.rendered("manyLogBooks");
         Router.go("/manyLogBooks");
 
@@ -16,8 +14,6 @@ Template.createLogBook.rendered=checkLimit;
 Template.createLogBook.events({
         'submit form': function(e) {
             e.preventDefault();
-
-            console.log("tutua");
 
             var LogBook = {
                 Name: $(e.target).find('[name=Nazwa]').val(),

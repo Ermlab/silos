@@ -9,7 +9,6 @@ Template.logBook.rendered=function (){
 
         if (isNaN(timestamp)==false)
         {
-            console.log(timestamp*1);
             var d=new Date(timestamp*1);
             $( this ).html(d);
 

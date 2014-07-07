@@ -1,11 +1,11 @@
 <template name="showUsers">
-    strona
+    <center><b><u>Subscribers</u></b>
     {{#each logBookUsers}}
     {{> bookUsers}}
-    {{/each}}
+    {{/each}}</center>
 </template>
 <template name="bookUsers">
-    {{#each users}}
+    {{#each users}}<br>
     {{> bookUser}}
     {{/each}}
 </template>

@@ -40,7 +40,6 @@ function drawChart(){
 }
 
 Template.chart.rendered = function(){
-	console.log("!");
 	setTimeout(function(){drawChart()},3000);
 	interval1 = Meteor.setInterval(drawChart,21*1000);
 }
@@ -105,7 +104,6 @@ Template.showLogs.rendered=function()
 {
 
         Meteor.call('updateTime',this.data.id);
-	console.log(this.data.logs);
 
 	
 
@@ -116,7 +114,6 @@ Template.showLogs.events({
         e.preventDefault();
         var tag=$(e.target).find('#tag').val();
 	aggregatebytag('#tag');
-        console.log(tag);
         var path="/showLogs/"+this.id+"/tag/"+tag;
         Router.go(path)
     }
@@ -125,7 +122,6 @@ Template.showLogs.events({
     'submit form[id=levelForm]': function(e) {
         e.preventDefault();
         var level=$(e.target).find('#level').val();
-        // console.log(this.id);
         var path="/showLogs/"+this.id+"/level/"+level;
         Router.go(path)
     }
