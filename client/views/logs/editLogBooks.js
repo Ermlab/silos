@@ -32,7 +32,7 @@ Template.editLogBook.events({
 'click .delete': function(e) {
 e.preventDefault();
 
-if (confirm("Usunac LogBooka?")) {
+if (confirm("Delete LogBook?")) {
 var currentLogBookId = this._id;
 LogBooks.remove(currentLogBookId);
 Router.go('showLogBooks');
@@ -41,7 +41,7 @@ Router.go('showLogBooks');
 'click .clean': function(e) {
     e.preventDefault();
 
-    if (confirm("Usunac wszystkie logi?")) {
+    if (confirm("Delete all logs?")) {
         var currentLogBookId = this._id;
         Meteor.call('clearLogBook', currentLogBookId);
         Router.go('showLogBooks');
@@ -78,3 +78,13 @@ Router.go('showLogBooks');
     }
 
 });
+
+/*function checkUser () {
+    var Author = Meteor.logBooks.findOne()["AuthorID"];
+    if (Author!==Meteor.userId()) {
+        Router.go("/noAccess");
+    }
+}
+
+Template.editLogBook.rendered=checkUser;*/
+
