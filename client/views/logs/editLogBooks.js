@@ -3,24 +3,24 @@ Template.editLogBook.events({
         e.preventDefault();
 
 
-        var currentLogBookId = this._id;
-
-        var logBookProperties = {
-            Name: $(e.target).find('[name=Name]').val()
+        var currentLogBookId = this.id;
 
 
-        }
         var json = [];
         $(".viewFiled").each(function(obj)
         {
             if ($(this).val().length>1)
-            json.push($(this).val());
+            json.push({field: $(this).val()});
 
         });
-        LogBooks.update({_id: currentLogBookId},{$set: { 'View' : json}});
+        //LogBooks.update({_id: currentLogBookId},{$set: { 'View' : json}});
 
-
-        LogBooks.update(currentLogBookId, {$set: logBookProperties}, function(error) {
+        console.log(currentLogBookId);
+        console.log(LogBooks.findOne(currentLogBookId).Name);
+        var newName=$(e.target).find('[name=Name]').val();
+        LogBooks.update(currentLogBookId, {$set: {Name : (newName.length<2 ?LogBooks.findOne(currentLogBookId).Name : newName )
+            , View : json }
+        }, function(error) {
             if (error) {
                 alert(error.reason);
             } else {

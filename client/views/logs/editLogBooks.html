@@ -1,5 +1,9 @@
+<template name="viewItem">
+    <input type="text" class="viewFiled" name="pole" value="{{field}}"/>
+</template>
 <template name="editLogBook">
 <center>
+
     <form>
         <div>Change LogBook name: <br>
             <input name="Name" type="text" value="{{Name}}" placeholder="Podaj nazwe LogBooka"/>
@@ -20,8 +24,13 @@
     Wpisz jakie pola chcesz wyswietlac: <br/>
 
         <a class="btn btn-info new" href="#">Add new field</a>
+
+
         <input type="submit" class="btn btn-success new" value="Submit"/><br><br>
-        <input type="text" class="viewFiled" name="pole">
+        {{#each Views}}
+        {{>viewItem}}<br/>
+        {{/each}}
+
     </form>
 </center>
 </template>
