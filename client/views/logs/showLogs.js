@@ -7,7 +7,6 @@ function drawChart(){
 	document.getElementById("four").innerHTML=d;
 	document.getElementById("five").innerHTML=e;
 	document.getElementById("all").innerHTML=all;
-	console.log(all);
 	if(all!=0){
 	document.getElementById("jeden").innerHTML=(a/all)*100+"%";
 	document.getElementById("dwa").innerHTML=b/all*100+"%";
