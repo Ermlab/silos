@@ -1,4 +1,4 @@
-var a,b,c,d,e;
+var a,b,c,d,e,all;
 var interval1, interval2;
 function drawChart(){
 	document.getElementById("one").innerHTML=a;
@@ -6,6 +6,22 @@ function drawChart(){
 	document.getElementById("three").innerHTML=c;
 	document.getElementById("four").innerHTML=d;
 	document.getElementById("five").innerHTML=e;
+	document.getElementById("all").innerHTML=all;
+	console.log(all);
+	if(all!=0){
+	document.getElementById("jeden").innerHTML=(a/all)*100+"%";
+	document.getElementById("dwa").innerHTML=b/all*100+"%";
+	document.getElementById("trzy").innerHTML=c/all*100+"%";
+	document.getElementById("cztery").innerHTML=d/all*100+"%";
+	document.getElementById("piec").innerHTML=e/all*100+"%";
+	}
+	else{
+	document.getElementById("jeden").innerHTML=0;
+	document.getElementById("dwa").innerHTML=0;
+	document.getElementById("trzy").innerHTML=0;
+	document.getElementById("cztery").innerHTML=0;
+	document.getElementById("piec").innerHTML=0;
+	}
 	
   var data = [
     {
@@ -43,28 +59,20 @@ Template.chart.rendered = function(){
 
 if(Meteor.isClient){
 	function aggregate(){
-	a=0,b=0,c=0,d=0,e=0;
+	a=0,b=0,c=0,d=0,e=0,all=0;
 		a=Logs.find({LogSeverity: '1'}).count();
 		b=Logs.find({LogSeverity: '2'}).count();
 		c=Logs.find({LogSeverity: '3'}).count();
 		d=Logs.find({LogSeverity: '4'}).count();
 		e=Logs.find({LogSeverity: '5'}).count();
-		
-}
-	function aggregatebytag(tag){
-	a=0,b=0,c=0,d=0,e=0;
-		a=Logs.find({LogSeverity: '1'}).count();
-		b=Logs.find({LogSeverity: '2'}).count();
-		c=Logs.find({LogSeverity: '3'}).count();
-		d=Logs.find({LogSeverity: '4'}).count();
-		e=Logs.find({LogSeverity: '5'}).count();
+		all=Logs.find().count();
 		
 }
 }
 
 
 Template.showLogs.created=function(){
-	a=0; b=0; c=0; d=0; e=0;
+	a=0; b=0; c=0; d=0; e=0; all=0;
 	aggregate();
 	interval2 = Meteor.setInterval(aggregate,20*1000);
 	
@@ -79,6 +87,7 @@ Template.showLogs.destroyed=function(){
 	c=0;
 	d=0;
 	e=0;
+	all=0;
 
 }
 
@@ -111,7 +120,6 @@ Template.showLogs.events({
     'submit form[id=tagForm]': function(e) {
         e.preventDefault();
         var tag=$(e.target).find('#tag').val();
-	aggregatebytag('#tag');
         var path="/showLogs/"+this.id+"/tag/"+tag;
         Router.go(path)
     }
