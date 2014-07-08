@@ -10,7 +10,14 @@ Template.editLogBook.events({
 
 
         }
+        var json = [];
+        $(".viewFiled").each(function(obj)
+        {
+            if ($(this).val().length>1)
+            json.push($(this).val());
 
+        });
+        LogBooks.update({_id: currentLogBookId},{$set: { 'View' : json}});
 
 
         LogBooks.update(currentLogBookId, {$set: logBookProperties}, function(error) {
@@ -64,10 +71,9 @@ Router.go('showLogBooks');
 
         input.setAttribute('type', 'text');
         input.setAttribute('name', 'pole');
+        input.setAttribute('class','viewFiled');
         form.appendChild(br);
         form.appendChild(input);
-
-
 
     }
 
