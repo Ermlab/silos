@@ -5,33 +5,23 @@ function drawChart(){
   var data = [
     {
         value: a,
-        color:"#7FFF00",
-        highlight: "#FF5A5E",
-        label: "Green"
+        color:"#7FFF00"
     },
     {
         value: b,
-        color: "#6495ED",
-        highlight: "#5AD3D1",
-        label: "Blue"
+        color: "#6495ED"
     },
     {
         value: c,
-        color: "#FFFF00",
-        highlight: "#FFC870",
-        label: "Yellow"
+        color: "#FFFF00"
     },
  {
         value: d,
-        color: "#FFA500",
-        highlight: "#5AD3D1",
-        label: "Orange"
+        color: "#FFA500"
     },
  {
         value: e,
-        color: "#FF0000",
-        highlight: "#5AD3D1",
-        label: "Red"
+        color: "#FF0000"
     }
 ]
   var ctx = $("#myChart").get(0).getContext("2d");
