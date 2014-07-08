@@ -69,7 +69,7 @@ if(Meteor.isClient){
 Template.showLogs.created=function(){
 	a=0; b=0; c=0; d=0; e=0; all=0;
 	Meteor.setTimeout(aggregate,5*1000);
-	interval2 = Meteor.setInterval(aggregate,20*1000);
+	interval2 = Meteor.setInterval(aggregate,30*1000);
 	
 
 
