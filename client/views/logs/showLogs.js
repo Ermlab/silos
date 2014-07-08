@@ -1,4 +1,4 @@
-var a,b,c,d,e,all;
+var a=0,b=0,c=0,d=0,e=0,all=0;
 var interval1, interval2;
 function drawChart(){
 	document.getElementById("one").innerHTML=a;
@@ -49,11 +49,6 @@ function drawChart(){
   new Chart(ctx).Pie(data);
 }
 
-Template.chart.rendered = function(){
-	setTimeout(function(){drawChart()},3000);
-	interval1 = Meteor.setInterval(drawChart,21*1000);
-}
-
 
 
 if(Meteor.isClient){
@@ -65,6 +60,7 @@ if(Meteor.isClient){
 		d=Logs.find({LogSeverity: '4'}).count();
 		e=Logs.find({LogSeverity: '5'}).count();
 		all=Logs.find().count();
+		drawChart();	
 		
 }
 }
@@ -72,14 +68,13 @@ if(Meteor.isClient){
 
 Template.showLogs.created=function(){
 	a=0; b=0; c=0; d=0; e=0; all=0;
-	aggregate();
+	Meteor.setTimeout(aggregate,5*1000);
 	interval2 = Meteor.setInterval(aggregate,20*1000);
 	
 
 
 }
 Template.showLogs.destroyed=function(){
-	Meteor.clearInterval(interval1);
 	Meteor.clearInterval(interval2);
 	a=0;
 	b=0;
