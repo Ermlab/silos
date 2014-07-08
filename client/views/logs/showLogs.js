@@ -1,6 +1,11 @@
 var a,b,c,d,e;
 var interval1, interval2;
 function drawChart(){
+	document.getElementById("one").innerHTML=a;
+	document.getElementById("two").innerHTML=b;
+	document.getElementById("three").innerHTML=c;
+	document.getElementById("four").innerHTML=d;
+	document.getElementById("five").innerHTML=e;
 	
   var data = [
     {
@@ -59,14 +64,21 @@ if(Meteor.isClient){
 
 
 Template.showLogs.created=function(){
+	a=0; b=0; c=0; d=0; e=0;
 	aggregate();
 	interval2 = Meteor.setInterval(aggregate,20*1000);
+	
 
 
 }
 Template.showLogs.destroyed=function(){
 	Meteor.clearInterval(interval1);
 	Meteor.clearInterval(interval2);
+	a=0;
+	b=0;
+	c=0;
+	d=0;
+	e=0;
 
 }
 
