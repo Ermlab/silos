@@ -1,20 +1,24 @@
+
+<Template name="logBookView">
+{{#each View}}
+    <th>{{field}}</th>
+    {{/each}}
+</Template>
+
+
 <template name="showLogs">
 {{#if ownPost}}
     <a href="{{pathFor 'addUser' _id=id}}" >dodaj uzytkownika</a>
     <a href="{{pathFor 'showUsers' _id=id}}" >pokaz uzytkownikow</a>{{/if}}
 <div id="przeslane dane">
 
-    {{#each view}}
-    {{/each}}
+
 <table class="table" id="logsTable">
 <thead>
 <tr>
-<th>Nazwa</th>
-<th>Tresc</th>
-<th>Data</th>
-<th>Poziom</th>
-<th>Proces</th>
-<th>Tagi</th>
+    {{#each Views}}
+    {{>logBookView}}
+    {{/each}}
 
 </tr>
 </thead>

@@ -4,7 +4,10 @@ Meteor.publish('myLogBooks', function(authorId) {
 Meteor.publish('logBooks', function(authorId) {
     return LogBooks.find({AuthorID: authorId});
 });
-
+Meteor.publish('logBook',function(ID)
+{
+    return LogBooks.find(ID);
+});
 Meteor.publish('logs', function(LogBookId) {
     return Logs.find({LogBookID: LogBookId});
 });

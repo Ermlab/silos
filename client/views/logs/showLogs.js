@@ -92,12 +92,8 @@ Template.showLogs.events({
 
 Template.showLogs.rendered=function()
 {
-
         Meteor.call('updateTime',this.data.id);
-
-	
-
-    Meteor.call('updateTime',this.data.id);
+        Meteor.call('updateTime',this.data.id);
 }
 Template.showLogs.events({
     'submit form[id=tagForm]': function(e) {
