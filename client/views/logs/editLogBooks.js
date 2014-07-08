@@ -33,7 +33,7 @@ Template.editLogBook.events({
 e.preventDefault();
 
 if (confirm("Delete LogBook?")) {
-var currentLogBookId = this._id;
+var currentLogBookId = this.id;
 LogBooks.remove(currentLogBookId);
 Router.go('showLogBooks');
 }
@@ -42,14 +42,14 @@ Router.go('showLogBooks');
     e.preventDefault();
 
     if (confirm("Delete all logs?")) {
-        var currentLogBookId = this._id;
+        var currentLogBookId = this.id;
         Meteor.call('clearLogBook', currentLogBookId);
         Router.go('showLogBooks');
     }
 },
 'click .add': function(e) {
       //pozniej
-        Router.go('addUser');
+        //Router.go('addUser');
         },
 
 
@@ -62,7 +62,7 @@ Router.go('showLogBooks');
                 jSon.push($(value).val());
             }
         });
-        LogBooks.update({_id: this._id}, {$set : {View : jSon}});
+        LogBooks.update({_id: this.id}, {$set : {View : jSon}});
     },
     'click .new': function(e) {
         var form = document.getElementsByTagName('form')[0],
