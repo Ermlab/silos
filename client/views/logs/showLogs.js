@@ -104,9 +104,43 @@ Template.showLogs.events({
         e.target.download = "logs.xls";
     }
 });
+function myFunction() {
+    var table="<thead><tr>";
+    var fields=LogBooks.findOne().View;
 
+    fields.forEach(function f(filed)
+    {
+
+        table+="<td>"+filed.field+"</td>";
+
+    });
+    table+="</tr></thead><tbody>"
+
+
+
+
+
+    Logs.find().fetch().forEach(function makeTable(entity)
+    {
+        table+="<tr>";
+        fields.forEach(function f(filed)
+        {
+
+            table+="<td>"+entity[filed.field]+"</td>";
+
+        });
+        table+="</tr>"
+    });
+    table+="</tbody>";
+    $("#logsTable").html(table);
+}
 Template.showLogs.rendered=function()
 {
+    setTimeout(myFunction, 500)
+
+
+
+
         Meteor.call('updateTime',this.data.id);
         Meteor.call('updateTime',this.data.id);
 }
