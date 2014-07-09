@@ -21,14 +21,16 @@ Users.allow({
 Logs = new Meteor.Collection('logs');
 function parse(doc)
 {
-
+    var visible;
+    if (Logs.find({LogBookID:doc['LogBookID']}).count()==1)
+    {
+        visible=true;
+    }else{
+        visible=false;
+    }
+    console.log(visible);
     var View=LogBooks.findOne(doc['LogBookID']).View;
     //console.log(View);
-
-
-
-
-
 
             for(var key in doc) {
                 var i=View.length;
@@ -43,9 +45,11 @@ function parse(doc)
                         j++;
                     }
                 });
-                if (j==3 || i==0)
+                console.log(key);
+                if (j==i || i==0)
                 {
-                    LogBooks.update({_id:doc['LogBookID']},{$push : {View : { field : key , visible: false }}});
+
+                    LogBooks.update({_id:doc['LogBookID']},{$push : {View : { field : key , visible: visible }}});
                 }
             }
 }
