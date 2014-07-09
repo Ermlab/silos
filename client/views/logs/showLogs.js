@@ -106,6 +106,7 @@ Template.showLogs.events({
 });
 
 function createTable() {
+
     var table="<thead><tr>";
     var fields=LogBooks.findOne().View;
     console.log(fields);
@@ -115,8 +116,13 @@ function createTable() {
         table+="<td>"+  field.field+"</td>";
 
     });
-    table+="</tr></thead><tbody>"
-    Logs.find().fetch().forEach(function makeTable(entity)
+    table+="</tr></thead><tbody>";
+
+        var findLogs=Logs.find().fetch();
+
+
+
+    findLogs.forEach(function makeTable(entity)
     {
         table+="<tr>";
         fields.forEach(function f(field)
