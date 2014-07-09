@@ -19,6 +19,43 @@ Users.allow({
 });
 
 Logs = new Meteor.Collection('logs');
+function parse(doc)
+{
+
+    var View=LogBooks.findOne(doc['LogBookID']).View;
+    //console.log(View);
+
+
+
+
+
+
+            for(var key in doc) {
+                var i=View.length;
+                var j=0;
+
+                View.forEach(function f(obj)
+                {
+                    if (key===obj.field)
+                    {
+                        return 0;
+                    }else {
+                        j++;
+                    }
+                });
+                if (j==3 || i==0)
+                {
+                    LogBooks.update({_id:doc['LogBookID']},{$push : {View : { field : key , visible: false }}});
+                }
+
+            }
+}
+Logs.after.insert(function (userId, doc) {
+    parse(doc);
+});
+Logs.after.update(function (userId, doc) {
+    parse(doc);
+});
 
 //LogBookUsers=new Meteor.Collection('logBookUsers');
 

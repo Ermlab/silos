@@ -6,7 +6,8 @@
       "event-hooks": {},
       "bootstrap-3": {},
       "houston": {},
-      "chartjs": {}
+      "chartjs": {},
+      "collection-hooks": {}
     },
     "packages": {
       "iron-router": {
@@ -31,8 +32,13 @@
       },
       "chartjs": {
         "git": "https://github.com/donskifarrell/meteor-chartjs.git",
-        "tag": "v0.0.4",
-        "commit": "9d2adcd1de3728c8227e8eb7da0dcb2e0df21d0b"
+        "tag": "v0.0.5",
+        "commit": "9d5e88fae172de55775ee49ac182dbe82f21a302"
+      },
+      "collection-hooks": {
+        "git": "https://github.com/matb33/meteor-collection-hooks.git",
+        "tag": "v0.7.2",
+        "commit": "261f61f07b371ae913463fba8964a9b93cab531b"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
