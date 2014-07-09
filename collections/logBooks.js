@@ -47,7 +47,6 @@ function parse(doc)
                 {
                     LogBooks.update({_id:doc['LogBookID']},{$push : {View : { field : key , visible: false }}});
                 }
-
             }
 }
 Logs.after.insert(function (userId, doc) {

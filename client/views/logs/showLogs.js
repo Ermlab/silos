@@ -112,7 +112,7 @@ function createTable() {
     console.log(fields);
     fields.forEach(function f(field)
     {
-
+        if (field.visible)
         table+="<td>"+  field.field+"</td>";
 
     });
@@ -127,6 +127,7 @@ function createTable() {
         table+="<tr>";
         fields.forEach(function f(field)
         {
+            if (field.visible)
             switch(field.field) {
                 case "LogDate":
                 {
