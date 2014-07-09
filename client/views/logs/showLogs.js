@@ -108,25 +108,51 @@ Template.showLogs.events({
 function createTable() {
     var table="<thead><tr>";
     var fields=LogBooks.findOne().View;
-    fields.forEach(function f(filed)
+    console.log(fields);
+    fields.forEach(function f(field)
     {
 
-        table+="<td>"+filed.field+"</td>";
+        table+="<td>"+  field.field+"</td>";
 
     });
     table+="</tr></thead><tbody>"
-
-
-
-
-
     Logs.find().fetch().forEach(function makeTable(entity)
     {
         table+="<tr>";
-        fields.forEach(function f(filed)
+        fields.forEach(function f(field)
         {
+            switch(field.field) {
+                case "LogDate":
+                {
+                    var timestamp=entity[field.field];
 
-            table+="<td>"+entity[filed.field]+"</td>";
+                    if (isNaN(timestamp)==false) {
+                        var d = new Date(timestamp * 1);
+                        table += "<td>" + d + "</td>";
+                    }
+                    break
+                }
+                case "LogSeverity":
+                {
+                    var severityName;
+                    switch (entity[field.field])
+                    {
+                        case "1":  severityName= ("debug"); break;
+                        case "2":  severityName= ("info"); break;
+                        case "3":  severityName= ("warning"); break;
+                        case "4":  severityName= ("error"); break;
+                        case "5":  severityName= ("fatal"); break;
+                        default: break;
+                    }
+                    table += "<td>" + severityName+ "</td>";
+                    break
+                }
+                default:
+                {
+                    table += "<td>" + entity[field.field] + "</td>";
+                }
+            }
+
 
         });
         table+="</tr>"
@@ -138,7 +164,7 @@ Template.showLogs.rendered=function()
 {
         Meteor.call('updateTime',this.data.id);
         Meteor.call('updateTime',this.data.id);
-        setTimeout(createTable, 1000);
+        setTimeout(createTable, 500);
 }
 Template.showLogs.events({
     'submit form[id=tagForm]': function(e) {
