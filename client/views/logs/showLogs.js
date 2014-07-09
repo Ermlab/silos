@@ -104,10 +104,10 @@ Template.showLogs.events({
         e.target.download = "logs.xls";
     }
 });
-function myFunction() {
+
+function createTable() {
     var table="<thead><tr>";
     var fields=LogBooks.findOne().View;
-
     fields.forEach(function f(filed)
     {
 
@@ -136,13 +136,9 @@ function myFunction() {
 }
 Template.showLogs.rendered=function()
 {
-    setTimeout(myFunction, 500)
-
-
-
-
         Meteor.call('updateTime',this.data.id);
         Meteor.call('updateTime',this.data.id);
+        setTimeout(createTable, 1000);
 }
 Template.showLogs.events({
     'submit form[id=tagForm]': function(e) {
