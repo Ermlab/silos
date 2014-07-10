@@ -2,35 +2,26 @@
     <div><input type="checkbox" class="viewField" name="pole" value="{{field}}" checked="{{visible}}" />{{field}}</div>
 </template>
 <template name="editLogBook">
-<center>
-
     <form>
         <div>Change LogBook name: <br>
-            <input name="Name" type="text" value="{{Name}}" placeholder="Podaj nazwe LogBooka"/>
+            <span class="col-xs-6 col-xs-height"><input name="Name" type="text" value="{{Name}}" placeholder="Podaj nazwe LogBooka"/></span>
+            <span class="col-xs-6"><input type="submit" value="Submit" class="btn btn-primary submit"/></span>
         </div>
+        <br/>
+        <br/>
         <div>
-
-
-            <input type="submit" value="Submit" class="btn btn-primary submit"/>
-        </div><br><br><br>
-<div>
-<a class="btn-danger btn-lg delete" href="#">Delete LogBook</a><br><br><br>
-    <a href="{{pathFor 'addUser' _id=id}}" class="btn-warning btn-lg">Add a subscriber</a>
-<br><br><br>
-    <a href="{{pathFor 'showUsers' _id=id}}" class="btn-success btn-lg">Show subscribers</a>
-<br><br><br>
-<a href="{{pathFor 'showLogBooks'}}" class="btn-info btn-lg clean">Clean LogBook</a>
-</div><br><br><br>
-    Choose fields to show <br/>
-
-        <a class="btn btn-info new" href="#">Add new field</a>
-
-
-        <input type="submit" class="btn btn-success new" value="Submit"/><br><br>
-        {{#each Views}}
-        {{>viewItem}}<br/>
-        {{/each}}
-
+           <span class="col-xs-6 col-xs-height">
+                <a class="btn-danger btn-lg delete" href="#">Delete LogBook</a><br/><br/><br/>
+                <a href="{{pathFor 'addUser' _id=id}}" class="btn-warning btn-lg">Add a subscriber</a><br/><br/><br/>
+                <a href="{{pathFor 'showUsers' _id=id}}" class="btn-success btn-lg">Show subscribers</a><br/><br/><br/>
+                <a href="{{pathFor 'showLogBooks'}}" class="btn-info btn-lg clean">Clean LogBook</a><br/><br/><br/>
+           </span>
+           <span class="col-xs-6 col-xs-height">
+                Choose fields to show <br/>
+                {{#each Views}}
+                {{>viewItem}}<br/>
+                {{/each}}
+           </span>
+        </div>
     </form>
-</center>
 </template>

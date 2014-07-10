@@ -1,6 +1,4 @@
 <template name="logBook">
-
-
 <tr>
 <td> <a href="showLogs/{{_id}}">{{Name}}</a> ({{isntRead}}) </td>
 <td> {{_id}} </td>
@@ -8,8 +6,6 @@
 <td class="date">{{Created}} </td>
 <td>{{#if ownPost}}<a href="{{pathFor 'editLogBook'}}" class="btn">Edit</a>{{/if}}</td>
 </tr>
-
-
 </template>
 <template name="logBookSub">
 
