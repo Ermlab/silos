@@ -120,12 +120,28 @@ function createTable() {
     var findLogs;
 
     var hash = window.location.hash.substring(1);
-    console.log(hash);
-    if (hash>=1){
+    var tag=getSearch(hash);
 
-        findLogs = Logs.find({LogSeverity: hash.toString() }).fetch();
-        console.log(findLogs);
+    var json=[]
+    var jsonVariable = {};
+    console.log(hash);
+    if (hash.length>=1){
+        jsonVariable['LogSeverity'] = getLevel(hash);
+        console.log(getLevel(hash));
+        var search=getSearch(hash);
+        if (search.length>1)
+        {
+            jsonVariable[search[0]]=search[1];
+        }
+        json.push(jsonVariable);
+    }
+    if (json.length>0)
+    {
+        console.log(json[0]);
+        console.log(Logs.find(json[0]).count());
+        findLogs = Logs.find(json[0]).fetch();
     }else{
+        console.log("tututa");
         findLogs = Logs.find().fetch();
     }
 
@@ -180,19 +196,51 @@ Template.showLogs.rendered=function()
         Meteor.call('updateTime',this.data.id);
         setTimeout(createTable, 500);
 }
+function getLevel(Hash)
+{
+    console.log(Hash[0]);
+    if (Hash.length>0)
+    {
+        return Hash[0];
+    }else{
+        return 0;
+    }
+}
+function getSearch(Hash)
+{
+    var search=Hash.toString().substring(2);
+    console.log(search);
+    if (Hash.length>1)
+    {
+
+        return search.split("=");
+    }else{
+        return [ ];
+    }
+}
 Template.showLogs.events({
     'submit form[id=tagForm]': function(e) {
         e.preventDefault();
         var tag=$(e.target).find('#tag').val();
-        var path="/showLogs/"+this.id+"/tag/"+tag;
-        Router.go(path)
+        var hash = window.location.hash.substring(1).split('&');
+
+        var key=$(e.target).find('#key').val();
+        var path="/showLogs/"+this.id+"#"+getLevel(hash)+"&"+key+"="+tag;
+        Router.go(path);
+        createTable();
     }
 });
 Template.showLogs.events({
     'submit form[id=levelForm]': function(e) {
         e.preventDefault();
         var level=$(e.target).find('#level').val();
-        var path="/showLogs/"+this.id+"#"+level;
+        var hash = window.location.hash.substring(1).split('&');
+        var search = getSearch(hash);
+        var searchPath="";
+        if (search.length>0){
+            searchPath="&"+search[0]+"="+search[1];
+        }
+        var path="/showLogs/"+this.id+"#"+level+searchPath;
         Router.go(path)
         createTable();
     }
