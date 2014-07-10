@@ -21,7 +21,8 @@ Template.createLogBook.events({
                 AuthorID: Meteor.userId(),
                 Created: ((new Date).getTime()),
                 View: [],
-                LastVisit: []
+                LastVisit: [],
+                Author: Meteor.users.findOne({_id: Meteor.userId()}).emails[0].address
             }
             LogBook._id = LogBooks.insert(LogBook);
 

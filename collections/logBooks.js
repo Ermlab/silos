@@ -9,7 +9,7 @@ LogBooks.allow({
 
 });
 
-Users = new Meteor.Collection("userData");
+Users = new Meteor.Collection('userData');
 
 Users.allow({
     update: function(userId, doc, fields, modifier)
