@@ -117,10 +117,17 @@ function createTable() {
 
     });
     table+="</tr></thead><tbody>";
+    var findLogs;
 
-        var findLogs=Logs.find().fetch();
+    var hash = window.location.hash.substring(1);
+    console.log(hash);
+    if (hash>=1){
 
-
+        findLogs = Logs.find({LogSeverity: hash.toString() }).fetch();
+        console.log(findLogs);
+    }else{
+        findLogs = Logs.find().fetch();
+    }
 
     findLogs.forEach(function makeTable(entity)
     {
@@ -185,8 +192,9 @@ Template.showLogs.events({
     'submit form[id=levelForm]': function(e) {
         e.preventDefault();
         var level=$(e.target).find('#level').val();
-        var path="/showLogs/"+this.id+"/level/"+level;
+        var path="/showLogs/"+this.id+"#"+level;
         Router.go(path)
+        createTable();
     }
 })
 function json2csv(objArray, headers, showHeaders) {
