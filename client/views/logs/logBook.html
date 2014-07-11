@@ -1,6 +1,6 @@
 <template name="logBook">
     <tr>
-    <td> <a href="showLogs/{{_id}}">{{Name}}</a> ({{isntRead}}) </td>
+    <td> <a href="{{pathFor 'showLogs'}}">{{Name}}</a> ({{isntRead}}) </td>
     <td>{{#if ownPost}}<a href="{{pathFor 'editLogBook'}}" class="btn">Edit</a>{{/if}}</td>
     </tr>
 </template>
