@@ -1,0 +1,10 @@
+.navbar-brand,
+.navbar-nav li a {
+    line-height: 15px;
+    height: 32px;
+min-height: 10px;
+padding-top:5px; padding-bottom:5px;
+}
+
+
+.navbar {min-height:32px}
