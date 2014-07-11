@@ -1,103 +1,120 @@
-<template name="row">
-    {{pole}}
-</template>
+
 <Template name="logBookView">
-{{#each View}}
+    {{#each View}}
+    {{#if visible}}
     <th>{{field}}</th>
+    {{/if}}
     {{/each}}
 </Template>
-
-
-<template name="showLogs">
-{{#if ownPost}}
-    <a href="{{pathFor 'addUser' _id=id}}" >dodaj uzytkownika</a>
-    <a href="{{pathFor 'showUsers' _id=id}}" >pokaz uzytkownikow</a>{{/if}}
-<div id="przeslane dane">
-
-<table class="table" id="logsTable">
-    {{#each Rows}}
-    {{>row}}
+<Template name="Row">
+    {{#each row}}
+    {{>Fields}}
     {{/each}}
-</table>
+
+</Template>
+<Template name="Fields">
+    <td>{{field}}</td>
+</Template>
+<template name="showLogs">
+
+    <a href="{{pathFor 'addUser' _id=id}}" >dodaj uzytkownika</a>
+    <a href="{{pathFor 'showUsers' _id=id}}" >pokaz uzytkownikow</a>
     <a class="btn btn-success download" href="#">Export to .csv</a><a download="logs.xls" class="btn btn-success" href="#" onclick="return ExcellentExport.excel(this, 'logsTable', 'Sheet Name Here');">Export to .xls</a><br>
-<font color=7FFF00>Debug</font> <font color=6495ED>Info</font> <font color=FFFF00>Warning</font> <font color=FFA500>Error</font> <font color=FF0000>Fatal</font>
-
-    <form id="tagForm">
-        <fieldset><legend>Filter by tag</legend>
-
-            <div class="control-group">
-                <label class="control-label" for="key">Key</label>
-                <input name="key" id="key" />
-                <label class="control-label" for="tag">Tag</label>
-                <input name="tag" id="tag" />
-            <input type="submit" value="Filter"/>
-                </div>
-        </fieldset>
-    </form>
-<form id="levelForm">
-<fieldset><legend>Filter by severity</legend>
-        
-        <div class="control-group">
-	<label class="control-label" for="level">Level</label>
-        <select class="controls" name="level" id="level" >
-    <option value="0">All</option>
-	<option value="1">1 - Debug</option>
-	<option value="2">2 - Info</option>
-	<option value="3">3 - Warning</option> 
-	<option value="4">4 - Error</option>
-	<option value="5">5 - Fatal</option>
-	</select></div>
-	<input type="submit" value="Filter"/>	
-	</fieldset>
-</form>
-</div>
     <div>
+
+    </div>
+    <div id="table" >
+        <table class="table" id="logsTable">
+            <thead>
+            <tr>
+                {{#each Views}}
+                {{>logBookView}}
+                {{/each}}
+
+            </tr>
+            </thead>
+            <tbody>
+            {{#each Rows}}
+            <tr>{{>Row}}</tr>
+            {{/each}}
+            </tbody>
+        </table>
+        <form id="tagForm">
+            <fieldset><legend>Filter by tag</legend>
+
+                <div class="control-group">
+                    <label class="control-label" for="tag">Tag</label>
+                    <input name="tag" id="tag" />
+                    <input type="submit" value="Filter"/>
+                </div>
+            </fieldset>
+        </form>
+
+        <form id="levelForm">
+            <fieldset><legend>Filter by severity</legend>
+
+                <div class="control-group">
+                    <label class="control-label" for="level">Level</label>
+                    <select class="controls" name="level" id="level" >
+                        <option value="1">1 - Debug</option>
+                        <option value="2">2 - Info</option>
+                        <option value="3">3 - Warning</option>
+                        <option value="4">4 - Error</option>
+                        <option value="5">5 - Fatal</option>
+                    </select></div>
+                <input type="submit" value="Filter"/>
+            </fieldset>
+        </form>
+        <font color=7FFF00>Debug</font> <font color=6495ED>Info</font> <font color=FFFF00>Warning</font> <font color=FFA500>Error</font> <font color=FF0000>Fatal</font>
+
+    </div>
+    <div id="stats" style="display: none">
         <legend>Stats</legend>
-	Please give the stats data a moment to render.<br>
-	Also note that stats data and the chart are refreshed about every 30 seconds.
-	<div>
-	<table class="table">
-	<tbody>
-	<tr bgcolor="#7FFF00">
-		<td>Debug</td>
-		<td id="one"> </td>
-		<td id="jeden"> </td>
-	</tr>
-	<tr bgcolor="#6495ED">
-		<td>Info</td>
-		<td id="two"> </td>
-		<td id="dwa"> </td>
-	</tr>
-	<tr bgcolor="#FFFF00">
-		<td>Warning</td>
-		<td id="three"> </td>
-		<td id="trzy"> </td>
-	</tr>
-	<tr bgcolor="#FFA500">
-		<td>Error</td>
-		<td id="four"> </td>
-		<td id="cztery"> </td>
-	</tr>
-	<tr bgcolor="#FF0000">
-		<td>Fatal</td>
-		<td id="five"> </td>
-		<td id="piec"> </td>
-	</tr>
-	<tr>
-		<td> </td>
-		<td id="all"> </td>
-		<td id="piec"> </td>
-	</tr>
-	</tbody>
-	</table>
-	
-	</div>
+        Please give the stats data a moment to render.<br>
+        Also note that stats data and the chart are refreshed about every 30 seconds.
+        <div>
+            <table class="table">
+                <tbody>
+                <tr bgcolor="#7FFF00">
+                    <td>Debug</td>
+                    <td id="one"> </td>
+                    <td id="jeden"> </td>
+                </tr>
+                <tr bgcolor="#6495ED">
+                    <td>Info</td>
+                    <td id="two"> </td>
+                    <td id="dwa"> </td>
+                </tr>
+                <tr bgcolor="#FFFF00">
+                    <td>Warning</td>
+                    <td id="three"> </td>
+                    <td id="trzy"> </td>
+                </tr>
+                <tr bgcolor="#FFA500">
+                    <td>Error</td>
+                    <td id="four"> </td>
+                    <td id="cztery"> </td>
+                </tr>
+                <tr bgcolor="#FF0000">
+                    <td>Fatal</td>
+                    <td id="five"> </td>
+                    <td id="piec"> </td>
+                </tr>
+                <tr>
+                    <td> </td>
+                    <td id="all"> </td>
+                    <td id="piec"> </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
         <div id="canva">
- 	{{>chart}}
+            {{>chart}}
         </div>
     </div>
 </template>
 
 <template name="chart">
-<canvas id="myChart" width="300" height="300"></canvas>
+    <canvas id="myChart" width="300" height="300"></canvas>
 </template>
