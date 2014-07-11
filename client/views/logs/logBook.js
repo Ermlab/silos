@@ -33,7 +33,7 @@ function gotToLogBook(e)
 {
     var adress=e.target.href.split("/");
     var ID=adress[adress.length-1]
-    Meteor.call('createTable',ID);
+    Meteor.call('createTable',ID,window.location.hash.substring(1));
 }
 Template.logBookSub.rendered=function (){
     $(".date").each(function() {
