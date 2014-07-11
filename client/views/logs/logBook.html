@@ -1,11 +1,13 @@
 <template name="logBook">
-    <tr>
-    <td> <a class="goTologBook" href="{{pathFor 'showLogs'}}">{{Name}}</a> ({{isntRead}}) </td>
-    <td>{{#if ownPost}}<a href="{{pathFor 'editLogBook'}}" class="btn">Edit</a>{{/if}}</td>
-    </tr>
+    {{Name}} ({{isntRead}})
+    <span style="float:right;"><a href="{{pathFor 'editLogBook'}}" class="glyphicon glyphicon-wrench" ></a>
+    </span>
+
 </template>
 <template name="logBookSub">
-    <tr>
-        <td> <a class="goTologBook" href="{{pathFor 'showLogs'}}">{{Name}}</a> ({{isntRead}}) </td>
-    </tr>
+
+    {{Name}} ({{isntRead}})
+    <span style="float:right;"><a href="{{pathFor 'editLogBook'}}" class="glyphicon glyphicon-wrench" ></a>
+    </span>
+
 </template>
