@@ -1,6 +1,6 @@
 <template name="showLogBooks">
     <div id="przeslane dane">
-        <ul class="nav nav-pills nav-stacked">
+        <ul class="nav nav-pills nav-stacked" id="nav">
             {{#each myLogBooks}}
             <li><a href="{{pathFor 'showLogs'}}">{{>logBook}}</a></li>
             {{/each}}
