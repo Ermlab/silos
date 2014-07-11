@@ -6,9 +6,10 @@ Meteor.publish('logBooks', function(authorId) {
 });
 Meteor.publish('logBook',function(ID)
 {
-    return LogBooks.find(ID);
+    return LogBooks.findOne(ID);
 });
-Meteor.publish('logs', function(LogBookId) {
+Meteor.publish('logs', function(LogBookId)
+{
     return Logs.find({LogBookID: LogBookId});
 });
 Meteor.publish('limits', function(userId) {

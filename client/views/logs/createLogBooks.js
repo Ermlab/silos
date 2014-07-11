@@ -6,7 +6,7 @@ function checkLimit() {
 
     }
 }
-//Template.createLogBook.rendered=checkLimit;
+Template.createLogBook.rendered=checkLimit;
 
 Template.createLogBook.events({
         'submit form': function(e) {
