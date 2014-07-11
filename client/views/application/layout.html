@@ -1,8 +1,14 @@
-<template name="layout">
-<div id="header" >
-{{> header}}
-</div>
-<div id="main" class="row-fluid">
-      {{> yield}}
-</div>
+<template name="layout" xmlns="http://www.w3.org/1999/html">
+    <header id="header" >
+    {{> header}}
+    </header>
+    <div id="main" class="row">
+        <span class="col-md-4">
+            {{>showLogBooks}}
+            
+        </span>
+        <span class="col-md-8">
+        {{> yield}}
+        </span>
+    </div>
 </template>
