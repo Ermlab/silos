@@ -1,8 +1,9 @@
+
+
 Template.showLogBooks.myLogBooks=function()
 {
     Meteor.subscribe('myLogBooks', Meteor.userId());
     var la = LogBooks.find({AuthorID: Meteor.userId().toString()}).fetch();
-    console.log(la);
     _.each(la,function(obj) {
         try {
             obj.isntRead = Logs.find({LogBookID: obj._id, LogDate: {$gt: (new Date(obj.LastVisit[0].date).getTime())}}).count();
