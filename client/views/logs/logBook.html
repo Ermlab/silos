@@ -1,14 +1,14 @@
 <template name="logBook">
     {{Name}} ({{isntRead}})
-    <span style="float:right;"><a href="{{pathFor 'editLogBook'}}" class="glyphicon glyphicon-wrench" ></a>
-    </span><span style="float:right;"><a href="{{pathFor 'logBookInfo'}}" class="glyphicon glyphicon-info-sign" ></a>
+    <span style="float:right;"><abbr title="Edit your LogBook"><a href="{{pathFor 'editLogBook'}}" class="glyphicon glyphicon-wrench" ></a></abbr>
+    </span><span style="float:right;"><abbr title="Info about this LogBook"><a href="{{pathFor 'logBookInfo'}}" class="glyphicon glyphicon-info-sign" ></a></abbr>
     </span>
 
 </template>
 <template name="logBookSub">
 
     {{Name}} ({{isntRead}})
-    <span style="float:right;"><a href="{{pathFor 'logBookInfo'}}" class="glyphicon glyphicon-info-sign" ></a>
+    <span style="float:right;"><abbr title="Info about this LogBook"><a href="{{pathFor 'logBookInfo'}}" class="glyphicon glyphicon-info-sign" ></a></abbr>
     </span>
 
 </template>
