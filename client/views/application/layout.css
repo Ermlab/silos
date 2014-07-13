@@ -4,7 +4,7 @@ html, body{
 }
 #content
 {
-    float: right;
+
 }
 #leftPanel {
 
@@ -12,6 +12,6 @@ html, body{
     color:dodgerblue;
     height: 100vh;
     background:#252525;
-    position: fixed;
     left: 0;
+    min-height: 100%;
 }
