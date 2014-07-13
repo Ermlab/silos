@@ -2,10 +2,16 @@ html, body{
     height: 100%;
 
 }
+#content
+{
+    float: right;
+}
 #leftPanel {
 
     background:#252525;
     color:dodgerblue;
     height: 100vh;
     background:#252525;
+    position: fixed;
+    left: 0;
 }

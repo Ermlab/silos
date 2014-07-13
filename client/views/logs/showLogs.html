@@ -17,56 +17,82 @@
 </Template>
 <template name="showLogs">
 
-    <a class="btn btn-info download" href="#">Export to .csv</a><a download="logs.xls" class="btn btn-info export" href="#" onclick="return ExcellentExport.excel(this, 'logsTable', 'Sheet Name Here');">Export to .xls</a><br>
+    <script type="text/javascript">
+
+        function changeDisplay(){
+            var text=$('#changeDisplay').text();
+            if (text=='show chart'){
+                $('#changeDisplay').text('show table');
+                $('#table').css("display","none");
+                $('#stats').css("display","block");
+            }else{
+                $('#changeDisplay').text('show chart');
+                $('#table').css("display","block");
+                $('#stats').css("display","none");
+            }
+
+        }
+
+    </script>
     <div>
-
-    </div>
-    <div id="table" >
-        <table class="table" id="logsTable">
-            <thead>
-            <tr>
-                {{#each Views}}
-                {{>logBookView}}
-                {{/each}}
-
-            </tr>
-            </thead>
-            <tbody>
-            {{#each Rows}}
-            <tr>{{>Row}}</tr>
-            {{/each}}
-            </tbody>
-        </table>
-        <form id="tagForm">
-            <fieldset><legend id="head">Filter by tag</legend>
-
-                <div class="control-group">
-                    <label class="control-label" for="tag">Tag</label>
-                    <input name="tag" id="tag" />
-                    <input type="submit" value="Filter"/>
-                </div>
-            </fieldset>
-        </form>
-
-        <form id="levelForm">
-            <fieldset><legend id="head">Filter by severity</legend>
-
-                <div class="control-group">
-                    <label class="control-label" for="level">Level</label>
-                    <select class="controls" name="level" id="level" >
-                        <option value="1">1 - Debug</option>
-                        <option value="2">2 - Info</option>
-                        <option value="3">3 - Warning</option>
-                        <option value="4">4 - Error</option>
-                        <option value="5">5 - Fatal</option>
-                    </select></div>
-                <input type="submit" value="Filter"/>
-            </fieldset>
-        </form>
+        <a id="changeDisplay" onclick="changeDisplay();" class="btn btn-info" href="#">show chart</a><a class="btn btn-info download" href="#">Export to .csv</a><a download="logs.xls" class="btn btn-info export" href="#" onclick="return ExcellentExport.excel(this, 'logsTable', 'Sheet Name Here');">Export to .xls</a>
+        <br/>
+    <div id="table"  >
+        <div>
+            <span class="col-md-6">
+                <form id="tagForm">
+                    <fieldset>
+                        <legend id="head">Filter by Filed</legend>
+                        <div class="control-group">
+                            <label class="control-label" for="key">Field</label>
+                            <input name="key" id="key" />
+                            <label class="control-label" for="tag">Tag</label>
+                            <input name="tag" id="tag" />
+                            <input type="submit" value="Filter"/>
+                        </div>
+                    </fieldset>
+                </form>
+            </span>
+            <span class="col-md-6">
+                <form id="levelForm">
+                    <fieldset><legend id="head">Filter by severity</legend>
+                        <div class="control-group">
+                            <label class="control-label" for="level">Level</label>
+                            <select class="controls" name="level" id="level" >
+                                <option value="1">1 - Debug</option>
+                                <option value="2">2 - Info</option>
+                                <option value="3">3 - Warning</option>
+                                <option value="4">4 - Error</option>
+                                <option value="5">5 - Fatal</option>
+                            </select></div>
+                        <input type="submit" value="Filter"/>
+                    </fieldset>
+                </form>
+            </span>
+        </div>
+        <div>
+            <br/>
+            Logs:
+        </div>
+        <div>
+            <table class="table" id="logsTable">
+                <thead>
+                    <tr>
+                    {{#each Views}}
+                    {{>logBookView}}
+                    {{/each}}
+                    </tr>
+                </thead>
+                    <tbody>
+                    {{#each Rows}}
+                    <tr>{{>Row}}</tr>
+                    {{/each}}
+                </tbody>
+            </table>
         <font color=7FFF00>Debug</font> <font color=6495ED>Info</font> <font color=FFFF00>Warning</font> <font color=FFA500>Error</font> <font color=FF0000>Fatal</font>
-
+        </div>
     </div>
-    <div id="stats" style="display: none">
+    <div id="stats">
         <legend id="head">Stats</legend>
         Please give the stats data a moment to render.<br>
         Also note that stats data and the chart are refreshed about every 30 seconds.
@@ -110,6 +136,7 @@
         <div id="canva">
             {{>chart}}
         </div>
+    </div>
     </div>
 </template>
 

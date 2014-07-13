@@ -104,14 +104,12 @@ Template.showLogs.events({
         e.target.download = "logs.xls";
     }
 });
-Template.showLogs.rendered=function()
-{
+Template.showLogs.rendered=function(){
     Meteor.call('updateTime',this.data.id);
     Meteor.call('updateTime',this.data.id);
     //Meteor.call('createTable',this.data.id,window.location.hash.substring(1));
 };
-function getSearch(Hash)
-{
+function getSearch(Hash){
     var search=Hash.toString().substring(2);
     if (Hash.length>1)
     {
@@ -139,7 +137,6 @@ Template.showLogs.events({
         var key=$(e.target).find('#key').val();
         var path="/showLogs/"+this.id+"#"+getLevel(hash)+"&"+key+"="+tag;
         Router.go(path);
-       // Meteor.call('createTable',this.id,window.location.hash.substring(1));
     }
 });
 Template.showLogs.events({
@@ -154,7 +151,6 @@ Template.showLogs.events({
         }
         var path="/showLogs/"+this.id+"#"+level+searchPath;
         Router.go(path)
-      //  Meteor.call('createTable',this.id,window.location.hash.substring(1));
     }
 })
 function json2csv(objArray, headers, showHeaders) {
