@@ -10,6 +10,7 @@ console.log("Wylogowalo ");
 }
 Hooks.onLoggedIn = function () {
 console.log("Zalogowalo ");
+Router.go("/ ");
 }
 
 
