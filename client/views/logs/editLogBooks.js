@@ -1,3 +1,17 @@
+Template.addUser.events({
+    'submit form': function(e) {
+        e.preventDefault();
+
+        Nazwa=$(e.target).find('[name=Nazwa]').val();
+        console.log(Nazwa);
+        LogBooks.update({ _id: this.id },{ $push: { users: Nazwa }});
+
+        Router.go('/editLogBook/'+this.id);
+    }
+});
+Template.bookUser.isEmail= function() {
+    return this.constructor === String;
+}
 Template.editLogBook.events({
     'submit form': function(e) {
         e.preventDefault();

@@ -1,16 +1,1 @@
-<template name="showUsers">
-    <center><b><u>Subscribers</u></b>
-    {{#each logBookUsers}}
-    {{> bookUsers}}
-    {{/each}}</center>
-</template>
-<template name="bookUsers">
-    {{#each users}}<br>
-    {{> bookUser}}
-    {{/each}}
-</template>
-<template name="bookUser">
-    {{#if isEmail}}
-        {{this}}
-    {{/if}}
-</template>
+
