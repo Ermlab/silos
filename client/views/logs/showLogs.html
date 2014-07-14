@@ -14,6 +14,9 @@
 <Template name="Fields">
     <td>{{field}}</td>
 </Template>
+<Template name="key">
+    <option value="{{key}}">{{key}}</option>
+</Template>
 <template name="showLogs">
 
     <script type="text/javascript">
@@ -53,7 +56,11 @@
                         <legend id="head">Filter by Filed</legend>
                         <div class="control-group">
                             <label class="control-label" for="key">Field</label>
-                            <input name="key" id="key"/>
+                            <select id="key" name="key">
+                                {{#each Keys}}
+                                {{>key}}
+                                {{/each}}
+                            </select>
                             <label class="control-label" for="tag">Tag</label>
                             <input name="tag" id="tag"/>
                             <input type="submit" value="Filter"/>
