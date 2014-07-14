@@ -2,21 +2,7 @@ Template.logBook.helpers({
 ownPost: function() {
 	return this.AuthorID == Meteor.userId(); }
 });
-Template.logBook.rendered=function (){
-    $(".date").each(function() {
-        var numberDate=$( this ).html();
-        var timestamp=(numberDate);
 
-        if (isNaN(timestamp)==false)
-        {
-            var d=new Date(timestamp*1);
-            $( this ).html(d);
-
-        }
-    });
-
-
-};
 Template.logBookSub.events({
     'click .goTologBook': function(e)
     {
@@ -35,19 +21,5 @@ function gotToLogBook(e)
     var ID=adress[adress.length-1]
     Meteor.call('createTable',ID,window.location.hash.substring(1));
 }
-Template.logBookSub.rendered=function (){
-    $(".date").each(function() {
-        var numberDate=$( this ).html();
-        var timestamp=(numberDate);
 
-        if (isNaN(timestamp)==false)
-        {
-            var d=new Date(timestamp*1);
-            $( this ).html(d);
-
-        }
-    });
-
-
-};
 

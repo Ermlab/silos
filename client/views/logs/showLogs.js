@@ -105,9 +105,7 @@ Template.showLogs.events({
     }
 });
 Template.showLogs.rendered=function(){
-    Meteor.call('updateTime',this.data.id);
-    Meteor.call('updateTime',this.data.id);
-    //Meteor.call('createTable',this.data.id,window.location.hash.substring(1));
+
 };
 function getSearch(Hash){
     var search=Hash.toString().substring(2);
