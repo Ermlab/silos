@@ -10,7 +10,8 @@ console.log("Wylogowalo ");
 }
 Hooks.onLoggedIn = function () {
 console.log("Zalogowalo ");
-Meteor.setTimeout(Router.go("/ "),1000);
+var path=("Logged");
+Router.go("/"+path);
 }
 
 
