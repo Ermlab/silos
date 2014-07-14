@@ -4,7 +4,6 @@
     "event-hooks": {},
     "bootstrap-3": {},
     "houston": {},
-    "collection-hooks": {},
-    "chartjs": {}
+    "collection-hooks": {}
   }
 }
