@@ -1,6 +1,33 @@
 <template name="viewItem">
     <div><input type="checkbox" class="viewField" name="pole" value="{{field}}" checked="{{visible}}" />{{field}}</div>
 </template>
+<template name="showUsers">
+    <center><b><u>Subscribers</u></b>
+    {{#each logBookUsers}}
+    {{> bookUsers}}
+    {{/each}}</center>
+</template>
+<template name="bookUsers">
+    {{#each users}}<br>
+    {{> bookUser}}
+    {{/each}}
+</template>
+<template name="bookUser">
+    {{#if isEmail}}
+        {{this}}
+    {{/if}}
+</template>
+<template name="addUser">
+    <form><center>
+        <fieldset><legend>Add subscriber to LogBook</legend>
+            <div class="control-group">
+                <label class="control-label" for="Nazwa<">Enter user's email</label>
+                <input class="controls" type="text" name="Nazwa" id="Nazwa"/>
+            </div>
+            <input type="submit" value="Submit"/>
+        </fieldset>
+    </center></form>
+</template>
 <template name="editLogBook">
     <form>
         <div>Change LogBook name: <br>
@@ -12,9 +39,9 @@
         <div>
            <span class="col-xs-6 col-xs-height">
                 <a class="btn-danger btn-lg delete" href="#">Delete LogBook</a><br/><br/><br/>
-                <a href="{{pathFor 'addUser' _id=id}}" class="btn-warning btn-lg">Add a subscriber</a><br/><br/><br/>
-                <a href="{{pathFor 'showUsers' _id=id}}" class="btn-success btn-lg">Show subscribers</a><br/><br/><br/>
-                <a href="{{pathFor 'showLogBooks'}}" class="btn-info btn-lg clean">Clean LogBook</a><br/><br/><br/>
+                <a href="{{pathFor 'wellcome'}}" class="btn-info btn-lg clean">Clean LogBook</a><br/><br/><br/>
+                {{>showUsers}}
+                {{>addUser}}
            </span>
            <span class="col-xs-6 col-xs-height">
                 Choose fields to show <br/>

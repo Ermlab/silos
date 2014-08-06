@@ -1,20 +1,14 @@
 <template name="logBook">
-<tr>
-<td> <a href="showLogs/{{_id}}">{{Name}}</a> ({{isntRead}}) </td>
-<td> {{_id}} </td>
-<td> {{Key}} </td>
-<td class="date">{{Created}} </td>
-<td>{{#if ownPost}}<a href="{{pathFor 'editLogBook'}}" class="btn">Edit</a>{{/if}}</td>
-</tr>
+    {{Name}} <span class="badge">{{isntRead}}</span>
+    <span style="float:right;"><abbr title="Edit your LogBook"><a href="{{pathFor 'editLogBook'}}" class="glyphicon glyphicon-wrench" ></a></abbr>
+    </span><span style="float:right;"><abbr title="Info about this LogBook"><a href="{{pathFor 'logBookInfo'}}" class="glyphicon glyphicon-info-sign" ></a></abbr>
+    </span>
+
 </template>
 <template name="logBookSub">
 
-
-    <tr>
-        <td> <a href="showLogs/{{_id}}">{{Name}}</a> ({{isntRead}}) </td>
-        <td class="date">{{Created}} </td>
-        <td>{{Author}}</td>
-    </tr>
-
+    {{Name}} ({{isntRead}})
+    <span style="float:right;"><abbr title="Info about this LogBook"><a href="{{pathFor 'logBookInfo'}}" class="glyphicon glyphicon-info-sign" ></a></abbr>
+    </span>
 
 </template>

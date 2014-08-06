@@ -68,8 +68,8 @@ if(Meteor.isClient){
 
 Template.showLogs.created=function(){
 	a=0; b=0; c=0; d=0; e=0; all=0;
-	Meteor.setTimeout(aggregate,5*1000);
-	interval2 = Meteor.setInterval(aggregate,30*1000);
+	Meteor.setTimeout(aggregate,1000);
+	//interval2 = Meteor.setInterval(aggregate,1000);
 	
 
 
@@ -104,112 +104,11 @@ Template.showLogs.events({
         e.target.download = "logs.xls";
     }
 });
+Template.showLogs.rendered=function(){
 
-function createTable() {
-
-    var table="<thead><tr>";
-    var fields=LogBooks.findOne().View;
-    console.log(fields);
-    fields.forEach(function f(field)
-    {
-        if (field.visible)
-        table+="<td>"+  field.field+"</td>";
-
-    });
-    table+="</tr></thead><tbody>";
-    var findLogs;
-
-    var hash = window.location.hash.substring(1);
-    var tag=getSearch(hash);
-
-    var json=[]
-    var jsonVariable = {};
-    console.log(hash);
-    if (hash.length>=1){
-        jsonVariable['LogSeverity'] = getLevel(hash);
-        console.log(getLevel(hash));
-        var search=getSearch(hash);
-        if (search.length>1)
-        {
-            jsonVariable[search[0]]=search[1];
-        }
-        json.push(jsonVariable);
-    }
-    if (json.length>0)
-    {
-        console.log(json[0]);
-        console.log(Logs.find(json[0]).count());
-        findLogs = Logs.find(json[0]).fetch();
-    }else{
-        console.log("tututa");
-        findLogs = Logs.find().fetch();
-    }
-
-    findLogs.forEach(function makeTable(entity)
-    {
-        table+="<tr>";
-        fields.forEach(function f(field)
-        {
-            if (field.visible)
-            switch(field.field) {
-                case "LogDate":
-                {
-                    var timestamp=entity[field.field];
-
-                    if (isNaN(timestamp)==false) {
-                        var d = new Date(timestamp * 1);
-                        table += "<td>" + d + "</td>";
-                    }
-                    break
-                }
-                case "LogSeverity":
-                {
-                    var severityName;
-                    switch (entity[field.field])
-                    {
-                        case "1":  severityName= ("debug"); break;
-                        case "2":  severityName= ("info"); break;
-                        case "3":  severityName= ("warning"); break;
-                        case "4":  severityName= ("error"); break;
-                        case "5":  severityName= ("fatal"); break;
-                        default: break;
-                    }
-                    table += "<td>" + severityName+ "</td>";
-                    break
-                }
-                default:
-                {
-                    table += "<td>" + entity[field.field] + "</td>";
-                }
-            }
-
-
-        });
-        table+="</tr>"
-    });
-    table+="</tbody>";
-    $("#logsTable").html(table);
-}
-Template.showLogs.rendered=function()
-{
-        Meteor.call('updateTime',this.data.id);
-        Meteor.call('updateTime',this.data.id);
-        setTimeout(createTable, 500);
-}
-function getLevel(Hash)
-{
-    console.log(Hash[0]);
-    if (Hash.length>0)
-    {
-        return Hash[0];
-    }else{
-        return 0;
-    }
-}
-function getSearch(Hash)
-{
+};
+function getSearch(Hash){
     var search=Hash.toString().substring(2);
-    console.log(search);
     if (Hash.length>1)
     {
 
@@ -217,7 +116,16 @@ function getSearch(Hash)
     }else{
         return [ ];
     }
-}
+};
+function getLevel(Hash){
+    console.log(Hash[0]);
+    if (Hash.length>0)
+    {
+        return Hash[0];
+    }else{
+        return 0;
+    }
+};
 Template.showLogs.events({
     'submit form[id=tagForm]': function(e) {
         e.preventDefault();
@@ -227,7 +135,6 @@ Template.showLogs.events({
         var key=$(e.target).find('#key').val();
         var path="/showLogs/"+this.id+"#"+getLevel(hash)+"&"+key+"="+tag;
         Router.go(path);
-        createTable();
     }
 });
 Template.showLogs.events({
@@ -242,7 +149,6 @@ Template.showLogs.events({
         }
         var path="/showLogs/"+this.id+"#"+level+searchPath;
         Router.go(path)
-        createTable();
     }
 })
 function json2csv(objArray, headers, showHeaders) {

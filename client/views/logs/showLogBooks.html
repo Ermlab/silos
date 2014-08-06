@@ -1,43 +1,17 @@
 <template name="showLogBooks">
-<div id="przeslane dane">
-    <center><b><u>My LogBooks</u></b></center>
-<table class="table">
-<thead>
-<tr>
-<th>Name</th>
-<th>ID</th>
-<th>Key</th>
-<th>Date</th>
-<th>    </th>
-</tr>
-</thead>
-<tbody>
+    <div id="przeslane dane">
+        <ul class="nav nav-pills nav-stacked" id="nav">
+            {{#each myLogBooks}}
+            <li><a href="{{pathFor 'showLogs'}}">{{>logBook}}</a></li>
+            {{/each}}
+        </ul>
+        <hr noshade="noshade" />
 
-{{#each myLogBooks}}
-{{>logBook}}
-{{/each}}
-
-</tbody>
-</table>
-    <center><b><u>Subscribed LogBooks</u></b></center>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Date</th>
-            <th>Author</th>
-
-        </tr>
-        </thead>
-        <tbody>
-
-
-        {{#each friendsLogBooks}}
-        {{> logBookSub}}
-        {{/each}}
-
-        </tbody>
-        </table>
-
-</div>
+        <ul class="nav nav-pills nav-stacked" id="nav">
+            {{#each friendsLogBooks}}
+            <li><a href="{{pathFor 'showLogs'}}">{{> logBookSub}}</a></li>
+            {{/each}}
+        </ul>
+    </div>
+    <hr noshade="noshade" />
 </template>

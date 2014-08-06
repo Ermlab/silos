@@ -1,3 +1,17 @@
+Template.addUser.events({
+    'submit form': function(e) {
+        e.preventDefault();
+
+        Nazwa=$(e.target).find('[name=Nazwa]').val();
+        console.log(Nazwa);
+        LogBooks.update({ _id: this.id },{ $push: { users: Nazwa }});
+
+        Router.go('/editLogBook/'+this.id);
+    }
+});
+Template.bookUser.isEmail= function() {
+    return this.constructor === String;
+}
 Template.editLogBook.events({
     'submit form': function(e) {
         e.preventDefault();
@@ -29,7 +43,7 @@ Template.editLogBook.events({
             if (error) {
                 alert(error.reason);
             } else {
-                Router.go('showLogBooks', {_id: currentLogBookId});
+                Router.go('showLogs', {_id: currentLogBookId});
             }
         });
     },
@@ -40,7 +54,7 @@ e.preventDefault();
 if (confirm("Delete LogBook?")) {
 var currentLogBookId = this.id;
 LogBooks.remove(currentLogBookId);
-Router.go('showLogBooks');
+Router.go('wellcome');
 }
 },
 'click .clean': function(e) {
@@ -49,7 +63,7 @@ Router.go('showLogBooks');
     if (confirm("Delete all logs?")) {
         var currentLogBookId = this.id;
         Meteor.call('clearLogBook', currentLogBookId);
-        Router.go('showLogBooks');
+        Router.go('showLogs', {_id: currentLogBookId});
     }
 },
 'click .add': function(e) {

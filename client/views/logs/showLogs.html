@@ -1,100 +1,160 @@
-
 <Template name="logBookView">
-{{#each View}}
-    <th>{{field}}</th>
+    {{#each View}}
+        {{#if visible}}
+            <th>{{field}}</th>
+        {{/if}}
     {{/each}}
 </Template>
+<Template name="Row">
+    {{#each row}}
+    {{>Fields}}
+    {{/each}}
 
-
+</Template>
+<Template name="Fields">
+    <td>{{field}}</td>
+</Template>
+<Template name="key">
+    <option value="{{key}}">{{key}}</option>
+</Template>
 <template name="showLogs">
-{{#if ownPost}}
-    <a href="{{pathFor 'addUser' _id=id}}" >dodaj uzytkownika</a>
-    <a href="{{pathFor 'showUsers' _id=id}}" >pokaz uzytkownikow</a>{{/if}}
-<div id="przeslane dane">
 
+    <script type="text/javascript">
 
-<table class="table" id="logsTable">
+        function changeDisplay() {
+            var text = $('#changeDisplay').text();
+            if (text == 'show chart') {
+                $('#changeDisplay').text('show table');
+                $('#table').css("display", "none");
+                $('#stats').css("display", "block");
 
-</table>
-    <a class="btn btn-success download" href="#">Export to .csv</a><a download="logs.xls" class="btn btn-success" href="#" onclick="return ExcellentExport.excel(this, 'logsTable', 'Sheet Name Here');">Export to .xls</a><br>
-<font color=7FFF00>Debug</font> <font color=6495ED>Info</font> <font color=FFFF00>Warning</font> <font color=FFA500>Error</font> <font color=FF0000>Fatal</font>
+                $('#leftPanel').css('height',$('#stats').css('height'));
+            } else {
 
-    <form id="tagForm">
-        <fieldset><legend>Filter by tag</legend>
+                $('#changeDisplay').text('show chart');
+                $('#table').css("display", "block");
+                $('#stats').css("display", "none");
+                $('#leftPanel').css('height',$('#table').css('height'));
+            }
 
-            <div class="control-group">
-                <label class="control-label" for="key">Key</label>
-                <input name="key" id="key" />
-                <label class="control-label" for="tag">Tag</label>
-                <input name="tag" id="tag" />
-            <input type="submit" value="Filter"/>
-                </div>
-        </fieldset>
-    </form>
-<form id="levelForm">
-<fieldset><legend>Filter by severity</legend>
-        
-        <div class="control-group">
-	<label class="control-label" for="level">Level</label>
-        <select class="controls" name="level" id="level" >
-    <option value="0">All</option>
-	<option value="1">1 - Debug</option>
-	<option value="2">2 - Info</option>
-	<option value="3">3 - Warning</option> 
-	<option value="4">4 - Error</option>
-	<option value="5">5 - Fatal</option>
-	</select></div>
-	<input type="submit" value="Filter"/>	
-	</fieldset>
-</form>
-</div>
+        }
+
+    </script>
     <div>
-        <legend>Stats</legend>
-	Please give the stats data a moment to render.<br>
-	Also note that stats data and the chart are refreshed about every 30 seconds.
-	<div>
-	<table class="table">
-	<tbody>
-	<tr bgcolor="#7FFF00">
-		<td>Debug</td>
-		<td id="one"> </td>
-		<td id="jeden"> </td>
-	</tr>
-	<tr bgcolor="#6495ED">
-		<td>Info</td>
-		<td id="two"> </td>
-		<td id="dwa"> </td>
-	</tr>
-	<tr bgcolor="#FFFF00">
-		<td>Warning</td>
-		<td id="three"> </td>
-		<td id="trzy"> </td>
-	</tr>
-	<tr bgcolor="#FFA500">
-		<td>Error</td>
-		<td id="four"> </td>
-		<td id="cztery"> </td>
-	</tr>
-	<tr bgcolor="#FF0000">
-		<td>Fatal</td>
-		<td id="five"> </td>
-		<td id="piec"> </td>
-	</tr>
-	<tr>
-		<td> </td>
-		<td id="all"> </td>
-		<td id="piec"> </td>
-	</tr>
-	</tbody>
-	</table>
-	
-	</div>
-        <div id="canva">
- 	{{>chart}}
+        <a id="changeDisplay" onclick="changeDisplay();" class="btn btn-info" href="#">show chart</a><a
+            class="btn btn-info download" href="#">Export to .csv</a><a download="logs.xls" class="btn btn-info export"
+                                                                        href="#"
+                                                                        onclick="return ExcellentExport.excel(this, 'logsTable', 'Sheet Name Here');">Export
+        to .xls</a>
+        <br/>
+
+        <div id="table">
+            <div class="row">
+            <span class="col-md-6">
+                <form id="tagForm">
+                    <fieldset>
+                        <legend id="head">Filter by Filed</legend>
+                        <div class="control-group">
+                            <label class="control-label" for="key">Field</label>
+                            <select id="key" name="key">
+                                {{#each Keys}}
+                                {{>key}}
+                                {{/each}}
+                            </select>
+                            <label class="control-label" for="tag">Tag</label>
+                            <input name="tag" id="tag"/>
+                            <input type="submit" value="Filter"/>
+                        </div>
+                    </fieldset>
+                </form>
+            </span>
+            <span class="col-md-6">
+                <form id="levelForm">
+                    <fieldset>
+                        <legend id="head">Filter by severity</legend>
+                        <div class="control-group">
+                            <label class="control-label" for="level">Level</label>
+                            <select class="controls" name="level" id="level">
+                                <option value="0">0 - All</option>
+                                <option value="1">1 - Debug</option>
+                                <option value="2">2 - Info</option>
+                                <option value="3">3 - Warning</option>
+                                <option value="4">4 - Error</option>
+                                <option value="5">5 - Fatal</option>
+                            </select></div>
+                        <input type="submit" value="Filter"/>
+                    </fieldset>
+                </form>
+            </span>
+            </div>
+            <div>
+                <table class="table" id="logsTable">
+                    <thead>
+                    <tr>
+                        {{#each Views}}
+                        {{>logBookView}}
+                        {{/each}}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each Rows}}
+                    <tr>{{>Row}}</tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+                <font color=7FFF00>Debug</font> <font color=6495ED>Info</font> <font color=FFFF00>Warning</font> <font
+                    color=FFA500>Error</font> <font color=FF0000>Fatal</font>
+            </div>
+
+        </div>
+        <div id="stats">
+            <legend id="head">Stats</legend>
+            Please give the stats data a moment to render.<br>
+            Also note that stats data and the chart are refreshed about every 30 seconds.
+            <div>
+                <table class="table">
+                    <tbody>
+                    <tr bgcolor="#7FFF00">
+                        <td id="clr">Debug</td>
+                        <td id="one"></td>
+                        <td id="jeden"></td>
+                    </tr>
+                    <tr bgcolor="#6495ED">
+                        <td id="clr">Info</td>
+                        <td id="two"></td>
+                        <td id="dwa"></td>
+                    </tr>
+                    <tr bgcolor="#FFFF00">
+                        <td id="clr">Warning</td>
+                        <td id="three"></td>
+                        <td id="trzy"></td>
+                    </tr>
+                    <tr bgcolor="#FFA500">
+                        <td id="clr">Error</td>
+                        <td id="four"></td>
+                        <td id="cztery"></td>
+                    </tr>
+                    <tr bgcolor="#FF0000">
+                        <td id="clr">Fatal</td>
+                        <td id="five"></td>
+                        <td id="piec"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td id="all"></td>
+                        <td id="piec"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div id="canva">
+                {{>chart}}
+            </div>
         </div>
     </div>
 </template>
 
 <template name="chart">
-<canvas id="myChart" width="300" height="300"></canvas>
+    <canvas id="myChart" width="300" height="300"></canvas>
 </template>

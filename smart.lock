@@ -6,7 +6,6 @@
       "event-hooks": {},
       "bootstrap-3": {},
       "houston": {},
-      "chartjs": {},
       "collection-hooks": {}
     },
     "packages": {
@@ -29,11 +28,6 @@
         "git": "https://github.com/gterrono/houston.git",
         "tag": "v1.0.6",
         "commit": "49765acf835385de6de6160b0c86514d5af09395"
-      },
-      "chartjs": {
-        "git": "https://github.com/donskifarrell/meteor-chartjs.git",
-        "tag": "v0.0.5",
-        "commit": "9d5e88fae172de55775ee49ac182dbe82f21a302"
       },
       "collection-hooks": {
         "git": "https://github.com/matb33/meteor-collection-hooks.git",
