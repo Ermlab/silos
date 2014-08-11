@@ -1,0 +1,35 @@
+<template name="logBooksNav">
+    <div id="">
+        {{#if logBooks}}
+        <ul class="nav nav-pills nav-stacked" id="nav">
+            {{#each logBooks}}
+            <li><a href="{{pathFor 'showLogs'}}">{{>logBooksNavItem}}</a>
+            </li>
+            {{/each}}
+        </ul>
+        {{else}}
+        <p><em>You have not created nor you are a member of any logbook.</em>
+        </p>
+        {{/if}}
+    </div>
+</template>
+
+
+<template name="logBooksNavItem">
+    {{Name}}<span class="badge">{{LogsCount}}</span>
+    <div class="pull-right">
+        <a href="{{ pathFor 'logBookSettings' _id=this._id }}" class="logbookSettings glyphicon glyphicon-cog" title="Settings"></a>
+    </div>
+</template>
+
+
+
+
+<!-- FIXME cz to jest potrzebne? -->
+<template name="logBookSub">
+
+    {{Name}} ({{isntRead}})
+    <span style="float:right;"><abbr title="Info about this LogBook"><a href="{{pathFor 'logBookInfo'}}" class="glyphicon glyphicon-info-sign" ></a></abbr>
+    </span>
+
+</template>

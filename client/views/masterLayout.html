@@ -1,0 +1,38 @@
+<template name="masterLayout">
+    <div class="container-fluid">
+        <div id="header" class="row">
+            <header class="col-md-12">
+                {{> header}}
+            </header>
+        </div>
+
+        <div id="main" class="row">
+            {{#if currentUser}}
+            <!-- left panel -->
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>Logbooks</strong>
+                    </div>
+                    <div class="panel-body">
+                        {{>logBooksNav}}
+                        <hr />{{>createLogBook}}
+                    </div>
+                </div>
+            </div>
+            <!-- main content -->
+            <div class=" col-md-9 ">
+                {{> yield}}
+            </div>
+            {{else}}
+            <div class="col-md-12 ">
+                {{> welcome}}
+            </div>
+            {{/if}}
+        </div>
+
+        <footer>
+            <p>Footer</p>
+        </footer>
+    </div>
+</template>

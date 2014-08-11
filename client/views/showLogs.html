@@ -1,0 +1,200 @@
+<template name="showLogs">
+    <form class="form-inline" role="form">
+        <div class="form-group">
+            <label class="" for="">Severity:</label>
+            <select id="filterSeverity" class="form-control">
+                <option value="">all</option>
+                <option value="1">trace</option>
+                <option value="2">debug</option>
+                <option value="3">info</option>
+                <option value="4">warning</option>
+                <option value="5">error</option>
+                <option value="6">fatal</option>
+            </select>
+        </div>
+    </form>
+    {{#if logs}}
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <!--<th>Id</th>-->
+                <th>Severity</th>
+                <th>Logger</th>
+                <th>Body</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each logs}}
+            <tr>
+                <!--<td>{{_id}}</td>-->
+                <td>{{levelStr}}</td>
+                <td>{{logger}}</td>
+                <td>{{{pprint body}}}</td>
+                <!--<td>{{#each body}} <span class="arg arg-{{printType this}}">{{{pprint this}}}</span> {{/each}}</td>-->
+                <td>{{toDate date}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{else}}
+    <p>This logbook is empty.</p>
+    {{/if}}
+</template>
+
+
+
+
+<template name="showLogs2">
+
+    <script type="text/javascript">
+        function changeDisplay() {
+            var text = $('#changeDisplay').text();
+            if (text == 'show chart') {
+                $('#changeDisplay').text('show table');
+                $('#table').css("display", "none");
+                $('#stats').css("display", "block");
+
+                $('#leftPanel').css('height', $('#stats').css('height'));
+            } else {
+
+                $('#changeDisplay').text('show chart');
+                $('#table').css("display", "block");
+                $('#stats').css("display", "none");
+                $('#leftPanel').css('height', $('#table').css('height'));
+            }
+
+        }
+    </script>
+    <div>
+        <a id="changeDisplay" onclick="changeDisplay();" class="btn btn-info" href="#">show chart</a><a class="btn btn-info download" href="#">Export to .csv</a><a download="logs.xls" class="btn btn-info export" href="#" onclick="return ExcellentExport.excel(this, 'logsTable', 'Sheet Name Here');">Export
+        to .xls</a>
+        <br/>
+
+        <div id="table">
+            <div class="row">
+                <span class="col-md-6">
+                <form id="tagForm">
+                    <fieldset>
+                        <legend id="head">Filter by Filed</legend>
+                        <div class="control-group">
+                            <label class="control-label" for="key">Field</label>
+                            <select id="key" name="key">
+                                {{#each Keys}}
+                                {{>key}}
+                                {{/each}}
+                            </select>
+                            <label class="control-label" for="tag">Tag</label>
+                            <input name="tag" id="tag"/>
+                            <input type="submit" value="Filter"/>
+                        </div>
+                    </fieldset>
+                </form>
+            </span>
+                <span class="col-md-6">
+                <form id="levelForm">
+                    <fieldset>
+                        <legend id="head">Filter by severity</legend>
+                        <div class="control-group">
+                            <label class="control-label" for="level">Level</label>
+                            <select class="controls" name="level" id="level">
+                                <option value="0">0 - All</option>
+                                <option value="1">1 - Debug</option>
+                                <option value="2">2 - Info</option>
+                                <option value="3">3 - Warning</option>
+                                <option value="4">4 - Error</option>
+                                <option value="5">5 - Fatal</option>
+                            </select></div>
+                        <input type="submit" value="Filter"/>
+                    </fieldset>
+                </form>
+            </span>
+            </div>
+            <div>
+                <table class="table" id="logsTable">
+                    <thead>
+                        <tr>
+                            {{#each Views}} {{>logBookView}} {{/each}}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each Rows}}
+                        <tr>{{>Row}}</tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+                <font color=7FFF00>Debug</font>  <font color=6495ED>Info</font>  <font color=FFFF00>Warning</font>  <font color=FFA500>Error</font>  <font color=FF0000>Fatal</font>
+            </div>
+
+        </div>
+        <div id="stats">
+            <legend id="head">Stats</legend>
+            Please give the stats data a moment to render.
+            <br>Also note that stats data and the chart are refreshed about every 30 seconds.
+            <div>
+                <table class="table">
+                    <tbody>
+                        <tr bgcolor="#7FFF00">
+                            <td id="clr">Debug</td>
+                            <td id="one"></td>
+                            <td id="jeden"></td>
+                        </tr>
+                        <tr bgcolor="#6495ED">
+                            <td id="clr">Info</td>
+                            <td id="two"></td>
+                            <td id="dwa"></td>
+                        </tr>
+                        <tr bgcolor="#FFFF00">
+                            <td id="clr">Warning</td>
+                            <td id="three"></td>
+                            <td id="trzy"></td>
+                        </tr>
+                        <tr bgcolor="#FFA500">
+                            <td id="clr">Error</td>
+                            <td id="four"></td>
+                            <td id="cztery"></td>
+                        </tr>
+                        <tr bgcolor="#FF0000">
+                            <td id="clr">Fatal</td>
+                            <td id="five"></td>
+                            <td id="piec"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td id="all"></td>
+                            <td id="piec"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div id="canva">
+                {{>chart}}
+            </div>
+        </div>
+    </div>
+</template>
+
+
+
+<template name="logBookView">
+    {{#each View}} {{#if visible}}
+    <th>{{field}}</th>
+    {{/if}} {{/each}}
+</template>
+
+<Template name="Row">
+    {{#each row}} {{>Fields}} {{/each}}
+
+</Template>
+<Template name="Fields">
+    <td>{{field}}</td>
+</Template>
+<Template name="key">
+    <option value="{{key}}">{{key}}</option>
+</Template>
+
+
+<template name="chart">
+    <canvas id="myChart" width="300" height="300"></canvas>
+</template>

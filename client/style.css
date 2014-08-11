@@ -1,0 +1,15 @@
+.arg {
+    font-family: monospace;
+}
+.arg:hover {
+    background-color: ghostwhite;
+}
+.arg:hover:before {
+    opacity: 0.1;
+}
+.arg-number {
+    color: green;
+}
+.arg-string {
+    color: blue;
+}

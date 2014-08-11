@@ -1,9 +1,9 @@
 {
   "packages": {
-    "iron-router": {},
     "event-hooks": {},
-    "bootstrap-3": {},
     "houston": {},
-    "collection-hooks": {}
+    "collection-hooks": {},
+    "bootstrap-3": {},
+    "log4js-silos": {}
   }
 }

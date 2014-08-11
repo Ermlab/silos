@@ -1,0 +1,107 @@
+<template name="logBookSettings">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">General information</h3>
+        </div>
+        <div class="panel-body">
+            <p><strong>Logbook:</strong> {{Name}}</p>
+            <p><strong>Owner:</strong> {{AuthorID}}</p>
+            <p><strong>API Key:</strong> {{Key}}</p>
+
+            <h4>Test it!</h4>
+
+            <p>Using web browser console (assuming that jQuery is present):</p>
+            <pre>$.post("{{baseUrl}}api/call/{{Key}}",{body:"Hello {{Name}} from browser", level:10000});</pre>
+
+            <p>Using bash:</p>
+            <pre>curl -X POST --data 'body=Hello {{Name}}!&level=10000' {{baseUrl}}api/call/{{Key}}</pre>
+
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Settings</h3>
+        </div>
+        <div class="panel-body">
+            <form role="form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" name="name" id="name" value="{{Name}}" placeholder="Enter name" />
+                </div>
+                <div class="form-group">
+                    <label for="">Visible fields</label>
+                    <div>
+                        Choose fields to show:
+                        <br/>{{#each Views}} {{>viewItem}}
+                        <br/>{{/each}}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Collaborators</h3>
+        </div>
+        <div class="panel-body">
+            {{>showUsers}} {{>addUser}}
+        </div>
+    </div>
+
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <h3 class="panel-title">Danger Zone</h3>
+        </div>
+        <div class="panel-body">
+            <button id="purge" class="btn btn-warning pull-right">Purge logs</button>
+            <p><strong>Purge all logs</strong>
+            </p>
+            <p>All logs from this logbook will be erased.</p>
+            <hr />
+            <button id="delete" class="btn btn-danger pull-right">Delete logbook</button>
+            <p><strong>Delete this logbook</strong>
+            </p>
+            <p>Once you delete a logbook, there is no going back. Please be certain.</p>
+        </div>
+    </div>
+</template>
+
+
+<template name="viewItem">
+    <div>
+        <input type="checkbox" class="viewField" name="pole" value="{{field}}" checked="{{visible}}" />{{field}}</div>
+</template>
+
+<template name="showUsers">
+    <center><b><u>Subscribers</u></b>
+        {{#each logBookUsers}} {{> bookUsers}} {{/each}}
+    </center>
+</template>
+
+<template name="bookUsers">
+    {{#each users}}
+    <br>{{> bookUser}} {{/each}}
+</template>
+
+<template name="bookUser">
+    {{#if isEmail}} {{this}} {{/if}}
+</template>
+
+<template name="addUser">
+    <form>
+        <center>
+            <fieldset>
+                <legend>Add subscriber to LogBook</legend>
+                <div class="control-group">
+                    <label class="control-label" for="Nazwa<">Enter user's email</label>
+                    <input class="controls" type="text" name="Nazwa" id="Nazwa" />
+                </div>
+                <input type="submit" value="Submit" />
+            </fieldset>
+        </center>
+    </form>
+</template>
+
+
