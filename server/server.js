@@ -1,7 +1,7 @@
 var silosLogbookSecretKey = 'qjKS3oHBigfr8YycZBsi8mp4c8hp3S8fsewEFP9mM6C3LgsTasYLCb4ygKGF2xY5';
 
 
-log4js.enableSilos(silosLogbookSecretKey, '127.0.0.1', 3000);
+log4js.enableSilos(silosLogbookSecretKey);
 logger = log4js.getLogger("meteor");
 
 

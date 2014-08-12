@@ -31,8 +31,8 @@
       },
       "log4js-silos": {
         "git": "https://github.com/Ermlab/log4js-silos.git",
-        "tag": "v0.1.5",
-        "commit": "636dd3e42907ee1084434f6a3f68c3f97a0bc41d"
+        "tag": "v0.1.7",
+        "commit": "602ca845fc5bb0136473832aa6fdf44dd8683e5a"
       },
       "paginated-subscription": {
         "git": "https://github.com/tmeasday/meteor-paginated-subscription.git",
