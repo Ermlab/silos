@@ -1,7 +1,6 @@
 {
   "packages": {
     "event-hooks": {},
-    "houston": {},
     "collection-hooks": {},
     "bootstrap-3": {},
     "log4js-silos": {}
