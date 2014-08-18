@@ -15,6 +15,10 @@ Template.showLogs.toDate = function (ts) {
 
 };
 
+Template.showLogs.filterSeverity = function () {
+    return Session.get('filterSeverity');
+}
+
 Template.showLogs.events({
     'change #filterSeverity': function (e) {
         Session.set('filterSeverity', $(e.target).val());

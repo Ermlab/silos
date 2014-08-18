@@ -6,13 +6,13 @@
         <div class="form-group">
             <label class="" for="">Severity:</label>
             <select id="filterSeverity" class="form-control">
-                <option value="">all</option>
-                <option value="1">trace</option>
-                <option value="2">debug</option>
-                <option value="3">info</option>
-                <option value="4">warning</option>
-                <option value="5">error</option>
-                <option value="6">fatal</option>
+                <option {{selected filterSeverity ""}} value="">all</option>
+                <option {{selected filterSeverity 1}} value="1">trace</option>
+                <option {{selected filterSeverity 2}} value="2">debug</option>
+                <option {{selected filterSeverity 3}} value="3">info</option>
+                <option {{selected filterSeverity 4}} value="4">warning</option>
+                <option {{selected filterSeverity 5}} value="5">error</option>
+                <option {{selected filterSeverity 6}} value="6">fatal</option>
             </select>
         </div>
     </form>
