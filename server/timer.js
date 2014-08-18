@@ -29,5 +29,5 @@ if (Meteor.isServer) {
                 // TODO: update logs count in logbook
             }
         );
-    }, 1000);
+    }, 3600);
 }

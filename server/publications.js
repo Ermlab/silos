@@ -1,10 +1,11 @@
 Meteor.publish('logBooks', function () {
-    console.log('Publishing logbooks to ' + this.userId);
-    var cursor = LogBooks.find({
-        'Members.UserId': this.userId
-    });
-    console.log('publishing ' + cursor.count() + ' logbooks to ' + this.userId);
-    return cursor;
+    if (this.userId) {
+        var cursor = LogBooks.find({
+            'Members.UserId': this.userId
+        });
+        console.log('Publishing ' + cursor.count() + ' logbooks to ' + this.userId);
+        return cursor;
+    }
 });
 
 
@@ -16,6 +17,27 @@ Meteor.publish('logs', function (id) {
     });
     console.log('publishing ' + cursor.count() + ' logs in ' + id + ' to ' + this.userId);
     return cursor;
+});
+
+
+Meteor.publish('logs-by-token', function (token) {
+    // TODO: make sure that current user can subscribe to this logbook
+    var logbook = LogBooks.findOne({
+        Key: token
+    });
+
+    console.log(logbook);
+
+    if (logbook) {
+        var cursor = Logs.find({
+            LogBookID: logbook._id
+        });
+        console.log('(token) publishing ' + cursor.count() + ' logs in ' + logbook._id);
+        // publish logs and logbook
+        return [cursor, LogBooks.find({
+            Key: token
+        })];
+    }
 });
 
 

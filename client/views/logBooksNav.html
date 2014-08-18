@@ -3,7 +3,7 @@
         {{#if logBooks}}
         <ul class="nav nav-pills nav-stacked" id="nav">
             {{#each logBooks}}
-            <li><a href="{{pathFor 'showLogs'}}">{{>logBooksNavItem}}</a>
+            <li>{{>logBooksNavItem}}
             </li>
             {{/each}}
         </ul>
@@ -16,10 +16,14 @@
 
 
 <template name="logBooksNavItem">
-    {{Name}}<span class="badge">{{LogsCount}}</span>
+    {{#if currentUser}}
+    <a href="{{pathFor 'showLogs'}}">{{Name}} <span class="badge">{{LogsCount}}</span>
     <div class="pull-right">
         <a href="{{ pathFor 'logBookSettings' _id=this._id }}" class="logbookSettings glyphicon glyphicon-cog" title="Settings"></a>
     </div>
+    </a>
+    {{else}} {{Name}} <span class="badge">{{LogsCount}}</span>
+    {{/if}}
 </template>
 
 

@@ -36,13 +36,4 @@ Accounts.onCreateUser(function (options, user) {
 });
 
 
-Meteor.startup(function () {
-    logger.info([1, 2, 3, 4, [10, 20, 30]]);
-    logger.info(1, 2, 3, 4);
-
-    logger.info("Silos restarted", {
-        aa: 1,
-        bb: 2
-    });
-
-});
+Meteor.startup(function () {});

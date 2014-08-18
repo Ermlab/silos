@@ -10,9 +10,6 @@ UI.registerHelper('selected', function (key, value) {
     if (value === undefined) {
         value = '';
     }
-
-    console.log(key, value);
-
     return key == value ? {
         selected: 'selected'
     } : '';

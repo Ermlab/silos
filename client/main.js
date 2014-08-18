@@ -1,9 +1,5 @@
 Meteor.startup(function () {
+    // TODO: Deps autorun on user
     Meteor.subscribe('logBooks');
-    Meteor.subscribe("userData");
-    //Hooks.init();
+    //Meteor.subscribe("userData");
 });
-
-//FIXME: do czegos to sluzy?
-//Hooks.onLoggedOut = function () {}
-//Hooks.onLoggedIn = function () {}
