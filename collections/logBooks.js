@@ -1,3 +1,5 @@
+Settings = new Meteor.Collection("settings");
+
 LogBooks = new Meteor.Collection('logBooks');
 
 LogBooks.allow({

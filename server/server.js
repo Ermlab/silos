@@ -6,8 +6,10 @@ logger = log4js.getLogger("meteor");
 
 
 Accounts.onCreateUser(function (options, user) {
-    // Add first logbook for Silos
-    if (user.emails[0].address == 'gorecki@ermlab.com' && LogBooks.find().count() === 0) {
+        
+    // Create Silos logbook for the first user
+    if (Meteor.users.find().count() == 0 && LogBooks.find().count() == 0) {
+                
         var timestamp = (new Date()).getTime();
         // Add Silos logbook for first created user
         LogBooks.insert({
@@ -24,11 +26,16 @@ Accounts.onCreateUser(function (options, user) {
                 }
             ]
         });
+        logger.info('Created Silos logbook for user ' + user.emails[0].address);
+        
+        logger.info('User ' + user.emails[0].address + ' gets admin rights');
+        user.role = ['admin'];
     }
 
-    // Update user
+    // extra user fields
     user.username = user.emails[0].address;
-    user.Limit = 3;
+    user.logbookLimit = 3;
+
     // We still want the default hook's 'profile' behavior.
     if (options.profile)
         user.profile = options.profile;
@@ -36,4 +43,6 @@ Accounts.onCreateUser(function (options, user) {
 });
 
 
-Meteor.startup(function () {});
+Meteor.startup(function () {
+    Updates.run();
+});
