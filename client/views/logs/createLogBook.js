@@ -30,5 +30,11 @@ Template.createLogBook.events({
         Router.go('logBookSettings', {
             _id: id
         });
+    },
+    
+    'click #upgradeAccount': function() {
+        //alert('We are working on it');
     }
 });
+
+

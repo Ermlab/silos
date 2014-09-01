@@ -3,7 +3,7 @@ Meteor.publish('logBooks', function () {
         var cursor = LogBooks.find({
             'Members.UserId': this.userId
         });
-        console.log('Publishing ' + cursor.count() + ' logbooks to ' + this.userId);
+        logger.debug('Publishing ' + cursor.count() + ' logbooks to ' + this.userId);
         return cursor;
     }
 });
@@ -15,7 +15,7 @@ Meteor.publish('logs', function (id) {
     var cursor = Logs.find({
         LogBookID: id
     });
-    console.log('publishing ' + cursor.count() + ' logs in ' + id + ' to ' + this.userId);
+    logger.debug('publishing ' + cursor.count() + ' logs in ' + id + ' to ' + this.userId);
     return cursor;
 });
 
@@ -32,7 +32,7 @@ Meteor.publish('logs-by-token', function (token) {
         var cursor = Logs.find({
             LogBookID: logbook._id
         });
-        console.log('(token) publishing ' + cursor.count() + ' logs in ' + logbook._id);
+        logger.debug('(token) publishing ' + cursor.count() + ' logs in ' + logbook._id);
         // publish logs and logbook
         return [cursor, LogBooks.find({
             Key: token
@@ -46,8 +46,26 @@ Meteor.publish("userData", function () {
         _id: this.userId
     }, {
         fields: {
-            'Limit': 1,
+            'logbookLimit': 1,
             'LastVisit': 1
         }
     });
+});
+
+Meteor.publish("adminLogbooks", function () {
+    if (Roles.userIsInRole(this.userId, ['admin'])) {
+        return LogBooks.find();
+    } else {
+        this.stop();
+        return;
+    }
+});
+
+Meteor.publish("adminUsers", function () {
+    if (Roles.userIsInRole(this.userId, ['admin'])) {
+        return Meteor.users.find();
+    } else {
+        this.stop();
+        return;
+    }
 });

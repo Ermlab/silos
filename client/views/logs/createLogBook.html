@@ -1,3 +1,71 @@
 <template name="createLogBook">
     <button id="newLogbookBtn" class="btn btn-default {{isDisabled}}">New Logbook</button>
+    {{#if isDisabled}}
+    <button id="upgradeAccount" class="btn btn-danger" data-toggle="modal" data-target="#upgdradeModal">I need more logbooks!</button>
+    {{/if}}
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="upgdradeModal" tabindex="-1" role="dialog" aria-labelledby="upgradeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="upgradeModalLabel">Upgrade your account</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4">
+                            <div class="thumbnail">
+                                <div class="caption text-center">
+                                    <h4>Basic</h4>
+                                    <h1 class="price">$5</h1><span class="mth">/month</span>
+                                    <div class="details">
+                                        <p><strong>10</strong> logbooks</p>
+                                        <p><strong>1 week</strong> retention</p>
+                                    </div>
+                                    <p><a href="#" class="btn btn-primary disabled" role="button">Upgrade</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="thumbnail text-center">
+                                <div class="caption">
+                                    <h4>Standard</h4>
+                                    <h1 class="price">$10</h1><span class="mth">/month</span>
+                                    <div class="details">
+                                        <p><strong>25</strong> logbooks</p>
+                                        <p><strong>1 month</strong> retention</p>
+                                    </div>
+                                    <p><a href="#" class="btn btn-primary disabled" role="button">Upgrade</a></p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="thumbnail text-center">
+                                <div class="caption">
+                                    <h4>Pro</h4>
+                                    <h1 class="price">$25</h1><span class="mth">/month</span>
+                                    <div class="details">
+                                        <p><strong>100</strong> logbooks</p>
+                                        <p><strong>1 year</strong> retention</p>
+                                    </div>
+                                    <p><a href="#" class="btn btn-primary disabled" role="button">Upgrade</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p>Sorry, paid plans are not ready yet but we are working on it.<br />Drop us an email if you need more logbooks: <a href="mailto:office@ermlab.com">office@ermlab.com</a></p>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Got it!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </template>

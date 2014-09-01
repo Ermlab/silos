@@ -1,0 +1,17 @@
+<template name="adminLogbooks">
+    <h2>All logbooks</h2>
+    <table class="table">
+        <thead>
+            <th>Name</th>
+            <th>Owner</th>
+        </thead>
+        <tbody>
+            {{#each logBooks}}
+            <tr>
+                <td><a href="{{baseUrl}}view/{{Key}}">{{Name}}</a></td>
+                <td>{{owner}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</template>

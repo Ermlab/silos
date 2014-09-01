@@ -13,3 +13,16 @@
 .arg-string {
     color: blue;
 }
+
+
+.details {
+    margin: 1.5em 0;
+}
+
+.price {
+    display: inline;
+}
+
+.mth {
+    color: #555;
+}
