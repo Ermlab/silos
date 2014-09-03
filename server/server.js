@@ -44,5 +44,6 @@ Accounts.onCreateUser(function (options, user) {
 
 
 Meteor.startup(function () {
+    logger.info("Meteor server started", new Date());
     Updates.run();
 });

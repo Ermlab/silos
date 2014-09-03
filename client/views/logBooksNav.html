@@ -19,6 +19,7 @@
     {{#if currentUser}}
     <a href="{{pathFor 'showLogs'}}">{{Name}} <span class="badge">{{LogsCount}}</span>
     <div class="pull-right">
+        <a href="{{ pathFor 'logBookHelp' _id=this._id }}" class="logbookHelp glyphicon glyphicon-info-sign" title="Help"></a>
         <a href="{{ pathFor 'logBookSettings' _id=this._id }}" class="logbookSettings glyphicon glyphicon-cog" title="Settings"></a>
     </div>
     </a>

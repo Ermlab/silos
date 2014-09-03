@@ -1,7 +1,3 @@
-Template.logBookSettings.baseUrl = function () {
-    return Meteor.absoluteUrl();
-}
-
 Template.logBookSettings.rendered = function () {
     // Focus on edit#name when settings page is opened for a new logbook
     if (Session.get('newLogbookCreated')) {

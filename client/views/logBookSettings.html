@@ -8,15 +8,6 @@
             <p><strong>Logbook:</strong> {{Name}}</p>
             <!--<p><strong>Owner:</strong> {{AuthorID}}</p>-->
             <p><strong>Token:</strong> {{Key}} (<a href="{{baseUrl}}view/{{Key}}">public link</a>)</p>
-
-            <h4>Test it!</h4>
-
-            <p>Using web browser console (assuming that jQuery is present):</p>
-            <pre>$.post("{{baseUrl}}api/call/{{Key}}",{body:"Hello {{Name}} from browser", level:1});</pre>
-
-            <p>Using bash:</p>
-            <pre>curl -X POST --data 'body=Hello {{Name}}!&level=1' {{baseUrl}}api/call/{{Key}}</pre>
-
         </div>
     </div>
 
@@ -41,17 +32,6 @@
             </form>
         </div>
     </div>
-
-    <!--
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Collaborators</h3>
-        </div>
-        <div class="panel-body">
-            {{>showUsers}} {{>addUser}}
-        </div>
-    </div>
--->
 
     <div class="panel panel-danger">
         <div class="panel-heading">

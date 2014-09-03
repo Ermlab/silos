@@ -1,0 +1,73 @@
+<template name="logBookHelp">
+    {{#with logbook}}
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">General information</h3>
+        </div>
+        <div class="panel-body">
+            <p><strong>Logbook:</strong> {{Name}}</p>
+            <!--<p><strong>Owner:</strong> {{AuthorID}}</p>-->
+            <p><strong>Token:</strong> {{Key}} (<a href="{{baseUrl}}view/{{Key}}">public link</a>)</p>
+        </div>
+    </div>
+            
+            
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Usage examples</h3>
+        </div>
+        <div class="panel-body">
+            <h3>In-browser console</h3>
+            <p>Using web browser console (assuming that jQuery is present):</p>
+            <pre>$.post("{{baseUrl}}api/call/{{Key}}",{body:"Hello {{Name}} from browser", level:1, logger: "console"});</pre>
+
+            <h3>Bash</h3>
+            <p>Type in terminal:</p>
+            <pre>curl -X POST --data 'body=Hello {{Name}}!&level=1&logger=bash' {{baseUrl}}api/call/{{Key}}</pre>
+
+            <h3>C# and Visual Studio</h3>
+            <p>Install <code>NLog</code> and <code>NLog Configuration</code> via Package Manager Console</p>
+<pre>PM> Install-Package NLog
+PM> Install-Package NLog.Config
+</pre>
+            <p>Next, modify your config file so that it uses Silos target. Check out <a href="https://github.com/Ermlab/nlog_silos_target">this repository</a> for more details.</p>
+
+            <h3>Node.js</h3>
+            <p>Add required npm packages:</p>
+<pre>npm install log4js
+npm install log4js-appender-silos</pre>
+            <p>Then your server code might look like:</p>
+<pre>var log4js = require('log4js');
+var appender = 'log4js-appender-silos';
+var token = '{{Key}}';
+
+log4js.loadAppender(appender);
+log4js.addAppender(log4js.appenders[appender](token));
+
+var logger = log4js.getLogger('node');
+
+logger.info('Node server started on ', new Date());</pre>
+            
+            <h3>Meteor</h3>
+            <p>For meteor 0.9.x: add <code>ermlab:log4js-silos</code> package</p>
+            <pre>meteor add ermlab:log4js-silos</pre>
+            <p>Then your server code might look like:</p>
+<pre>log4js.enableSilos("{{Key}}");
+var logger = log4js.getLogger("meteor");
+
+Meteor.startup(function () {
+    logger.info("Meteor server started on ", new Date());
+});</pre>
+            
+            <h3>Python</h3>
+            PyPI (pip) package for Silos is on the way. For now, check out <a href="https://gist.github.com/pgorecki/e616444fcd8e729206e3">this gist</a>.
+            
+            <br />
+            <br />
+            <h3>Not on the list?</h3>
+            Your favourite language is not on the list? Drop us an email at <a href="mailto:office@ermlab.com">office@ermlab.com</a>.
+            
+        </div>
+    </div>
+    {{/with}}
+</template>
