@@ -8,7 +8,7 @@
         <tbody>
             {{#each logBooks}}
             <tr>
-                <td><a href="{{baseUrl}}view/{{Key}}">{{Name}}</a></td>
+                <td><a href="{{ pathFor 'showLogsToken' token=this.Key }}">{{Name}}</a></td>
                 <td>{{owner}}</td>
             </tr>
             {{/each}}

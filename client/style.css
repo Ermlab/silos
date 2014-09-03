@@ -45,6 +45,7 @@
 
 .log-body {
     width: 100%;
+    white-space: pre;
 }
 
 #logs thead {

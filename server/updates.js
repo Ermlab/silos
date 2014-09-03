@@ -4,6 +4,9 @@ var updates = {
         logger.info('User ' + user.emails[0].address + ' gets admin rights');
         Roles.addUsersToRoles(user._id, ['admin']);
     },
+    '2' : function () {
+        Meteor.users.update({}, {$set: {logbookLimit:3}});
+    }
 };
 
 Updates = {

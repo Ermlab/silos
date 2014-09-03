@@ -15,7 +15,7 @@ var resizeLogsTable = function () {
 
 var scrollDownLogs = function () {
     if (Session.get('autoScroll')) {
-        $('#logs').scrollTop($('#logs').height() + $(window).height());
+        $('#logs').scrollTop($('#logs table').height() + $(window).height());
     }
 }
 
@@ -53,7 +53,6 @@ Template.showLogs.loggers = function () {
 }
 
 Template.showLogs.alertClass = function () {
-    console.log(this);
     switch (this.level) {
         case 1: return 'alert-trace';
         case 2: return 'alert-info';
@@ -62,7 +61,6 @@ Template.showLogs.alertClass = function () {
         case 5: return 'alert-danger';
         case 6: return 'alert-fatal';
     }
-    
 }
 
 Template.showLogs.events({
