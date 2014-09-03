@@ -33,7 +33,33 @@ Accounts.onCreateUser(function (options, user) {
     }
 
     // extra user fields
-    user.username = user.emails[0].address;
+    logger.debug(options);
+    logger.debug(user);
+
+    var username = undefined;
+
+    // standard auth
+    if (!username) {
+        try {
+            username = user.emails[0].address;
+        } catch (e) {}
+    }
+
+    // google auth
+    if (!username) {
+        try {
+            username = user.services.google.email;
+        } catch (e) {}
+    }
+    
+    // github auth
+    if (!username) {
+        try {
+            username = user.services.github.username;
+        } catch (e) {}
+    }
+
+    user.username = username;
     user.logbookLimit = 3;
 
     // We still want the default hook's 'profile' behavior.

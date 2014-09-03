@@ -83,6 +83,9 @@ Template.showLogs.events({
         scrollDownLogs();
         $(e.target).blur();
         e.preventDefault();
+    },
+    'click .log-body': function (e) {
+        $(e.target).toggleClass('format-pre');
     }
 });
 

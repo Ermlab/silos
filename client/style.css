@@ -1,13 +1,6 @@
 .arg {
     font-family: monospace;
 }
-.arg:hover {
-    background-color: ghostwhite;
-}
-.arg:hover:before {
-    opacity: 0.1;
-}
-
 
 #logs tbody {
     overflow: scroll;
@@ -45,7 +38,6 @@
 
 .log-body {
     width: 100%;
-    white-space: pre;
 }
 
 #logs thead {
@@ -63,4 +55,8 @@
   color: #76110F;
   background-color: #FFAAA8;
   border-color: #ebccd1;
+}
+
+.format-pre {
+    white-space: pre;
 }
