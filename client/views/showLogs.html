@@ -4,9 +4,17 @@
 
     <form class="form-inline" role="form">
         <div class="form-group">
-            <label class="" for="">Severity:</label>
+            Show logs from
+            <select id="filterLogger" class="form-control">
+                <option {{selected filterLogger ""}} value="">any</option>
+                {{#each loggers}}
+                <option {{selected filterLogger this}} value="{{this}}">{{this}}</option>
+                {{/each}}
+            </select>
+            <label class="" for="filterLogger">logger</label>
+            with
             <select id="filterSeverity" class="form-control">
-                <option {{selected filterSeverity ""}} value="">all</option>
+                <option {{selected filterSeverity ""}} value="">any</option>
                 <option {{selected filterSeverity 1}} value="1">trace</option>
                 <option {{selected filterSeverity 2}} value="2">debug</option>
                 <option {{selected filterSeverity 3}} value="3">info</option>
@@ -14,35 +22,55 @@
                 <option {{selected filterSeverity 5}} value="5">error</option>
                 <option {{selected filterSeverity 6}} value="6">fatal</option>
             </select>
+            <label class="" for="filterLogger">severity</label>.
+
+
+            <button id="filterReset" class="btn btn-default">Reset</button>
+            
+            {{#if autoScroll}}
+            <button id="filterReset" class="btn btn-primary autoScroll">Autoscroll</button>
+            {{else}}
+            <button id="filterReset" class="btn btn-default autoScroll">Autoscroll</button>
+            {{/if}}
+            
         </div>
     </form>
     {{#if logs}}
-    <table class="table table-condensed">
-        <thead>
-            <tr>
-                <!--<th>Id</th>-->
-                <th>Severity</th>
-                <th>Logger</th>
-                <th>Body</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each logs}}
-            <tr>
-                <!--<td>{{_id}}</td>-->
-                <td>{{levelStr}}</td>
-                <td>{{logger}}</td>
-                <td>{{{pprint body}}}</td>
-                <!--<td>{{#each body}} <span class="arg arg-{{printType this}}">{{{pprint this}}}</span> {{/each}}</td>-->
-                <td>{{toDate date}}</td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
+    <div id="logs">
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Severity</th>
+                    <th>Logger</th>
+                    <th>Body</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td></td>
+                </tr>
+            </tfoot>
+            <tbody>
+                {{#each logs}}
+                <tr>
+                    <td>{{levelStr}}</td>
+                    <td>{{logger}}</td>
+                    <td>{{{pprint body}}}</td>
+                    <td>{{toDate date}}</td>
+                    {{action}}
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
     {{else}}
     <br />
-    <p>There are {{logsCount}} logs in this logbook but none of them match your filter criteria.</p>
+        {{#if logsCount}}
+        <p>There are {{logsCount}} logs in this logbook but none of them match your filter criteria. Oh, come on!</p>
+        {{else}}
+        <p>This logbook is empty!</p>
+        {{/if}}
     {{/if}}
 </template>
 
