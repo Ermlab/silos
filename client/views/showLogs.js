@@ -52,6 +52,19 @@ Template.showLogs.loggers = function () {
     return Session.get('loggers');
 }
 
+Template.showLogs.alertClass = function () {
+    console.log(this);
+    switch (this.level) {
+        case 1: return 'alert-trace';
+        case 2: return 'alert-info';
+        case 3: return 'alert-success';
+        case 4: return 'alert-warning';
+        case 5: return 'alert-danger';
+        case 6: return 'alert-fatal';
+    }
+    
+}
+
 Template.showLogs.events({
     'change #filterSeverity': function (e) {
         Session.set('filterSeverity', $(e.target).val());

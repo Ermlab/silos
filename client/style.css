@@ -7,12 +7,7 @@
 .arg:hover:before {
     opacity: 0.1;
 }
-.arg-number {
-    color: green;
-}
-.arg-string {
-    color: blue;
-}
+
 
 #logs tbody {
     overflow: scroll;
@@ -39,6 +34,32 @@
     background: white;
 }
 
+.log-level {
+}
+
+.log-logger {
+}
+
+.log-date {
+}
+
+.log-body {
+    width: 100%;
+}
+
 #logs thead {
     box-shadow: 0px 1px 1px #888888;
+}
+
+.alert-trace {
+  color: #5F92AB;
+  background-color: #F3FFFF;
+  border-color: #bce8f1;
+}
+
+.alert-fatal {
+  font-weight: bold;
+  color: #76110F;
+  background-color: #FFAAA8;
+  border-color: #ebccd1;
 }

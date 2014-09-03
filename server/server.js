@@ -6,10 +6,10 @@ logger = log4js.getLogger("meteor");
 
 
 Accounts.onCreateUser(function (options, user) {
-        
+
     // Create Silos logbook for the first user
     if (Meteor.users.find().count() == 0 && LogBooks.find().count() == 0) {
-                
+
         var timestamp = (new Date()).getTime();
         // Add Silos logbook for first created user
         LogBooks.insert({
@@ -27,7 +27,7 @@ Accounts.onCreateUser(function (options, user) {
             ]
         });
         logger.info('Created Silos logbook for user ' + user.emails[0].address);
-        
+
         logger.info('User ' + user.emails[0].address + ' gets admin rights');
         user.role = ['admin'];
     }
@@ -44,6 +44,6 @@ Accounts.onCreateUser(function (options, user) {
 
 
 Meteor.startup(function () {
-    logger.info("Meteor server started", new Date());
+    logger.info("Silos server restarted on " + new Date());
     Updates.run();
 });

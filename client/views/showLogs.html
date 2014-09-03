@@ -42,7 +42,7 @@
                 <tr>
                     <th>Severity</th>
                     <th>Logger</th>
-                    <th>Body</th>
+                    <th class="max-width">Body</th>
                     <th>Date</th>
                 </tr>
             </thead>
@@ -53,11 +53,11 @@
             </tfoot>
             <tbody>
                 {{#each logs}}
-                <tr>
-                    <td>{{levelStr}}</td>
-                    <td>{{logger}}</td>
-                    <td>{{{pprint body}}}</td>
-                    <td>{{toDate date}}</td>
+                <tr class="{{alertClass}}">
+                    <td class="log-level">{{levelStr}}</td>
+                    <td class="log-logger">{{logger}}</td>
+                    <td class="log-body">{{{pprint body}}}</td>
+                    <td class="log-date">{{toDate date}}</td>
                     {{action}}
                 </tr>
                 {{/each}}
