@@ -6,16 +6,25 @@ Template.signin.rendered = function () {
         }).fetch();
 
         if (userGoogleSettings != '') {
+
+            var id = Meteor.userId();
+
+            if (id != null) {
+                Router.go('/');
+            }
+
             var google = document.getElementById("google");
 
-            google.setAttribute('class', 'btn btn-success btn-sm');
+            if (google) {
+                google.setAttribute('class', 'btn btn-success btn-sm');
 
-            document.getElementById("googleText").innerHTML = 'Sign in with Google';
+                document.getElementById("googleText").innerHTML = 'Sign in with Google';
+            }
         } else {
 
             var google = document.getElementById("google");
 
-            google.setAttribute('class', 'btn btn-danger btn-sm');
+            google.setAttribute('class', 'btn btn-danger btn-sm'); // Here is the problem, need to remove.
 
             document.getElementById("googleText").innerHTML = 'Google is not configured';
         }
@@ -25,11 +34,21 @@ Template.signin.rendered = function () {
         }).fetch();
 
         if (userGithubSettings != '') {
+
+            var id = Meteor.userId();
+
+            if (id != null) {
+                Router.go('/');
+            }
+
             var userGithubSettings = document.getElementById("github");
 
-            userGithubSettings.setAttribute('class', 'btn btn-success btn-sm');
+            if (userGithubSettings) {
+                userGithubSettings.setAttribute('class', 'btn btn-success btn-sm');
 
-            document.getElementById("githubText").innerHTML = 'Sign in with Github';
+                document.getElementById("githubText").innerHTML = 'Sign in with Github';
+            }
+
         } else {
 
             var userGithubSettings = document.getElementById("github");
