@@ -27,7 +27,7 @@ Template.logBookSettings.events({
         e.preventDefault();
         if (confirm("You are going to delete the logbook. Ary you sure?")) {
             LogBooks.remove(this._id);
-            Router.go('lastLogbook');
+            Router.go('/');
         }
     },
 
