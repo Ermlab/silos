@@ -1,7 +1,13 @@
 Template.logBooksNav.logBooks = function () {
     // find all logbook which current user is member of
-    var la = LogBooks.find({Members:{$elemMatch:{UserId:Meteor.userId()}}}).fetch()
-    
+    var la = LogBooks.find({
+        Members: {
+            $elemMatch: {
+                UserId: Meteor.userId()
+            }
+        }
+    }).fetch()
+
     _.each(la, function (obj) {
         try {
             obj.isntRead = Logs.find({

@@ -1,11 +1,39 @@
 <template name="welcome">
-    <h1>Silos</h1>
-    <h2>Simple logging service</h2>
+    {{#if currentUser}} {{> loggedIn}}{{else}} {{> register}}{{/if}}
+</template>
 
-    <p>Silos is a cloud based log management service.</p>
-    <ul>
-        <li>Store your logs in one place</li>
-        <li>Make your logs accessible to anyone</li>
-        <li>Super easy to setup and integrate</li>
-    </ul>
+<template name="register">
+    <span class="bg-info col-md-12">
+        <div class="col-md-8 bg-info">
+
+            <div>
+                <h1 id='signinText'>Silos</h1>
+                <h3><small>I don't know what can i write right here.</small></h3>
+                <p><a class="btn btn-primary btn-lg">Learn more</a>
+                </p>
+            </div>
+
+        </div>
+
+        <div class="col-md-4 bg-info" style="margin-bottom:10px;">
+            <h3 id='signinText'>Register</h3>
+            <div class="form-group">
+                <input class="form-control input-sm" id="iEmail" type="email" placeholder="Enter email ">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control input-sm" id="inputPassword" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control input-sm" id="inputPasswordConfirm" placeholder="Confirm password">
+                <h4 class="bg-danger" ><small id="errors"></small></h4>
+            </div>
+            <h5><small>By clicking on the register button below, you agree to the PLON Terms of Service and Privacy Policy</small></h5>
+            <button type="button" class="btn btn-success btn-sm" id="register">Register</button>
+        </div>
+
+        </span>
+</template>
+
+<template name="loggedIn">
+    Hey i am logged
 </template>

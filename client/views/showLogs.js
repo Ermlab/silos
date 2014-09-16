@@ -1,5 +1,5 @@
 var resizeLogsTable = function () {
-    var freeSpace = $(window).height() - $("body").height();
+    var freeSpace = $(window).height() - $("html").outerHeight();
 
     var current = $('#logs').height();
 
@@ -8,10 +8,10 @@ var resizeLogsTable = function () {
     $('#logs').height(Math.max(minHeight, current + freeSpace));
 
     var top = $('#logs').offset();
+
     var bottom = $(window).height();
 
 }
-
 
 var scrollDownLogs = function () {
     if (Session.get('autoScroll')) {
@@ -35,9 +35,40 @@ Template.showLogs.pprint = function (arg) {
 };
 
 Template.showLogs.toDate = function (ts) {
-    var date = new Date(ts);
-    return date.toISOString();
+    var data = new Date(ts);
+    return moment(data).format('DD/MM/YYYY HH:mm');
+};
 
+Template.showLogs.filtredByDate = function (object) {
+    var base = object;
+
+    var fromMoment = document.getElementById("datetimepicker").value;
+
+    if (fromMoment) {
+        var myDate = fromMoment.substring(0, 10);
+        myDate = myDate.split("/");
+
+        var myHours = fromMoment.substring(10);
+        myHours = myHours.split(":");
+
+        var newDate = myDate[1] + "/" + myDate[0] + "/" + myDate[2] + " " + myHours[0] + ":" + myHours[1];
+
+        var convertDate = new Date(newDate).getTime();
+
+        var dif = base - convertDate;
+
+        var daysDifference = Math.floor(dif / 1000 / 60);
+
+        dif -= daysDifference * 1000 * 60;
+
+        if (daysDifference > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return true;
+    }
 };
 
 Template.showLogs.filterSeverity = function () {
@@ -54,12 +85,18 @@ Template.showLogs.loggers = function () {
 
 Template.showLogs.alertClass = function () {
     switch (this.level) {
-        case 1: return 'alert-trace';
-        case 2: return 'alert-info';
-        case 3: return 'alert-success';
-        case 4: return 'alert-warning';
-        case 5: return 'alert-danger';
-        case 6: return 'alert-fatal';
+    case 1:
+        return 'alert-trace';
+    case 2:
+        return 'alert-info';
+    case 3:
+        return 'alert-success';
+    case 4:
+        return 'alert-warning';
+    case 5:
+        return 'alert-danger';
+    case 6:
+        return 'alert-fatal';
     }
 }
 
@@ -86,6 +123,13 @@ Template.showLogs.events({
     },
     'click .log-body': function (e) {
         $(e.target).toggleClass('format-pre');
+    },
+    'click .log-body': function (e) {
+        $(e.target).toggleClass('format-pre');
+    },
+    'click #filtered': function (e) {
+        e.preventDefault();
+        console.log('Hi i am here !');
     }
 });
 
@@ -113,5 +157,9 @@ Template.showLogs.rendered = function () {
             scrollDownLogs();
             Meteor.clearInterval(id);
         }
-    }, 10);
+    }, 500);
+
+    jQuery('#datetimepicker').datetimepicker({
+        format: 'd/m/Y H:i'
+    });
 }

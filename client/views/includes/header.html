@@ -5,23 +5,41 @@
                 <div class="col-md-3 navbar-brand">
                     <a class="" href="{{pathFor 'welcome'}}">Silos</a>
                 </div>
-                <div class="col-md-9 navbar-brand">
-                    {{#if logbook.Name}} <span class="label label-primary">{{logbook.Name}}</span> {{/if}}
-                    <span class="" style="float: right;font-size:75%">{{>loginButtons align="right "}}</span>
-                </div>
+                {{#if currentUser}}
+
+                <ul class="nav navbar-nav navbar-right" style="margin-right: 10px;">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                {{#if userType currentUser}}
+                                 <img src="http://gravatar.com/avatar/{{gravatarHash}}?d=identicon&s=32" class="img-rounded" alt="user avatar" style="height:32px; margin:-8px 8px" />
+                                {{else}}
+                               <img src="{{currentUser.profile.avatar_url}}" class="img-rounded" alt="user avatar" style="height:32px; margin:-8px 8px" />
+                                {{/if}}
+                            <b>{{currentUser.username}}</b>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#"><i class="fa fa-male"></i> Profile</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li role="presentation"><a role="menuitem" id="userLogout" tabindex="-1" href="{{ pathFor 'welcome'}}"><i class="fa fa-sign-out"></i> Sign out</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                {{else}} {{#if loggingIn}} {{else}} {{> signInNavBar}} {{/if}} {{/if}}
             </div>
         </div>
-        <!--
-        <div class="navbar-header ">
-            <button type="button " class="navbar-toggle " data-toggle="collapse " data-target=".navbar-collapse ">
-                <span class="sr-only ">Toggle navigation</span>
-                <span class="icon-bar "></span>
-                <span class="icon-bar "></span>
-                <span class="icon-bar "></span>
-            </button>
+    </div>
+</template>
 
-        </div>
--->
-        <!--/.nav-collapse -->
+<template name="signInNavBar">
+    <div class="navbar-form navbar-right">
+        <button type="button" class="btn btn-default btn-sm" style="margin-right: 10px;" id="signIn">Sign In</button>
+    </div>
+</template>
+
+<template name="signInLoading">
+    <div class="navbar-right">
+        <i class="fa fa-spin fa-spinner"></i>
     </div>
 </template>

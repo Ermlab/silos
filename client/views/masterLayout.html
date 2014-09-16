@@ -26,14 +26,16 @@
             </div>
             {{else}}
             <div class="col-md-12">
-                {{> welcome}}
+                {{> yield}}
             </div>
             {{/if}}
         </div>
 
-        <footer>
-            <p>Powered by <strong>Ermlab </strong> sp. z o. o. </p>
-        </footer>
+        <div class="row" style="margin-top: 10px;">
+            <footer class="col-md-12 text-center">
+                <p id="signinText">Powered by <strong>Ermlab </strong> sp. z o. o.</p>
+            </footer>
+        </div>
     </div>
 </template>
 
