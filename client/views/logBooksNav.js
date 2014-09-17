@@ -59,19 +59,31 @@ Template.logBooksNavItem.helpers({
 });
 
 Template.logBooksNavItem.events({
-    'click .goTologBook': function (e) {
-        gotToLogBook(e)
-    }
-});
-Template.logBooksNavItem.events({
-    'click .goTologBook': function (e) {
-        gotToLogBook(e)
+    'click #insertActive': function (e) {
+        var getElement = e.currentTarget.getAttribute('ref');
+
+        var allLogsBooks = LogBooks.find().fetch();
+
+        for (var i = 0; i < LogBooks.find().count(); i++) {
+            if (allLogsBooks[i]._id == e.currentTarget.getAttribute('ref')) {
+                document.getElementById(getElement).setAttribute('class', 'active');
+                var object = document.getElementsByName(allLogsBooks[i]._id);
+                object[0].setAttribute('id', 'changeIconColor');
+                object[1].setAttribute('id', 'changeIconColor');
+            } else {
+                document.getElementById(allLogsBooks[i]._id).setAttribute('class', '');
+                var object = document.getElementsByName(allLogsBooks[i]._id);
+                object[0].setAttribute('id', 'changeIconColor');
+                object[1].setAttribute('id', 'changeIconColor');
+            }
+        }
+        //gotToLogBook(e)
     }
 });
 
 // FIXME: czy to jest potrzebne?
-function gotToLogBook(e) {
-    var adress = e.target.href.split("/");
-    var ID = adress[adress.length - 1]
-    Meteor.call('createTable', ID, window.location.hash.substring(1));
-}
+//function gotToLogBook(e) {
+//    var adress = e.target.href.split("/");
+//    var ID = adress[adress.length - 1]
+//    Meteor.call('createTable', ID, window.location.hash.substring(1));
+//}

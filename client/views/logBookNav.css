@@ -1,0 +1,9 @@
+a:hover {
+    text-decoration: none
+}
+a {
+    text-decoration: none
+}
+#changeIconColor {
+    color: white;
+}
