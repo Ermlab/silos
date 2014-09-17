@@ -36,4 +36,13 @@
 
 <template name="loggedIn">
     <!-- Here is the page after success logging -->
+    {{#if countLogbooks}}
+    <blockquote>
+        <i class='fa fa-arrow-left' style='color: lightgray; font-size: 40px; margin-top: 120px;'> Select one of the logbooks to display its logs</i>
+    </blockquote>{{else}}
+    <blockquote>
+        <i class='fa fa-arrow-left' style='color: lightgray; font-size: 40px; margin-top: 120px;'> Create your first logbook and start logging.</i>
+    </blockquote>{{/if}}
+
+
 </template>

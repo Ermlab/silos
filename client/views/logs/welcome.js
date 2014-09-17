@@ -21,7 +21,6 @@ Template.welcome.events = {
             inputPasswordConfirm.value = "";
 
         } else {
-
             document.getElementById("errors").innerHTML = "Passwords do not match. Please Try again";
         }
     }
@@ -37,3 +36,20 @@ function errors() {
     }
     return false
 }
+
+Template.loggedIn.helpers({
+    countLogbooks: function () {
+        // False if count = 0 and True if count = 1
+        var count = LogBooks.find().count();
+
+        if (count == 0) {
+            return false;
+        }
+        if (count == 1) {
+            Router.go('/logbook/:' + LogBooks.findOne()._id);
+        }
+        if (count > 1) {
+            return true;
+        }
+    }
+});
