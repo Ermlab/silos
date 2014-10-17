@@ -1,33 +1,14 @@
-/**
- * Created by radek on 01.07.14.
- */
 if (Meteor.isServer) {
     Meteor.setInterval(function () {
-        // console.log("Timer");
-        // console.log((new Date).setMonth((new Date).getMonth()-1));
+        var countBefore = Logs.find().count();
+        var timestamp = Date.now() - 700 * 24 * 3600;
         Logs.remove({
-            LogDate: {
-                $lt: (new Date).setMonth((new Date).getMonth() - 1)
+            date: {
+                $lt: timestamp
             }
         });
-        LogBooks.find().fetch().forEach(
-            function (obj) {
-                //console.log(obj._id);
-                if (Logs.find({
-                    LogBookID: obj._id
-                }).count() > 100) {
-                    Logs.remove({
-                        LogBookID: obj._id,
-                        LogDate: {
-                            $lt: Logs.find({
-                                LogBookID: obj._id
-                            }).fetch()[100].LogDate
-                        }
-                    });
-                }
+        var countAfter = Logs.find().count();
+        console.log("Logs removed (before/after)", countBefore, countAfter);
 
-                // TODO: update logs count in logbook
-            }
-        );
-    }, 3600);
+    }, 60 * 1000);
 }

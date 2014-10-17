@@ -1,6 +1,6 @@
 var silosLogbookSecretKey = 'qjKS3oHBigfr8YycZBsi8mp4c8hp3S8fsewEFP9mM6C3LgsTasYLCb4ygKGF2xY5';
 
-log4js.enableSilos(silosLogbookSecretKey);
+//log4js.enableSilos(silosLogbookSecretKey);
 logger = log4js.getLogger("meteor");
 
 Accounts.onCreateUser(function (options, user) {
@@ -109,28 +109,13 @@ Accounts.onCreateUser(function (options, user) {
 
 Meteor.startup(function () {
     logger.info("Silos server restarted on " + new Date());
+    logger.info("Users: " + Meteor.users.find().count());
+    logger.info("Logbooks: " + LogBooks.find().count());
+    logger.info("Logs: " + Logs.find().count());
+    
     Updates.run();
 
-    Meteor.setInterval(function () {
-        var allLogs = Logs.find().fetch()
-
-        for (var obj in allLogs) {
-
-            var nowTime = Date.now();
-
-            var diff = Math.abs(nowTime - allLogs[obj].date);
-
-            if (diff > 604800000) {
-                Logs.remove({
-                    _id: allLogs[obj]._id
-                });
-                console.log('Remove old log by id: ' + allLogs[obj]._id);
-            }
-        }
-    }, 900000);
-
     // Set settings for Email system
-
     process.env.MAIL_URL = 'smtp://postmaster%40mg.ermlab.com:0e3b968207f4265e04961b18e7b2e7e7@smtp.mailgun.org:587'
 
     Accounts.emailTemplates.from = 'no-reply@mg.ermlab.com';
