@@ -1,7 +1,7 @@
 if (Meteor.isServer) {
     Meteor.setInterval(function () {
         var countBefore = Logs.find().count();
-        var timestamp = Date.now() - 700 * 24 * 3600;
+        var timestamp = Date.now() - 14 * 24 * 3600;
         Logs.remove({
             date: {
                 $lt: timestamp
