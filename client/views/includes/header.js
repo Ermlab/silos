@@ -1,3 +1,16 @@
+Template.header.helpers({
+    gravatarHash: function () {
+        return CryptoJS.MD5(Meteor.user().emails[0].address);
+    },
+    userType: function (user) {
+        if (user.emails != null) {
+            return true;
+        } else {
+            return false
+        }
+    }
+});
+
 Template.header.events = {
     'click #userLogout': function () {
         Meteor.logout();
@@ -6,16 +19,3 @@ Template.header.events = {
         Router.go('signin');
     }
 };
-Template.header.gravatarHash = function () {
-    return CryptoJS.MD5(Meteor.user().emails[0].address);
-}
-
-Template.header.helpers({
-    'userType': function (user) {
-        if (user.emails != null) {
-            return true;
-        } else {
-            return false
-        }
-    }
-});

@@ -19,86 +19,89 @@ var scrollDownLogs = function () {
     }
 }
 
-Template.showLogs.autoScroll = function () {
-    return Session.get('autoScroll');
-}
+Template.showLogs.helpers({
+    autoScroll: function () {
+        return Session.get('autoScroll');
+    },
 
-Template.showLogs.pprint = function (arg) {
-    if (arg instanceof Array) {
-        var out = [];
-        for (var i = 0; i < arg.length; i++) {
-            out[i] = Utils.pprint(arg[i]);
+    pprint: function (arg) {
+        if (arg instanceof Array) {
+            var out = [];
+            for (var i = 0; i < arg.length; i++) {
+                out[i] = Utils.pprint(arg[i]);
+            }
+            return out.join(', ');
         }
-        return out.join(', ');
-    }
-    return Utils.pprint(arg);
-};
+        return Utils.pprint(arg);
+    },
 
-Template.showLogs.toDate = function (ts) {
-    var data = new Date(ts);
-    return moment(data).format('DD/MM/YYYY HH:mm');
-};
+    toDate: function (ts) {
+        var data = new Date(ts);
+        return moment(data).format('DD/MM/YYYY HH:mm');
+    },
 
-Template.showLogs.filtredByDate = function (object) {
-    var base = object;
+    filtredByDate: function (object) {
+        var base = object;
 
-    var fromMoment = document.getElementById("datetimepicker").value;
+        var fromMoment = document.getElementById("datetimepicker").value;
 
-    if (fromMoment) {
-        var myDate = fromMoment.substring(0, 10);
-        myDate = myDate.split("/");
+        if (fromMoment) {
+            var myDate = fromMoment.substring(0, 10);
+            myDate = myDate.split("/");
 
-        var myHours = fromMoment.substring(10);
-        myHours = myHours.split(":");
+            var myHours = fromMoment.substring(10);
+            myHours = myHours.split(":");
 
-        var newDate = myDate[1] + "/" + myDate[0] + "/" + myDate[2] + " " + myHours[0] + ":" + myHours[1];
+            var newDate = myDate[1] + "/" + myDate[0] + "/" + myDate[2] + " " + myHours[0] + ":" + myHours[1];
 
-        var convertDate = new Date(newDate).getTime();
+            var convertDate = new Date(newDate).getTime();
 
-        var dif = base - convertDate;
+            var dif = base - convertDate;
 
-        var daysDifference = Math.floor(dif / 1000 / 60);
+            var daysDifference = Math.floor(dif / 1000 / 60);
 
-        dif -= daysDifference * 1000 * 60;
+            dif -= daysDifference * 1000 * 60;
 
-        if (daysDifference > 0) {
-            return true;
+            if (daysDifference > 0) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
-            return false;
+            return true;
         }
-    } else {
-        return true;
+    },
+
+    filterSeverity: function () {
+        return Session.get('filterSeverity');
+    },
+
+    filterLogger: function () {
+        return Session.get('filterLogger');
+    },
+
+    loggers: function () {
+        return Session.get('loggers');
+    },
+
+    alertClass: function () {
+        switch (this.level) {
+        case 1:
+            return 'alert-trace';
+        case 2:
+            return 'alert-info';
+        case 3:
+            return 'alert-success';
+        case 4:
+            return 'alert-warning';
+        case 5:
+            return 'alert-danger';
+        case 6:
+            return 'alert-fatal';
+        }
     }
-};
+});
 
-Template.showLogs.filterSeverity = function () {
-    return Session.get('filterSeverity');
-}
-
-Template.showLogs.filterLogger = function () {
-    return Session.get('filterLogger');
-}
-
-Template.showLogs.loggers = function () {
-    return Session.get('loggers');
-}
-
-Template.showLogs.alertClass = function () {
-    switch (this.level) {
-    case 1:
-        return 'alert-trace';
-    case 2:
-        return 'alert-info';
-    case 3:
-        return 'alert-success';
-    case 4:
-        return 'alert-warning';
-    case 5:
-        return 'alert-danger';
-    case 6:
-        return 'alert-fatal';
-    }
-}
 
 Template.showLogs.events({
     'change #filterSeverity': function (e) {

@@ -1,13 +1,15 @@
-Template.createLogBook.isDisabled = function () {
-    if (!Utils.canAddNewLogbook()) {
-        return 'disabled';
+Template.createLogBook.helpers({
+    isDisabled: function () {
+        if (!Utils.canAddNewLogbook()) {
+            return 'disabled';
+        }
     }
-};
+});
 
 Template.createLogBook.events({
     'click #newLogbookBtn': function (e) {
         e.preventDefault();
-        
+
         var timestamp = (new Date()).getTime();
 
         var logBook = {
@@ -31,10 +33,8 @@ Template.createLogBook.events({
             _id: id
         });
     },
-    
-    'click #upgradeAccount': function() {
+
+    'click #upgradeAccount': function () {
         //alert('We are working on it');
     }
 });
-
-

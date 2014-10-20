@@ -1,3 +1,5 @@
-Template.logBookHelp.baseUrl = function () {
-    return Meteor.absoluteUrl();
-}
+Template.logBookHelp.helpers({
+    baseUrl: function () {
+        return Meteor.absoluteUrl();
+    }
+});
