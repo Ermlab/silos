@@ -3,12 +3,14 @@
     <table class="table">
         <thead>
             <th>Name</th>
+            <th>Count</th>
             <th>Owner</th>
         </thead>
         <tbody>
             {{#each logBooks}}
             <tr>
                 <td><a href="{{ pathFor 'showLogsToken' token=this.Key }}">{{Name}}</a></td>
+                <td>{{LogsCount}}</td>
                 <td>{{owner}}</td>
             </tr>
             {{/each}}
