@@ -11,8 +11,8 @@ d3
 accounts-google
 accounts-github
 accounts-base
-mrt:collection-hooks@0.7.2
-cmather:iron-router@0.8.2
+mrt:collection-hooks
+iron:router
 http
 ermlab:log4js-silos
 mizzao:bootstrap-3
