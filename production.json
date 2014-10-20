@@ -2,5 +2,8 @@
     "kadira": {
         "appId": "43ofETbGwnEXREtj6",
         "appSecret": "2e340288-d087-4562-81cb-449b940a40cd"
+    },
+    "silos": {
+        "token": "qjKS3oHBigfr8YycZBsi8mp4c8hp3S8fsewEFP9mM6C3LgsTasYLCb4ygKGF2xY5"
     }
 }

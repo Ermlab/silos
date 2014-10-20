@@ -1,6 +1,12 @@
-var silosLogbookSecretKey = 'qjKS3oHBigfr8YycZBsi8mp4c8hp3S8fsewEFP9mM6C3LgsTasYLCb4ygKGF2xY5';
 
-//log4js.enableSilos(silosLogbookSecretKey);
+console.log(Meteor.settings);
+
+if (Meteor.settings.silos) {
+    var token = Meteor.settings.silos.token;
+    console.log("Silos: authenticating with token "+token);
+    log4js.enableSilos(token);
+}
+
 logger = log4js.getLogger("meteor");
 
 Accounts.onCreateUser(function (options, user) {
