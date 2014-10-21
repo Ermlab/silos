@@ -37,39 +37,7 @@ Template.showLogs.helpers({
 
     toDate: function (ts) {
         var data = new Date(ts);
-        return moment(data).format('DD/MM/YYYY HH:mm');
-    },
-
-    filtredByDate: function (object) {
-        var base = object;
-
-        var fromMoment = document.getElementById("datetimepicker").value;
-
-        if (fromMoment) {
-            var myDate = fromMoment.substring(0, 10);
-            myDate = myDate.split("/");
-
-            var myHours = fromMoment.substring(10);
-            myHours = myHours.split(":");
-
-            var newDate = myDate[1] + "/" + myDate[0] + "/" + myDate[2] + " " + myHours[0] + ":" + myHours[1];
-
-            var convertDate = new Date(newDate).getTime();
-
-            var dif = base - convertDate;
-
-            var daysDifference = Math.floor(dif / 1000 / 60);
-
-            dif -= daysDifference * 1000 * 60;
-
-            if (daysDifference > 0) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return true;
-        }
+        return moment(data).format(DATE_TIME_FORMAT);
     },
 
     filterSeverity: function () {
@@ -78,6 +46,10 @@ Template.showLogs.helpers({
 
     filterLogger: function () {
         return Session.get('filterLogger');
+    },
+
+    filterDate: function () {
+        return Session.get('filterDate');
     },
 
     loggers: function () {
@@ -112,6 +84,9 @@ Template.showLogs.events({
         Session.set('filterLogger', $(e.target).val());
         $(e.target).blur();
     },
+    'change #filterDate': function (e) {
+        Session.set('filterDate', $(e.target).val());
+    },
     'click #filterReset': function (e) {
         Session.set('filterSeverity', '');
         Session.set('filterLogger', '');
@@ -132,13 +107,14 @@ Template.showLogs.events({
     },
     'click #filtered': function (e) {
         e.preventDefault();
-        console.log('Hi i am here !');
     }
 });
 
-Template.showLogs.action = function () {
-    scrollDownLogs();
-}
+Template.showLogs.helpers({
+    action: function () {
+        scrollDownLogs();
+    }
+});
 
 Template.showLogs.created = function () {
     $(window).resize(function () {
@@ -149,6 +125,7 @@ Template.showLogs.created = function () {
 Template.showLogs.destroyed = function () {
     $(window).off('resize');
 };
+
 
 Template.showLogs.rendered = function () {
     var id = Meteor.setInterval(function () {
@@ -162,7 +139,10 @@ Template.showLogs.rendered = function () {
         }
     }, 500);
 
-    jQuery('#datetimepicker').datetimepicker({
-        format: 'd/m/Y H:i'
+    $('#filterDate').datetimepicker({
+        format: DATE_TIME_FORMAT,
+        formatTime: TIME_FORMAT,
+        formatDate: DATE_FORMAT
     });
+
 }

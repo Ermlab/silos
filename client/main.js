@@ -1,5 +1,10 @@
 var loggers = {};
 
+//DATE_TIME_FORMAT = 'Y-m-d H:i';
+DATE_FORMAT = 'DD.MM.YYYY';
+TIME_FORMAT = 'HH:mm';
+DATE_TIME_FORMAT = DATE_FORMAT+' '+TIME_FORMAT;
+
 Meteor.startup(function () {
     Meteor.subscribe('logBooks');
     Meteor.subscribe("userData");

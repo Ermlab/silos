@@ -23,14 +23,14 @@
                 <option {{selected filterSeverity 6}} value="6">fatal</option>
             </select>
             <label class="" for="filterLogger">severity</label>&nbsp; since
-            <input type="text" id="datetimepicker" class="form-control" placeholder="choose date" style='margin-left: 5px;'>
+            <input type="text" id="filterDate" class="form-control" value="{{filterDate}}" placeholder="choose date" style='margin-left: 5px;'>
 
             <button id="filterReset" class="btn btn-default">Reset</button>
 
             {{#if autoScroll}}
-            <button id="filterReset" class="btn btn-primary autoScroll">Autoscroll</button>
+            <button class="btn btn-primary autoScroll">Autoscroll</button>
             {{else}}
-            <button id="filterReset" class="btn btn-default autoScroll">Autoscroll</button>
+            <button class="btn btn-default autoScroll">Autoscroll</button>
             {{/if}}
 
         </div>
@@ -53,7 +53,7 @@
                 </tr>
             </tfoot>
             <tbody>
-                {{#each logs}} {{#if filtredByDate date}}
+                {{#each logs}}
                 <tr class="{{alertClass}}">
                     <td class="log-level">{{levelStr}}</td>
                     <td class="log-logger">{{logger}}</td>
@@ -61,7 +61,7 @@
                     <td class="log-date">{{toDate date}}</td>
                     {{action}}
                 </tr>
-                {{else}} {{/if}} {{/each}}
+                {{/each}}
             </tbody>
         </table>
     </div>
