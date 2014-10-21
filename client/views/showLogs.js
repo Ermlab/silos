@@ -112,7 +112,11 @@ Template.showLogs.events({
 
 Template.showLogs.helpers({
     action: function () {
-        scrollDownLogs();
+        Meteor.defer(function() {
+            scrollDownLogs();
+            resizeLogsTable();
+        });
+        
     }
 });
 
