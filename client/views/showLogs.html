@@ -1,7 +1,4 @@
 <template name="showLogs">
-
-    {{#contentFor "activeLogbook"}} TODO {{/contentFor}}
-
     <form class="form-inline" role="form">
         <div class="form-group">
             Show logs from
@@ -32,6 +29,9 @@
             {{else}}
             <button class="btn btn-default autoScroll">Autoscroll</button>
             {{/if}}
+            {{#if loading}}
+            <i class="loading fa fa-spinner fa-spin"></i>
+            {{/if}}
 
         </div>
 
@@ -54,7 +54,7 @@
             </tfoot>
             <tbody>
                 {{#each logs}}
-                <tr class="{{alertClass}}">
+                <tr class="{{alertClass}}" data-id="{{_id}}">
                     <td class="log-level">{{levelStr}}</td>
                     <td class="log-logger">{{logger}}</td>
                     <td class="log-body">{{{pprint body}}}</td>
