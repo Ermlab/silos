@@ -90,6 +90,7 @@ Template.showLogs.events({
     'click #filterReset': function (e) {
         Session.set('filterSeverity', '');
         Session.set('filterLogger', '');
+        Session.set('filterDate', '');
         $(e.target).blur();
         e.preventDefault();
     },
