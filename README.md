@@ -8,7 +8,7 @@ Silos
 
 Using web browser console (assuming that jQuery is present):
 
-    $.post("http://your_domain.com/api/call/token_abcd",{body:"Hello PLON from browser", level:1, logger: "console"});
+    $.post("http://your_domain.com/api/call/token_abcd",{body:"Hello from browser", level:1, logger: "console"});
 
 
 ## Bash
