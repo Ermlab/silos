@@ -48,19 +48,16 @@ Template.showLogs.helpers({
                 var fromTop = target.scrollHeight - fromBottom;
                 
                 if (target.oldHeight===undefined) {
-                    console.debug('new lastheight');
                     target.oldHeight = target.scrollHeight;
                 }
                 
                 var step = target.scrollHeight - target.oldHeight;
                 if (step > 0) {
-                    console.debug('step', step);
                     $('#logs').scrollTop($('#logs').scrollTop() + step);
                 }
                 
                 if (!this.loading) {
                     target.oldHeight = undefined;
-                    console.debug('clearing lastheight');
                 }
             }
         }
@@ -108,9 +105,9 @@ Template.showLogs.events({
         var fromBottom = e.target.scrollHeight - e.target.scrollTop;
         var fromTop = e.target.scrollHeight - fromBottom;
         
+        var key = '{0}_limit'.format(this.logbook._id);
         if (fromTop == 0 && Session.get(key) < this.logbook.LogsCount) {
             Session.set("autoScroll", false);
-            var key = '{0}_limit'.format(this.logbook._id);
             Session.set(key, Session.get(key) + 100);
         }
     }
