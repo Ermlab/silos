@@ -28,13 +28,10 @@
             <button class="btn btn-primary autoScroll">Autoscroll</button>
             {{else}}
             <button class="btn btn-default autoScroll">Autoscroll</button>
-            {{/if}}
-            {{#if loading}}
+            {{/if}} {{#if loading}}
             <i class="loading fa fa-spinner fa-spin"></i>
             {{/if}}
-
         </div>
-
     </form>
     {{#if logs}}
     <div id="logs">
@@ -53,14 +50,8 @@
                 </tr>
             </tfoot>
             <tbody>
-                {{#each logs}}
-                <tr class="{{alertClass}}" data-id="{{_id}}">
-                    <td class="log-level">{{levelStr}}</td>
-                    <td class="log-logger">{{logger}}</td>
-                    <td class="log-body">{{{pprint body}}}</td>
-                    <td class="log-date">{{toDate date}}</td>
-                    {{action}}
-                </tr>
+                {{#each logs}} 
+                  {{> logEntry}}
                 {{/each}}
             </tbody>
         </table>
@@ -72,13 +63,22 @@
     <p>This logbook is empty!</p>
     {{/if}} {{/if}}
 
+    {{onData}}
+    {{#unless loading}}
+      {{onLoaded}}
+    {{/unless}}
 </template>
 
-
-
+<template name="logEntry">
+    <tr class="{{alertClass}}" data-id="{{_id}}">
+        <td class="log-level">{{levelStr}}</td>
+        <td class="log-logger">{{logger}}</td>
+        <td class="log-body">{{{pprint body}}}</td>
+        <td class="log-date">{{toDate date}}</td>
+    </tr>
+</template>
 
 <template name="showLogs2">
-
     <script type="text/javascript">
         function changeDisplay() {
             var text = $('#changeDisplay').text();

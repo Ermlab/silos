@@ -9,15 +9,24 @@ Meteor.publish('logBooks', function () {
 });
 
 
-Meteor.publish('logs', function (id) {
+Meteor.publish('logs', function (id, limit) {
     // TODO: make sure that current user can subscribe to this logbook
+    limit = limit || 20;
 
     var cursor = Logs.find({
         LogBookID: id
+    }, {
+        sort: {
+            date: -1
+        },
+        limit: limit
     });
-    logger.debug('publishing ' + cursor.count() + ' logs in ' + id + ' to ' + this.userId);
+
+    logger.debug('published ' + cursor.count() + ' logs in ' + id + ' to ' + this.userId);
     return cursor;
 });
+
+
 
 
 Meteor.publish('logs-by-token', function (token) {

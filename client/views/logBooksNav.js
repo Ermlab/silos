@@ -26,6 +26,10 @@ Template.logBooksNav.helpers({
         });
         return la;
     },
+    
+    activeClass: function () {
+        return Session.get("currentLogBook") == this._id ? "active" : "";
+    },
 
     friendsLogBooks: function () {
         var user = Meteor.user();
@@ -61,23 +65,4 @@ Template.logBooksNavItem.helpers({
 });
 
 Template.logBooksNavItem.events({
-    'click #insertActive': function (e) {
-        var getElement = e.currentTarget.getAttribute('ref');
-
-        var allLogsBooks = LogBooks.find().fetch();
-
-        for (var i = 0; i < LogBooks.find().count(); i++) {
-            if (allLogsBooks[i]._id == e.currentTarget.getAttribute('ref')) {
-                document.getElementById(getElement).setAttribute('class', 'active');
-                var object = document.getElementsByName(allLogsBooks[i]._id);
-                object[0].setAttribute('id', 'changeIconColor');
-                object[1].setAttribute('id', 'changeIconColor');
-            } else {
-                document.getElementById(allLogsBooks[i]._id).setAttribute('class', '');
-                var object = document.getElementsByName(allLogsBooks[i]._id);
-                object[0].setAttribute('id', 'changeIconColor');
-                object[1].setAttribute('id', 'changeIconColor');
-            }
-        }
-    }
 });

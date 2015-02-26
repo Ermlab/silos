@@ -1,9 +1,8 @@
-
 console.log(Meteor.settings);
 
 if (Meteor.settings.silos) {
     var token = Meteor.settings.silos.token;
-    console.log("Silos: authenticating with token "+token);
+    console.log("Silos: authenticating with token " + token);
     log4js.enableSilos(token);
 }
 
@@ -118,8 +117,13 @@ Meteor.startup(function () {
     logger.info("Users: " + Meteor.users.find().count());
     logger.info("Logbooks: " + LogBooks.find().count());
     logger.info("Logs: " + Logs.find().count());
-    
+
     Updates.run();
+
+    Logs._ensureIndex({
+        "date": 1,
+        "LogBookID": 1
+    });
 
     // Set settings for Email system
     process.env.MAIL_URL = 'smtp://postmaster%40mg.ermlab.com:0e3b968207f4265e04961b18e7b2e7e7@smtp.mailgun.org:587'

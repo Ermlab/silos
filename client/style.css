@@ -61,8 +61,16 @@
     white-space: pre;
 }
 
-.loading {
+i.loading {
     display: inline-block;
     margin-left: 0.5em;
     font-size: 20px;
+}
+
+li.active .icons a {
+    color: #eef;
+}
+
+li.active .icons a:hover {
+    color: #fff;
 }

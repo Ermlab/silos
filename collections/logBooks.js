@@ -32,7 +32,6 @@ function parse(doc) {
     } else {
         visible = false;
     }
-    console.log('xxx', visible);
     var View = LogBooks.findOne(doc['LogBookID']).View;
     //console.log(View);
 

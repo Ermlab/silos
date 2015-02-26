@@ -3,7 +3,7 @@
         {{#if logBooks}}
         <ul class="nav nav-pills nav-stacked" id="nav">
             {{#each logBooks}}
-            <li id='{{_id}}' class='none'>{{>logBooksNavItem}}
+            <li id='{{_id}}' class='{{activeClass}}'>{{>logBooksNavItem}}
             </li>
             {{/each}}
         </ul>
@@ -17,8 +17,8 @@
 
 <template name="logBooksNavItem">
     {{#if currentUser}}
-    <a href="{{pathFor 'showLogs'}}" id='insertActive' ref='{{_id}}'>{{Name}} <span class="badge">{{LogsCount}}</span>
-    <div class="pull-right">
+    <a href="{{pathFor 'showLogs'}}" ref='{{_id}}'>{{Name}} <span class="badge">{{LogsCount}}</span>
+    <div class="icons pull-right">
         <a href="{{ pathFor 'logBookHelp' _id=this._id }}" name='{{_id}}' class="logbookHelp glyphicon glyphicon-info-sign" title="Help"></a>
     <a href="{{ pathFor 'logBookSettings' _id=this._id }}" name='{{_id}}' class="logbookSettings glyphicon glyphicon-cog" title="Settings"></a>
     </div>
