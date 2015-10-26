@@ -105,7 +105,7 @@ Template.showLogs.events({
         var fromBottom = e.target.scrollHeight - e.target.scrollTop;
         var fromTop = e.target.scrollHeight - fromBottom;
         var key = '{0}_limit'.format(this.logbookId);
-        if (!loading && fromTop == 0 && Session.get(key) < this.logbook.LogsCount) {
+        if (!this.loading && fromTop == 0 && Session.get(key) < this.logbook.LogsCount) {
             Session.set("autoScroll", false);
             Session.set(key, Session.get(key) + 100);
         }
