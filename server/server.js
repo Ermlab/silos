@@ -1,5 +1,3 @@
-console.log(Meteor.settings);
-
 if (Meteor.settings.silos) {
     var token = Meteor.settings.silos.token;
     console.log("Silos: authenticating with token " + token);
@@ -69,7 +67,7 @@ Accounts.onCreateUser(function (options, user) {
     if (options.profile)
         user.profile = options.profile;
 
-    // If user loggin in with github 
+    // If user loggin in with github
     if (user.services.github) {
         var accessToken = user.services.github.accessToken,
             result,
@@ -119,6 +117,17 @@ Meteor.startup(function () {
     logger.info("Logs: " + Logs.find().count());
 
     Updates.run();
+
+    /*
+    for (var i=0; i<10000; i++) {
+      Logs.insert({
+        'body' : 'log'+i,
+        'level': (i%6)+1,
+        'logger' : 'console'+(i%3),
+        'LogBookID' : "iKy2zue2rsDCjqcP9",
+      });
+    }
+    */
 
     Logs._ensureIndex({
         "date": 1,

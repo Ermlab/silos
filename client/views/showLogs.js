@@ -4,7 +4,7 @@ var resizeLogsTable = function () {
     var minHeight = $('#col-logbooks').height();
     $('#logs').height(Math.max(minHeight, current + freeSpace));
     var top = $('#logs').offset();
-    var bottom = $(window).height();            
+    var bottom = $(window).height();
 }
 
 var scrollDownLogs = function () {
@@ -42,20 +42,20 @@ Template.showLogs.helpers({
 
         if (Logs.find().count() > 0) {
             var target = $('#logs')[0];
-            
+
             if (target) {
                 var fromBottom = target.scrollHeight - target.scrollTop;
                 var fromTop = target.scrollHeight - fromBottom;
-                
+
                 if (target.oldHeight===undefined) {
                     target.oldHeight = target.scrollHeight;
                 }
-                
+
                 var step = target.scrollHeight - target.oldHeight;
                 if (step > 0) {
                     $('#logs').scrollTop($('#logs').scrollTop() + step);
                 }
-                
+
                 if (!this.loading) {
                     target.oldHeight = undefined;
                 }
@@ -85,7 +85,7 @@ Template.showLogs.events({
     },
     'click .autoScroll': function (e) {
         Session.set('autoScroll', !Session.get('autoScroll'));
-        
+
         if (Session.get('autoScroll')) {
             scrollDownLogs();
         }
@@ -104,9 +104,8 @@ Template.showLogs.events({
     'scroll': function (e) {
         var fromBottom = e.target.scrollHeight - e.target.scrollTop;
         var fromTop = e.target.scrollHeight - fromBottom;
-        
-        var key = '{0}_limit'.format(this.logbook._id);
-        if (fromTop == 0 && Session.get(key) < this.logbook.LogsCount) {
+        var key = '{0}_limit'.format(this.logbookId);
+        if (!loading && fromTop == 0 && Session.get(key) < this.logbook.LogsCount) {
             Session.set("autoScroll", false);
             Session.set(key, Session.get(key) + 100);
         }
